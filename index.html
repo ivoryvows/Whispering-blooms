@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,16 +7,9 @@
 
 <title>Whispering Blooms</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
-
-/* =========================
-   RESET
-========================= */
 
 *{
     margin:0;
@@ -29,9 +23,69 @@ html{
 
 body{
     background:#faf7f1;
-    color:#5c2732;
-    font-family:"Montserrat",sans-serif;
+    color:#641b29;
     overflow-x:hidden;
+    font-family:'Montserrat',sans-serif;
+}
+
+
+/* =========================
+   OPENING GATE
+========================= */
+
+#gate{
+    position:fixed;
+    inset:0;
+    width:100%;
+    height:100vh;
+    height:100dvh;
+    background:#faf7f1;
+    z-index:99999;
+    overflow:hidden;
+    transition:opacity 1.2s ease;
+}
+
+#gateVideo{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+}
+
+#tapText{
+    position:absolute;
+    left:50%;
+    bottom:12%;
+    transform:translateX(-50%);
+    z-index:10;
+
+    color:white;
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-size:clamp(32px,8vw,60px);
+    letter-spacing:1px;
+
+    text-shadow:
+        0 2px 12px rgba(60,10,20,.65),
+        0 0 20px rgba(255,255,255,.25);
+
+    white-space:nowrap;
+    cursor:pointer;
+
+    animation:tapFloat 2.5s ease-in-out infinite;
+    transition:opacity .6s ease;
+}
+
+@keyframes tapFloat{
+
+    0%,100%{
+        transform:translateX(-50%) translateY(0);
+    }
+
+    50%{
+        transform:translateX(-50%) translateY(-8px);
+    }
+
 }
 
 
@@ -39,7 +93,7 @@ body{
    MAIN PAGE
 ========================= */
 
-.page{
+#main{
     position:relative;
     min-height:100vh;
     background:#faf7f1;
@@ -48,153 +102,120 @@ body{
 
 
 /* =========================
-   SIDE FLORAL IMAGE
+   SIDE FLOWERS
 ========================= */
 
 .floral{
     position:absolute;
-    width:185px;
-    height:auto;
-    z-index:10;
+    width:125px;
+    max-width:27vw;
+    z-index:1;
     pointer-events:none;
-    opacity:.92;
 }
 
-.floral-left{
-    left:-70px;
+.left{
+    left:-22px;
 }
 
-.floral-right{
-    right:-70px;
+.right{
+    right:-22px;
     transform:scaleX(-1);
 }
 
-.flower1{
-    top:650px;
+.f1{
+    top:8%;
 }
 
-.flower2{
-    top:1450px;
+.f2{
+    top:38%;
 }
 
-.flower3{
-    top:2350px;
+.f3{
+    top:69%;
 }
-
-.flower4{
-    top:3250px;
-}
-
-.flower5{
-    top:4150px;
-}
-
-.flower6{
-    top:5050px;
-}
-
-
-/* =========================
-   SUBTLE FLOWER MOVEMENT
-========================= */
 
 .floating{
-    animation:flowerFloat 6s ease-in-out infinite;
+    animation:flowerMove 6s ease-in-out infinite;
 }
 
-.delay1{
-    animation-delay:1.5s;
-}
-
-.delay2{
-    animation-delay:3s;
-}
-
-@keyframes flowerFloat{
+@keyframes flowerMove{
 
     0%,100%{
         margin-top:0;
     }
 
     50%{
-        margin-top:-12px;
+        margin-top:-9px;
     }
 
 }
 
 
 /* =========================
-   GOLD DETAILS
-========================= */
-
-.gold-line{
-    width:65px;
-    height:1px;
-    background:#ad8c5c;
-    margin:14px auto;
-}
-
-
-/* =========================
-   GATE
-========================= */
-
-#gate{
-    position:fixed;
-    inset:0;
-    z-index:9999;
-    background:#000;
-    transition:opacity 1.2s ease;
-}
-
-#gate video{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-}
-
-.tap{
-    position:absolute;
-    left:50%;
-    bottom:13%;
-    transform:translateX(-50%);
-
-    color:white;
-
-    font-family:"Cormorant Garamond",serif;
-    font-size:30px;
-    font-style:italic;
-    letter-spacing:2px;
-
-    text-shadow:
-        0 2px 12px rgba(0,0,0,.7);
-
-    animation:tapPulse 2s ease-in-out infinite;
-
-    white-space:nowrap;
-}
-
-@keyframes tapPulse{
-
-    0%,100%{
-        opacity:.65;
-    }
-
-    50%{
-        opacity:1;
-    }
-
-}
-
-
-/* =========================
-   COMMON SECTION
+   GENERAL SECTION
 ========================= */
 
 .section{
     position:relative;
+    min-height:100vh;
+    width:100%;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    padding:70px 20px;
+
+    overflow:hidden;
+}
+
+.content{
+    position:relative;
     z-index:5;
-    background:#faf7f1;
+    width:min(900px,100%);
+    text-align:center;
+}
+
+
+/* =========================
+   TYPOGRAPHY
+========================= */
+
+.script{
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-size:clamp(27px,7vw,46px);
+    color:#8b3444;
+}
+
+.title{
+    margin:15px 0;
+
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(45px,11vw,78px);
+    font-weight:400;
+    color:#641b29;
+}
+
+.gold-line{
+    width:80px;
+    height:1px;
+    background:#b69a61;
+    margin:18px auto;
+}
+
+.subtitle{
+    font-family:'Cormorant Garamond',serif;
+    font-size:22px;
+    color:#806a70;
+}
+
+.scroll{
+    margin-top:55px;
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-size:21px;
+    color:#a17c55;
 }
 
 
@@ -203,92 +224,11 @@ body{
 ========================= */
 
 .welcome{
-    min-height:95vh;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    text-align:center;
-    padding:70px 30px;
+    min-height:100vh;
 }
 
-.welcome-content{
-    max-width:600px;
-}
-
-.small-script{
-    font-family:"Cormorant Garamond",serif;
-    font-size:21px;
-    font-style:italic;
-    color:#9b746b;
-}
-
-.welcome h1{
-    margin-top:8px;
-
-    font-family:"Cormorant Garamond",serif;
-    font-size:58px;
-    font-weight:400;
-    color:#6d2936;
-
-    letter-spacing:1px;
-}
-
-.welcome p{
-    margin-top:12px;
-
-    font-size:10px;
-    letter-spacing:4px;
-    text-transform:uppercase;
-
-    color:#94736a;
-}
-
-.scroll{
-    margin-top:70px;
-
-    font-size:9px;
-    letter-spacing:3px;
-    text-transform:uppercase;
-
-    color:#a28a79;
-}
-
-
-/* =========================
-   SECTION HEADING
-========================= */
-
-.heading{
-    text-align:center;
-    padding:80px 20px 35px;
-}
-
-.heading .eyebrow{
-    font-size:9px;
-    letter-spacing:4px;
-    text-transform:uppercase;
-    color:#a17c72;
-}
-
-.heading h2{
-    margin-top:5px;
-
-    font-family:"Cormorant Garamond",serif;
-    font-size:48px;
-    font-weight:400;
-
-    color:#6d2936;
-}
-
-.heading p{
-    margin-top:7px;
-
-    font-family:"Cormorant Garamond",serif;
-    font-size:18px;
-
-    color:#876a62;
+.welcome .content{
+    padding:30px;
 }
 
 
@@ -296,171 +236,101 @@ body{
    COUNTDOWN
 ========================= */
 
-.countdown-section{
-    padding-bottom:85px;
+.countdown-box{
+    width:min(750px,100%);
+
+    padding:50px 25px;
+
+    background:rgba(255,253,248,.9);
+
+    border:1px solid rgba(182,154,97,.5);
+
+    box-shadow:
+        0 15px 45px rgba(70,20,30,.07);
 }
 
-.countdown-frame{
-    width:88%;
-    max-width:600px;
-
-    margin:0 auto;
-
-    padding:42px 15px;
-
-    border-top:1px solid #b59667;
-    border-bottom:1px solid #b59667;
-
-    text-align:center;
+.countdown-title{
+    font-family:'Cormorant Garamond',serif;
+    font-size:45px;
+    font-weight:400;
+    color:#641b29;
+    margin-bottom:25px;
 }
 
-.countdown{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    gap:20px;
-}
-
-.time{
-    min-width:65px;
-}
-
-.time-number{
-    font-family:"Cormorant Garamond",serif;
-    font-size:42px;
-    color:#702b38;
-}
-
-.time-label{
-    margin-top:3px;
-
-    font-size:8px;
-    letter-spacing:2px;
-
-    color:#a27d73;
+#countdown{
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(20px,5vw,30px);
+    color:#8b3444;
+    letter-spacing:1px;
 }
 
 
 /* =========================
-   EVENT SECTION
+   EVENTS
 ========================= */
 
 .event{
+    min-height:auto;
+    padding-top:35px;
     padding-bottom:0;
 }
 
-.event-card{
-    width:90%;
-    max-width:700px;
-
-    margin:0 auto;
-
-    border:1px solid #b79a6d;
-
-    padding:6px;
-
-    background:#fffdf9;
+.event-content{
+    width:min(900px,100%);
+    text-align:center;
 }
+
+.event-title{
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(42px,9vw,65px);
+    font-weight:400;
+    color:#641b29;
+    margin-bottom:22px;
+}
+
+
+/* VIDEO PLACEHOLDER */
 
 .video-placeholder{
     width:100%;
     aspect-ratio:16/9;
 
-    background:
-        linear-gradient(
-            135deg,
-            #f6efe7,
-            #fffdf9
-        );
+    background:#eee8dc;
+
+    border:1px solid rgba(182,154,97,.5);
 
     display:flex;
-    justify-content:center;
     align-items:center;
+    justify-content:center;
 
-    position:relative;
-}
+    color:#8b3444;
 
-.video-placeholder::before{
-    content:"";
-
-    position:absolute;
-    inset:13px;
-
-    border:1px solid rgba(175,142,95,.35);
-}
-
-.placeholder-text{
-    position:relative;
-    text-align:center;
-}
-
-.placeholder-text span{
-    display:block;
-
-    font-family:"Cormorant Garamond",serif;
-    font-size:31px;
-
-    color:#762d39;
-}
-
-.placeholder-text small{
-    display:block;
-
-    margin-top:6px;
-
-    font-size:8px;
-    letter-spacing:3px;
-    text-transform:uppercase;
-
-    color:#a07c72;
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-size:25px;
 }
 
 
-/* =========================
-   MAP
-========================= */
+/* MAP */
 
 .map-placeholder{
     width:100%;
+    height:280px;
 
-    min-height:250px;
+    background:#eee8dc;
 
-    margin-top:0;
-
-    background:#f2ece3;
+    border:1px solid rgba(182,154,97,.5);
 
     display:flex;
     align-items:center;
     justify-content:center;
 
-    text-align:center;
+    color:#8b3444;
 
-    border-top:1px solid #e2d6c8;
-    border-bottom:1px solid #e2d6c8;
-}
+    font-family:'Cormorant Garamond',serif;
+    font-size:23px;
 
-.map-inner{
-    padding:30px;
-}
-
-.map-inner .pin{
-    font-family:"Cormorant Garamond",serif;
-    font-size:40px;
-    color:#7a303d;
-}
-
-.map-inner h3{
-    font-family:"Cormorant Garamond",serif;
-    font-size:25px;
-    font-weight:400;
-    color:#6d2936;
-}
-
-.map-inner p{
-    margin-top:5px;
-    font-size:9px;
-    letter-spacing:2px;
-    color:#987970;
+    margin-top:0;
 }
 
 
@@ -469,46 +339,33 @@ body{
 ========================= */
 
 .dress{
-    padding-bottom:90px;
+    min-height:100vh;
 }
 
 .dress-box{
-    width:90%;
-    max-width:650px;
+    width:min(750px,100%);
+    padding:55px 25px;
 
-    margin:0 auto;
+    background:rgba(255,253,248,.9);
 
-    border:1px solid #b79a6d;
-    padding:7px;
+    border:1px solid rgba(182,154,97,.45);
 
-    background:#fffdf9;
+    box-shadow:
+        0 15px 45px rgba(70,20,30,.06);
 }
 
-.dress-placeholder{
-    aspect-ratio:4/5;
-
-    background:#f3ede4;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    text-align:center;
-}
-
-.dress-placeholder h3{
-    font-family:"Cormorant Garamond",serif;
-    font-size:45px;
+.dress-title{
+    font-family:'Cormorant Garamond',serif;
+    font-size:48px;
     font-weight:400;
-    color:#702b38;
+    color:#641b29;
 }
 
-.dress-placeholder p{
-    margin-top:7px;
-    font-size:9px;
-    letter-spacing:3px;
-    text-transform:uppercase;
-    color:#99786e;
+.dress-text{
+    margin-top:20px;
+    font-family:'Cormorant Garamond',serif;
+    font-size:23px;
+    color:#806a70;
 }
 
 
@@ -517,54 +374,49 @@ body{
 ========================= */
 
 .rsvp{
-    padding-bottom:100px;
+    min-height:100vh;
 }
 
 .rsvp-box{
-    width:88%;
-    max-width:550px;
+    width:min(650px,100%);
+    padding:55px 25px;
 
-    margin:0 auto;
+    background:#fffdf8;
 
-    padding:50px 25px;
+    border:1px solid rgba(182,154,97,.55);
 
-    background:#fffdf9;
-
-    border:1px solid #b79a6d;
-
-    text-align:center;
+    box-shadow:
+        0 15px 45px rgba(70,20,30,.07);
 }
 
-.rsvp-box h2{
-    font-family:"Cormorant Garamond",serif;
-    font-size:55px;
+.rsvp-title{
+    font-family:'Cormorant Garamond',serif;
+    font-size:45px;
     font-weight:400;
-    color:#702b38;
+    color:#641b29;
 }
 
-.rsvp-box p{
-    margin-top:8px;
-
-    font-family:"Cormorant Garamond",serif;
-    font-size:19px;
-
-    color:#896b63;
+.rsvp-text{
+    margin-top:15px;
+    color:#806a70;
+    font-family:'Cormorant Garamond',serif;
+    font-size:21px;
 }
 
 .rsvp-button{
     display:inline-block;
+    margin-top:30px;
 
-    margin-top:28px;
+    padding:13px 38px;
 
-    padding:13px 35px;
-
-    background:#702b38;
+    background:#641b29;
     color:white;
 
-    font-size:9px;
-    letter-spacing:3px;
-
     text-decoration:none;
+
+    font-family:'Montserrat',sans-serif;
+    font-size:13px;
+    letter-spacing:2px;
 }
 
 
@@ -572,34 +424,16 @@ body{
    FOOTER
 ========================= */
 
-.footer{
-    position:relative;
-    z-index:5;
-
+footer{
+    padding:45px 20px;
     text-align:center;
 
-    padding:55px 20px;
+    background:#faf7f1;
 
-    background:#f2ebe1;
+    color:#9a7c80;
 
-    border-top:1px solid #e1d3c3;
-}
-
-.footer h3{
-    font-family:"Cormorant Garamond",serif;
-    font-size:32px;
-    font-weight:400;
-
-    color:#702b38;
-}
-
-.footer p{
-    margin-top:8px;
-
-    font-size:8px;
-    letter-spacing:3px;
-
-    color:#9a786f;
+    font-family:'Cormorant Garamond',serif;
+    font-size:18px;
 }
 
 
@@ -610,39 +444,24 @@ body{
 @media(max-width:600px){
 
     .floral{
-        width:145px;
+        width:100px;
     }
 
-    .floral-left{
-        left:-58px;
+    .left{
+        left:-20px;
     }
 
-    .floral-right{
-        right:-58px;
+    .right{
+        right:-20px;
     }
 
-    .welcome h1{
-        font-size:48px;
+    .section{
+        padding-left:15px;
+        padding-right:15px;
     }
 
-    .heading h2{
-        font-size:42px;
-    }
-
-    .countdown{
-        gap:8px;
-    }
-
-    .time{
-        min-width:58px;
-    }
-
-    .time-number{
-        font-size:34px;
-    }
-
-    .tap{
-        font-size:27px;
+    .event{
+        padding-top:25px;
     }
 
 }
@@ -654,24 +473,27 @@ body{
 <body>
 
 
-<!-- ==================================================
-     GATE
-================================================== -->
+<!-- =====================================================
+     OPENING GATE
+===================================================== -->
 
 <div id="gate">
 
     <video
         id="gateVideo"
         playsinline
-        preload="auto">
+        webkit-playsinline
+        preload="auto"
+        muted>
 
         <source
-            src="https://raw.githubusercontent.com/ivoryvows/Whispering-blooms/refs/heads/main/darwaza.mov"
-            type="video/quicktime">
+            src="https://ivoryvows.github.io/Whispering-blooms/darwaza.mp4"
+            type="video/mp4">
 
     </video>
 
-    <div class="tap" id="tapText">
+
+    <div id="tapText">
         Tap to Open
     </div>
 
@@ -679,57 +501,62 @@ body{
 
 
 
-<div class="page">
+<!-- =====================================================
+     MAIN WEBSITE
+===================================================== -->
+
+<main id="main">
 
 
-<!-- ==================================================
-     ACTUAL FLORAL DECORATION
-================================================== -->
-
-<img
-class="floral floral-left flower1 floating"
-src="https://files.catbox.moe/s2lwha.png">
+<!-- SIDE FLOWERS -->
 
 <img
-class="floral floral-right flower2 floating delay1"
-src="https://files.catbox.moe/s2lwha.png">
+    class="floral left f1 floating"
+    src="https://files.catbox.moe/s2lwha.png">
 
 <img
-class="floral floral-left flower3 floating delay2"
-src="https://files.catbox.moe/s2lwha.png">
+    class="floral right f1 floating"
+    src="https://files.catbox.moe/s2lwha.png">
+
 
 <img
-class="floral floral-right flower4 floating"
-src="https://files.catbox.moe/s2lwha.png">
+    class="floral left f2 floating"
+    src="https://files.catbox.moe/s2lwha.png">
 
 <img
-class="floral floral-left flower5 floating delay1"
-src="https://files.catbox.moe/s2lwha.png">
+    class="floral right f2 floating"
+    src="https://files.catbox.moe/s2lwha.png">
+
 
 <img
-class="floral floral-right flower6 floating delay2"
-src="https://files.catbox.moe/s2lwha.png">
+    class="floral left f3 floating"
+    src="https://files.catbox.moe/s2lwha.png">
+
+<img
+    class="floral right f3 floating"
+    src="https://files.catbox.moe/s2lwha.png">
 
 
-<!-- ==================================================
-     WELCOME
-================================================== -->
+
+<!-- =====================================================
+     1. WELCOME
+===================================================== -->
 
 <section class="section welcome">
 
-    <div class="welcome-content">
+    <div class="content">
 
-        <div class="small-script">
+        <div class="script">
             Together with their families
         </div>
 
         <div class="gold-line"></div>
 
-        <h1>
+        <h1 class="title">
             You Are Invited
         </h1>
 
-        <p>
+        <p class="subtitle">
             To celebrate a beautiful beginning
         </p>
 
@@ -743,76 +570,26 @@ src="https://files.catbox.moe/s2lwha.png">
 
 
 
-<!-- ==================================================
-     COUNTDOWN
-================================================== -->
+<!-- =====================================================
+     2. COUNTDOWN
+===================================================== -->
 
-<section class="section countdown-section">
+<section class="section">
 
-    <div class="heading">
+    <div class="content countdown-box">
 
-        <div class="eyebrow">
-            The Celebration
+        <div class="script">
+            The Countdown
         </div>
 
-        <h2>
-            Counting Down
-        </h2>
+        <div class="gold-line"></div>
 
-        <p>
-            Until our forever begins
-        </p>
+        <div class="countdown-title">
+            Until Our Celebration
+        </div>
 
-    </div>
-
-
-    <div class="countdown-frame">
-
-        <div class="countdown">
-
-            <div class="time">
-                <div class="time-number" id="days">
-                    00
-                </div>
-
-                <div class="time-label">
-                    DAYS
-                </div>
-            </div>
-
-
-            <div class="time">
-                <div class="time-number" id="hours">
-                    00
-                </div>
-
-                <div class="time-label">
-                    HOURS
-                </div>
-            </div>
-
-
-            <div class="time">
-                <div class="time-number" id="minutes">
-                    00
-                </div>
-
-                <div class="time-label">
-                    MINUTES
-                </div>
-            </div>
-
-
-            <div class="time">
-                <div class="time-number" id="seconds">
-                    00
-                </div>
-
-                <div class="time-label">
-                    SECONDS
-                </div>
-            </div>
-
+        <div id="countdown">
+            Loading...
         </div>
 
     </div>
@@ -821,66 +598,24 @@ src="https://files.catbox.moe/s2lwha.png">
 
 
 
-<!-- ==================================================
-     DHOLKI
-================================================== -->
+<!-- =====================================================
+     3. DHOLKI
+===================================================== -->
 
 <section class="section event">
 
-    <div class="heading">
+    <div class="event-content">
 
-        <div class="eyebrow">
-            Celebration One
-        </div>
-
-        <h2>
+        <h2 class="event-title">
             Dholki
         </h2>
 
-        <p>
-            A night of music & celebration
-        </p>
-
-    </div>
-
-
-    <div class="event-card">
-
         <div class="video-placeholder">
-
-            <div class="placeholder-text">
-
-                <span>
-                    Dholki
-                </span>
-
-                <small>
-                    Video will appear here
-                </small>
-
-            </div>
-
+            Dholki Video
         </div>
 
-    </div>
-
-
-    <div class="map-placeholder">
-
-        <div class="map-inner">
-
-            <div class="pin">
-                ✦
-            </div>
-
-            <h3>
-                Dholki Location
-            </h3>
-
-            <p>
-                MAP WILL APPEAR HERE
-            </p>
-
+        <div class="map-placeholder">
+            Dholki Map
         </div>
 
     </div>
@@ -889,66 +624,24 @@ src="https://files.catbox.moe/s2lwha.png">
 
 
 
-<!-- ==================================================
-     MEHNDI
-================================================== -->
+<!-- =====================================================
+     4. MEHNDI
+===================================================== -->
 
 <section class="section event">
 
-    <div class="heading">
+    <div class="event-content">
 
-        <div class="eyebrow">
-            Celebration Two
-        </div>
-
-        <h2>
+        <h2 class="event-title">
             Mehndi
         </h2>
 
-        <p>
-            Henna, laughter & lovely moments
-        </p>
-
-    </div>
-
-
-    <div class="event-card">
-
         <div class="video-placeholder">
-
-            <div class="placeholder-text">
-
-                <span>
-                    Mehndi
-                </span>
-
-                <small>
-                    Video will appear here
-                </small>
-
-            </div>
-
+            Mehndi Video
         </div>
 
-    </div>
-
-
-    <div class="map-placeholder">
-
-        <div class="map-inner">
-
-            <div class="pin">
-                ✦
-            </div>
-
-            <h3>
-                Mehndi Location
-            </h3>
-
-            <p>
-                MAP WILL APPEAR HERE
-            </p>
-
+        <div class="map-placeholder">
+            Mehndi Map
         </div>
 
     </div>
@@ -957,66 +650,24 @@ src="https://files.catbox.moe/s2lwha.png">
 
 
 
-<!-- ==================================================
-     SHADI
-================================================== -->
+<!-- =====================================================
+     5. SHADI
+===================================================== -->
 
 <section class="section event">
 
-    <div class="heading">
+    <div class="event-content">
 
-        <div class="eyebrow">
-            The Main Celebration
-        </div>
-
-        <h2>
+        <h2 class="event-title">
             Shadi
         </h2>
 
-        <p>
-            The beginning of forever
-        </p>
-
-    </div>
-
-
-    <div class="event-card">
-
         <div class="video-placeholder">
-
-            <div class="placeholder-text">
-
-                <span>
-                    Shadi
-                </span>
-
-                <small>
-                    Video will appear here
-                </small>
-
-            </div>
-
+            Shadi Video
         </div>
 
-    </div>
-
-
-    <div class="map-placeholder">
-
-        <div class="map-inner">
-
-            <div class="pin">
-                ✦
-            </div>
-
-            <h3>
-                Shadi Location
-            </h3>
-
-            <p>
-                MAP WILL APPEAR HERE
-            </p>
-
+        <div class="map-placeholder">
+            Shadi Map
         </div>
 
     </div>
@@ -1025,66 +676,24 @@ src="https://files.catbox.moe/s2lwha.png">
 
 
 
-<!-- ==================================================
-     WALIMA
-================================================== -->
+<!-- =====================================================
+     6. WALIMA
+===================================================== -->
 
 <section class="section event">
 
-    <div class="heading">
+    <div class="event-content">
 
-        <div class="eyebrow">
-            Celebration Four
-        </div>
-
-        <h2>
+        <h2 class="event-title">
             Walima
         </h2>
 
-        <p>
-            Celebrating our new beginning
-        </p>
-
-    </div>
-
-
-    <div class="event-card">
-
         <div class="video-placeholder">
-
-            <div class="placeholder-text">
-
-                <span>
-                    Walima
-                </span>
-
-                <small>
-                    Video will appear here
-                </small>
-
-            </div>
-
+            Walima Video
         </div>
 
-    </div>
-
-
-    <div class="map-placeholder">
-
-        <div class="map-inner">
-
-            <div class="pin">
-                ✦
-            </div>
-
-            <h3>
-                Walima Location
-            </h3>
-
-            <p>
-                MAP WILL APPEAR HERE
-            </p>
-
+        <div class="map-placeholder">
+            Walima Map
         </div>
 
     </div>
@@ -1093,47 +702,27 @@ src="https://files.catbox.moe/s2lwha.png">
 
 
 
-<!-- ==================================================
-     DRESS CODE
-================================================== -->
+<!-- =====================================================
+     7. DRESS CODE
+===================================================== -->
 
 <section class="section dress">
 
-    <div class="heading">
+    <div class="content dress-box">
 
-        <div class="eyebrow">
-            A Little Style Note
+        <div class="script">
+            Dress Code
         </div>
 
-        <h2>
-            Dress Code
+        <div class="gold-line"></div>
+
+        <h2 class="dress-title">
+            Elegance in Every Detail
         </h2>
 
-        <p>
-            Come dressed in celebration
+        <p class="dress-text">
+            Details coming soon
         </p>
-
-    </div>
-
-
-    <div class="dress-box">
-
-        <div class="dress-placeholder">
-
-            <div>
-
-                <h3>
-                    Dress<br>
-                    Code
-                </h3>
-
-                <p>
-                    Picture will appear here
-                </p>
-
-            </div>
-
-        </div>
 
     </div>
 
@@ -1141,46 +730,30 @@ src="https://files.catbox.moe/s2lwha.png">
 
 
 
-<!-- ==================================================
-     RSVP
-================================================== -->
+<!-- =====================================================
+     8. RSVP
+===================================================== -->
 
 <section class="section rsvp">
 
-    <div class="heading">
+    <div class="content rsvp-box">
 
-        <div class="eyebrow">
-            Your Presence Matters
+        <div class="script">
+            Kindly RSVP
         </div>
 
-        <h2>
-            RSVP
+        <div class="gold-line"></div>
+
+        <h2 class="rsvp-title">
+            We Can't Wait to Celebrate With You
         </h2>
 
-        <p>
-            We would love to celebrate with you
+        <p class="rsvp-text">
+            Your presence will make our celebration even more special.
         </p>
 
-    </div>
-
-
-    <div class="rsvp-box">
-
-        <h2>
-            Kindly Respond
-        </h2>
-
-        <p>
-            Your presence will make our celebration
-            even more special.
-        </p>
-
-        <a
-        href="#"
-        class="rsvp-button">
-
+        <a href="#" class="rsvp-button">
             CONFIRM RSVP
-
         </a>
 
     </div>
@@ -1188,33 +761,25 @@ src="https://files.catbox.moe/s2lwha.png">
 </section>
 
 
+</main>
 
-<!-- ==================================================
-     FOOTER
-================================================== -->
 
-<footer class="footer">
-
-    <h3>
-        Whispering Blooms
-    </h3>
-
-    <p>
-        WITH LOVE • WITH JOY • WITH GRATITUDE
-    </p>
-
+<footer>
+    With love, always ♡
 </footer>
 
 
-</div>
 
-
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
 
 <script>
 
-/* ==================================================
-   GATE
-================================================== */
+
+/* =========================
+   OPENING GATE
+========================= */
 
 const gate =
 document.getElementById("gate");
@@ -1225,68 +790,100 @@ document.getElementById("gateVideo");
 const tapText =
 document.getElementById("tapText");
 
-let started = false;
+let opened = false;
 
 
-gate.addEventListener("click",function(){
+/* Tap anywhere on opening */
 
-    if(started) return;
+gate.addEventListener("click", function(){
 
-    started = true;
+    if(opened) return;
+
+    opened = true;
 
     tapText.style.opacity = "0";
 
     gateVideo.play().catch(function(error){
 
-        console.log(error);
+        console.log("Video could not play:",error);
 
     });
 
 });
 
 
+/* =========================
+   CLOSE GATE
+========================= */
+
+function closeGate(){
+
+    if(gate.classList.contains("closed")) return;
+
+    gate.classList.add("closed");
+
+    gate.style.opacity = "0";
+
+    setTimeout(function(){
+
+        gate.style.display = "none";
+
+        /*
+        Unlock page scrolling
+        */
+
+        document.body.style.overflow = "auto";
+
+        document.documentElement.style.overflow = "auto";
+
+    },1200);
+
+}
+
+
 /*
-   For now the gate disappears when the
-   video reaches 9 seconds.
+   Gate disappears around 9 seconds
 */
 
 gateVideo.addEventListener("timeupdate",function(){
 
-    if(
-        gateVideo.currentTime >= 9 &&
-        !gate.classList.contains("closing")
-    ){
+    if(gateVideo.currentTime >= 9){
 
-        gate.classList.add("closing");
-
-        gate.style.opacity = "0";
-
-        setTimeout(function(){
-
-            gate.style.display = "none";
-
-        },1200);
+        closeGate();
 
     }
 
 });
 
 
+/*
+   Safety:
+   If video ends before 9 seconds
+*/
 
-/* ==================================================
+gateVideo.addEventListener("ended",function(){
+
+    closeGate();
+
+});
+
+
+
+/* =========================
    COUNTDOWN
-================================================== */
+========================= */
 
 /*
-   TEMPORARY DATE
-   We will replace this later.
+   Temporary date.
+   We will replace this later
+   with your actual wedding date.
 */
 
 const weddingDate =
 new Date("December 31, 2026 20:00:00").getTime();
 
 
-function countdown(){
+function updateCountdown(){
 
     const now =
     new Date().getTime();
@@ -1297,10 +894,8 @@ function countdown(){
 
     if(distance <= 0){
 
-        document.getElementById("days").innerText="00";
-        document.getElementById("hours").innerText="00";
-        document.getElementById("minutes").innerText="00";
-        document.getElementById("seconds").innerText="00";
+        document.getElementById("countdown").innerHTML =
+        "The day has arrived ♡";
 
         return;
 
@@ -1310,55 +905,54 @@ function countdown(){
     const days =
     Math.floor(
         distance /
-        (1000*60*60*24)
+        (1000 * 60 * 60 * 24)
     );
 
 
     const hours =
     Math.floor(
         (distance %
-        (1000*60*60*24)) /
-        (1000*60*60)
+        (1000 * 60 * 60 * 24))
+        /
+        (1000 * 60 * 60)
     );
 
 
     const minutes =
     Math.floor(
         (distance %
-        (1000*60*60)) /
-        (1000*60)
+        (1000 * 60 * 60))
+        /
+        (1000 * 60)
     );
 
 
     const seconds =
     Math.floor(
         (distance %
-        (1000*60)) /
+        (1000 * 60))
+        /
         1000
     );
 
 
-    document.getElementById("days").innerText =
-        String(days).padStart(2,"0");
+    document.getElementById("countdown").innerHTML =
 
-    document.getElementById("hours").innerText =
-        String(hours).padStart(2,"0");
-
-    document.getElementById("minutes").innerText =
-        String(minutes).padStart(2,"0");
-
-    document.getElementById("seconds").innerText =
-        String(seconds).padStart(2,"0");
+        days + " Days · " +
+        hours + " Hours · " +
+        minutes + " Minutes · " +
+        seconds + " Seconds";
 
 }
 
 
-countdown();
+updateCountdown();
 
-setInterval(countdown,1000);
+setInterval(updateCountdown,1000);
+
 
 </script>
 
-
 </body>
 </html>
+```
