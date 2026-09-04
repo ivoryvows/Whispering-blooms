@@ -13,10 +13,6 @@
 
 <style>
 
-/* =========================================================
-   BASIC
-========================================================= */
-
 *{
     box-sizing:border-box;
     -webkit-tap-highlight-color:transparent;
@@ -28,63 +24,60 @@ html{
 
 body{
     margin:0;
-    padding:0;
     overflow-x:hidden;
     font-family:"Cormorant Garamond",serif;
-    color:#5a3030;
+    color:#633737;
     background:#f8f2e8;
 }
 
-/* =========================================================
-   CONTINUOUS BACKGROUND
-========================================================= */
+/* =====================================================
+   BACKGROUND
+===================================================== */
 
 #background{
     position:fixed;
     inset:0;
-    z-index:-10;
-    background:#f8f2e8;
-    transition:background 1.4s ease;
+    z-index:-20;
+    transition:background 1.5s ease;
 }
 
-/* Original background until countdown */
 #background.original{
     background:
-      radial-gradient(circle at 20% 20%,rgba(255,255,255,.8),transparent 35%),
-      radial-gradient(circle at 80% 70%,rgba(239,225,207,.45),transparent 40%),
-      #f8f2e8;
+    radial-gradient(circle at 15% 15%,rgba(255,255,255,.75),transparent 38%),
+    radial-gradient(circle at 85% 75%,rgba(235,220,198,.45),transparent 42%),
+    #f8f2e8;
 }
 
 #background.pink{
     background:
-      radial-gradient(circle at 15% 20%,rgba(255,255,255,.55),transparent 38%),
-      radial-gradient(circle at 85% 75%,rgba(244,194,205,.45),transparent 40%),
-      #f6dfe4;
+    radial-gradient(circle at 15% 15%,rgba(255,255,255,.6),transparent 38%),
+    radial-gradient(circle at 85% 80%,rgba(243,190,204,.48),transparent 43%),
+    #f5dfe4;
 }
 
 #background.green{
     background:
-      radial-gradient(circle at 15% 20%,rgba(255,255,255,.6),transparent 38%),
-      radial-gradient(circle at 85% 75%,rgba(183,211,187,.5),transparent 42%),
-      #e2eee3;
+    radial-gradient(circle at 15% 15%,rgba(255,255,255,.65),transparent 38%),
+    radial-gradient(circle at 85% 80%,rgba(181,210,187,.5),transparent 43%),
+    #e1ede2;
 }
 
 #background.gold{
     background:
-      radial-gradient(circle at 15% 20%,rgba(255,255,255,.65),transparent 38%),
-      radial-gradient(circle at 85% 75%,rgba(225,198,143,.45),transparent 42%),
-      #f1e7ca;
+    radial-gradient(circle at 15% 15%,rgba(255,255,255,.65),transparent 38%),
+    radial-gradient(circle at 85% 80%,rgba(222,194,133,.48),transparent 43%),
+    #f0e5c7;
 }
 
-/* =========================================================
+/* =====================================================
    GLITTER
-========================================================= */
+===================================================== */
 
 #glitter{
     position:fixed;
     inset:0;
+    z-index:-5;
     pointer-events:none;
-    z-index:-1;
     overflow:hidden;
 }
 
@@ -93,8 +86,8 @@ body{
     width:3px;
     height:3px;
     border-radius:50%;
-    background:rgba(174,137,67,.65);
-    box-shadow:0 0 7px rgba(194,157,82,.65);
+    background:rgba(173,136,65,.62);
+    box-shadow:0 0 7px rgba(196,157,78,.6);
     animation:twinkle 4s ease-in-out infinite;
 }
 
@@ -104,62 +97,49 @@ body{
         transform:scale(.6);
     }
     50%{
-        opacity:.8;
-        transform:scale(1.4);
+        opacity:.85;
+        transform:scale(1.35);
     }
 }
 
-/* =========================================================
-   SOUND BUTTON
-========================================================= */
+/* =====================================================
+   SOUND
+===================================================== */
 
 #soundButton{
     position:fixed;
-    right:14px;
-    top:14px;
+    right:13px;
+    top:13px;
     z-index:99999;
 
-    border:1px solid rgba(174,137,67,.7);
-    background:rgba(255,250,240,.88);
-    color:#743838;
-
     padding:8px 13px;
+
+    border:1px solid rgba(169,133,65,.7);
     border-radius:30px;
+
+    background:rgba(255,250,240,.9);
+    color:#743737;
 
     font-family:"Montserrat",sans-serif;
     font-size:10px;
-    letter-spacing:.5px;
 
     backdrop-filter:blur(8px);
     -webkit-backdrop-filter:blur(8px);
-
-    box-shadow:0 3px 15px rgba(80,40,20,.12);
 }
 
-/* =========================================================
-   MAIN CONTENT
-========================================================= */
-
-#main{
-    position:relative;
-    z-index:2;
-    width:100%;
-}
-
-/* =========================================================
-   GATE / OPENING
-========================================================= */
+/* =====================================================
+   GATE
+===================================================== */
 
 #gate{
     position:fixed;
     inset:0;
     z-index:50000;
     overflow:hidden;
+
     background:#f8f2e8;
 
-    transition:
-        opacity 1.2s ease,
-        visibility 1.2s ease;
+    transition:opacity 1.2s ease,visibility 1.2s ease;
 }
 
 #gate.hidden{
@@ -168,15 +148,11 @@ body{
     pointer-events:none;
 }
 
-/*
-   STILL + VIDEO ARE EXACTLY SAME POSITION.
-   This prevents the "jhatka".
-*/
-
 #doorStill,
 #doorVideo{
     position:absolute;
     inset:0;
+
     width:100%;
     height:100%;
 
@@ -189,7 +165,6 @@ body{
 #doorStill{
     z-index:2;
     opacity:1;
-
     transition:opacity 1.15s ease;
 }
 
@@ -198,11 +173,7 @@ body{
     opacity:0;
 
     background:#f8f2e8;
-
-    transition:opacity 1.15s ease;
 }
-
-/* Dark/gold subtle overlay */
 
 #gate::after{
     content:"";
@@ -212,17 +183,13 @@ body{
     pointer-events:none;
 
     background:
-      linear-gradient(
+    linear-gradient(
         to bottom,
-        rgba(35,10,10,.08),
+        rgba(40,10,10,.08),
         transparent 35%,
-        rgba(35,10,10,.08)
-      );
+        rgba(40,10,10,.08)
+    );
 }
-
-/* =========================================================
-   TAP TO OPEN
-========================================================= */
 
 #tapArea{
     position:absolute;
@@ -230,14 +197,14 @@ body{
     z-index:10;
 
     display:flex;
-    align-items:flex-end;
     justify-content:center;
+    align-items:flex-end;
 
     padding-bottom:12vh;
 
     cursor:pointer;
 
-    transition:opacity .6s ease;
+    transition:opacity:.6s ease;
 }
 
 #tapText{
@@ -247,17 +214,15 @@ body{
     font-size:clamp(30px,8vw,52px);
 
     text-shadow:
-      0 2px 4px rgba(60,20,10,.5),
-      0 0 12px rgba(255,231,173,.35);
-
-    letter-spacing:.5px;
+    0 2px 5px rgba(50,20,10,.55),
+    0 0 12px rgba(255,225,165,.35);
 
     animation:tapGlow 2.5s ease-in-out infinite;
 }
 
 @keyframes tapGlow{
     0%,100%{
-        opacity:.72;
+        opacity:.75;
         transform:translateY(0);
     }
     50%{
@@ -266,119 +231,72 @@ body{
     }
 }
 
-/* =========================================================
-   SECTION COMMON
-========================================================= */
+/* =====================================================
+   MAIN
+===================================================== */
+
+#main{
+    position:relative;
+    z-index:2;
+    width:100%;
+}
+
+/* =====================================================
+   SECTIONS
+===================================================== */
 
 .section{
-    position:relative;
     width:100%;
+    position:relative;
 
-    padding:
-      24px
-      18px
-      38px;
+    padding-left:14px;
+    padding-right:14px;
 
     display:flex;
     flex-direction:column;
     align-items:center;
 }
 
-/*
-  Countdown and everything before it stays original.
-*/
-
-.original-section{
-    background:transparent;
-}
-
-/* =========================================================
-   EVENT SECTIONS
-========================================================= */
-
-.event-section{
-    min-height:auto;
-
+#parents{
     padding-top:18px;
-    padding-bottom:22px;
-
-    transition:background .8s ease;
+    padding-bottom:14px;
 }
 
-#dholki{
-    background:rgba(246,223,228,.20);
+#countdown{
+    padding-top:12px;
+    padding-bottom:16px;
 }
 
-#mehndi{
-    background:rgba(226,238,227,.20);
-}
-
-#shadi{
-    background:rgba(241,231,202,.20);
-}
-
-#walima{
-    background:rgba(246,223,228,.20);
-}
-
-/* =========================================================
-   EVENT HEADINGS
-   ONLY CURSIVE — NO DUPLICATE NORMAL HEADINGS
-========================================================= */
-
-.event-title{
-    margin:4px 0 10px;
-
-    font-family:"Great Vibes",cursive;
-    font-size:clamp(42px,11vw,65px);
-    font-weight:400;
-
-    color:#743838;
-
-    line-height:1;
-
-    text-align:center;
-
-    text-shadow:
-      0 1px 2px rgba(100,40,30,.12);
-}
-
-/* =========================================================
+/* =====================================================
    VIDEO FRAME
-========================================================= */
+===================================================== */
 
 .video-wrap{
     position:relative;
-    width:min(92vw,520px);
 
-    margin:0 auto 8px;
+    width:min(94vw,500px);
 
     padding:7px;
 
-    border:1px solid #b89752;
+    border:1px solid #b99752;
 
-    background:rgba(255,250,240,.12);
+    background:rgba(255,250,240,.13);
 
     box-shadow:
-      0 7px 25px rgba(85,45,25,.12);
+    0 7px 25px rgba(75,40,25,.12);
 }
-
-/* Inner gold line */
 
 .video-wrap::before{
     content:"";
-    position:absolute;
 
+    position:absolute;
     inset:3px;
 
-    border:1px solid rgba(184,151,82,.72);
+    border:1px solid rgba(185,151,82,.72);
 
     pointer-events:none;
-
     z-index:5;
 }
-
-/* Video itself */
 
 .video-wrap video{
     display:block;
@@ -389,20 +307,17 @@ body{
     max-height:72vh;
 
     object-fit:cover;
-
-    background:transparent;
 }
 
-/* =========================================================
-   CORNER FLOWERS
-   NOT FULL SIDE FLOWERS
-========================================================= */
+/* =====================================================
+   FLOWERS ONLY AT CORNERS
+===================================================== */
 
 .corner-flower{
     position:absolute;
 
-    width:72px;
-    height:72px;
+    width:68px;
+    height:68px;
 
     object-fit:contain;
 
@@ -410,82 +325,36 @@ body{
 
     pointer-events:none;
 
-    opacity:.95;
-
-    filter:
-      drop-shadow(0 2px 3px rgba(70,40,20,.12));
+    filter:drop-shadow(0 2px 3px rgba(70,40,20,.13));
 }
 
-/* Top-left */
-
 .corner-flower.top-left{
-    left:-22px;
-    top:-18px;
-
+    left:-21px;
+    top:-17px;
     transform:rotate(-12deg);
 }
 
-/* Bottom-right */
-
 .corner-flower.bottom-right{
-    right:-22px;
-    bottom:-20px;
-
+    right:-21px;
+    bottom:-19px;
     transform:rotate(168deg);
 }
 
-/*
-  These are the only flowers around event videos.
-*/
-
-/* =========================================================
-   ORIGINAL SECTION FLOWERS
-========================================================= */
-
-.original-frame{
-    position:relative;
-}
-
-/* =========================================================
-   PARENTS
-========================================================= */
-
-#parents{
-    padding-top:18px;
-    padding-bottom:20px;
-}
-
-#parents .video-wrap{
-    margin-bottom:0;
-}
-
-/* =========================================================
+/* =====================================================
    COUNTDOWN
-========================================================= */
-
-#countdown{
-    padding-top:15px;
-    padding-bottom:18px;
-}
+===================================================== */
 
 .countdown-frame{
     position:relative;
-
-    width:min(94vw,700px);
-
+    width:min(96vw,700px);
     margin:0 auto;
-
-    overflow:visible;
 }
 
-.countdown-frame img{
+.countdown-frame > img{
     display:block;
-
     width:100%;
     height:auto;
 }
-
-/* Exact tested countdown placement */
 
 .countdown-box{
     position:absolute;
@@ -497,44 +366,139 @@ body{
     transform:translateY(-50%);
 
     z-index:10;
-
-    line-height:normal;
 }
 
 .countdown-box .tickcounter{
-    display:block !important;
-
-    width:100% !important;
-    height:0 !important;
-
-    position:relative !important;
-
-    padding-bottom:25% !important;
-
-    margin:0 !important;
+    display:block!important;
+    width:100%!important;
+    height:0!important;
+    position:relative!important;
+    padding-bottom:25%!important;
+    margin:0!important;
 }
 
-/* =========================================================
-   EVENT VIDEO SIZES
-========================================================= */
+/* =====================================================
+   EVENT SECTIONS
+===================================================== */
 
-.event-section .video-wrap{
-    width:min(92vw,500px);
+.event-section{
+    padding-top:10px;
+    padding-bottom:16px;
+
+    transition:background .8s ease;
 }
 
-/* Keep sections tight */
-
-.event-section + .event-section{
-    margin-top:0;
+#dholki{
+    background:rgba(246,220,227,.20);
 }
 
-/* =========================================================
+#mehndi{
+    background:rgba(224,237,225,.20);
+}
+
+#shadi{
+    background:rgba(240,229,199,.20);
+}
+
+#walima{
+    background:rgba(246,220,227,.20);
+}
+
+/* ONLY CURSIVE TITLES */
+
+.event-title{
+    margin:2px 0 8px;
+
+    font-family:"Great Vibes",cursive;
+
+    font-size:clamp(43px,11vw,62px);
+
+    font-weight:400;
+
+    line-height:1;
+
+    color:#743838;
+
+    text-align:center;
+}
+
+/* =====================================================
+   EVENT MAP
+===================================================== */
+
+.map-title{
+    margin:5px 0 5px;
+
+    font-family:"Great Vibes",cursive;
+
+    font-size:34px;
+
+    line-height:1;
+
+    color:#743838;
+}
+
+.map-wrap{
+    width:min(94vw,500px);
+
+    padding:5px;
+
+    border:1px solid #b99752;
+
+    background:rgba(255,250,240,.25);
+
+    box-shadow:
+    0 5px 18px rgba(75,40,25,.1);
+
+    margin:0 auto 4px;
+}
+
+.map-wrap iframe{
+    display:block;
+
+    width:100%;
+    height:215px;
+
+    border:0;
+}
+
+/* =====================================================
+   EVENT ADDRESS
+===================================================== */
+
+.event-details{
+    width:min(94vw,500px);
+
+    text-align:center;
+
+    margin:2px auto 0;
+
+    color:#6b3939;
+}
+
+.event-details .venue{
+    font-size:20px;
+    line-height:1.15;
+}
+
+.event-details .address{
+    margin-top:2px;
+
+    font-family:"Montserrat",sans-serif;
+
+    font-size:9px;
+    line-height:1.5;
+
+    letter-spacing:.3px;
+}
+
+/* =====================================================
    DRESS CODE
-========================================================= */
+===================================================== */
 
 #dresscode{
-    padding-top:20px;
-    padding-bottom:24px;
+    padding-top:16px;
+    padding-bottom:20px;
 }
 
 .dress-image{
@@ -542,20 +506,21 @@ body{
 
     display:block;
 
-    border:1px solid #b89752;
-
     padding:6px;
 
-    box-shadow:0 7px 25px rgba(85,45,25,.12);
+    border:1px solid #b99752;
+
+    box-shadow:
+    0 7px 25px rgba(75,40,25,.12);
 }
 
-/* =========================================================
+/* =====================================================
    RSVP
-========================================================= */
+===================================================== */
 
 #rsvp{
-    padding-top:18px;
-    padding-bottom:45px;
+    padding-top:14px;
+    padding-bottom:40px;
 }
 
 .rsvp-frame{
@@ -566,181 +531,129 @@ body{
     margin:0 auto;
 }
 
-.rsvp-frame img{
+.rsvp-frame > img{
     display:block;
+
     width:100%;
     height:auto;
 }
 
+/*
+   IMPORTANT:
+   Everything stays INSIDE the RSVP frame.
+*/
+
 .rsvp-form{
     position:absolute;
 
-    left:17%;
-    right:17%;
+    /*
+      These values keep the complete form
+      inside the actual frame.
+    */
 
-    top:24%;
+    left:21%;
+    right:21%;
+
+    top:27%;
+    bottom:16%;
+
+    z-index:5;
 
     display:flex;
     flex-direction:column;
+    justify-content:center;
 
-    gap:10px;
-
-    z-index:5;
+    gap:8px;
 }
+
+/* RSVP TEXT = MAROON */
 
 .rsvp-form input,
 .rsvp-form select{
+
     width:100%;
 
-    padding:10px 11px;
+    min-height:34px;
 
-    border:none;
-    border-bottom:1px solid rgba(255,245,220,.8);
+    padding:7px 9px;
 
-    background:rgba(90,40,40,.16);
-
-    color:#fffaf0;
-
-    font-family:"Cormorant Garamond",serif;
-    font-size:16px;
+    border:0;
+    border-bottom:1px solid rgba(113,52,52,.55);
 
     outline:none;
+
+    background:rgba(255,248,237,.32);
+
+    color:#713434;
+
+    font-family:"Cormorant Garamond",serif;
+
+    font-size:16px;
+
+    text-align:center;
 
     border-radius:0;
 }
 
 .rsvp-form input::placeholder{
-    color:rgba(255,250,240,.85);
+    color:#713434;
+    opacity:.9;
 }
 
 .rsvp-form select{
-    color:#fffaf0;
+    color:#713434;
 }
 
 .rsvp-form option{
-    color:#4d2929;
-    background:#fffaf0;
+    color:#713434;
+    background:#fff8ed;
 }
 
+/* RSVP BUTTON */
+
 .rsvp-button{
-    margin-top:7px;
+    width:100%;
 
-    padding:11px;
+    margin-top:3px;
 
-    border:1px solid rgba(255,240,200,.9);
+    padding:8px 5px;
 
-    background:rgba(92,42,42,.35);
+    border:1px solid rgba(113,52,52,.7);
 
-    color:#fffaf0;
+    background:rgba(255,248,237,.35);
+
+    color:#713434;
 
     font-family:"Great Vibes",cursive;
 
-    font-size:23px;
+    font-size:22px;
 
-    border-radius:2px;
+    line-height:1;
+
+    cursor:pointer;
 }
 
 #rsvpMessage{
     text-align:center;
 
-    color:#fffaf0;
+    color:#713434;
 
     font-family:"Great Vibes",cursive;
 
-    font-size:25px;
+    font-size:22px;
 
-    margin-top:5px;
+    line-height:1;
 }
 
-/* =========================================================
-   MAP
-========================================================= */
-
-.map-wrap{
-    width:min(92vw,500px);
-
-    margin:4px auto 10px;
-
-    border:1px solid #b89752;
-
-    padding:5px;
-
-    background:rgba(255,250,240,.25);
-}
-
-.map-wrap iframe{
-    display:block;
-
-    width:100%;
-    height:220px;
-
-    border:0;
-}
-
-/* =========================================================
-   SMALL EVENT DETAILS
-========================================================= */
-
-.event-details{
-    text-align:center;
-
-    margin-top:0;
-
-    color:#6d3b3b;
-}
-
-.event-details .date{
-    font-family:"Montserrat",sans-serif;
-
-    font-size:10px;
-
-    letter-spacing:2px;
-
-    text-transform:uppercase;
-
-    margin-bottom:4px;
-}
-
-.event-details .venue{
-    font-size:21px;
-
-    line-height:1.15;
-}
-
-/* =========================================================
+/* =====================================================
    MOBILE
-========================================================= */
+===================================================== */
 
 @media(max-width:600px){
 
-    .section{
-        padding-left:12px;
-        padding-right:12px;
-    }
-
-    .event-section{
-        padding-top:12px;
-        padding-bottom:17px;
-    }
-
-    .event-title{
-        margin-top:2px;
-        margin-bottom:7px;
-        font-size:48px;
-    }
-
-    .video-wrap{
-        width:94vw;
-        padding:6px;
-    }
-
-    .video-wrap::before{
-        inset:3px;
-    }
-
     .corner-flower{
-        width:60px;
-        height:60px;
+        width:58px;
+        height:58px;
     }
 
     .corner-flower.top-left{
@@ -753,83 +666,129 @@ body{
         bottom:-17px;
     }
 
-    .countdown-frame{
-        width:96vw;
+    .event-section{
+        padding-top:8px;
+        padding-bottom:14px;
     }
 
-    .countdown-box{
-        width:62%;
-        left:19%;
-        top:52%;
+    .event-title{
+        font-size:49px;
+        margin-bottom:6px;
+    }
+
+    .video-wrap{
+        width:94vw;
+        padding:6px;
+    }
+
+    .map-wrap{
+        width:94vw;
     }
 
     .map-wrap iframe{
         height:190px;
     }
 
+    .map-title{
+        font-size:31px;
+    }
+
+    .event-details .venue{
+        font-size:18px;
+    }
+
+    .event-details .address{
+        font-size:8px;
+    }
+
+    /*
+      RSVP mobile positioning
+    */
+
     .rsvp-form{
-        left:15%;
-        right:15%;
-        top:22%;
-        gap:7px;
+        left:20%;
+        right:20%;
+
+        top:25%;
+        bottom:14%;
+
+        gap:6px;
     }
 
     .rsvp-form input,
     .rsvp-form select{
-        padding:7px 8px;
-        font-size:14px;
+        min-height:28px;
+
+        padding:4px 5px;
+
+        font-size:13px;
     }
 
     .rsvp-button{
-        padding:7px;
-        font-size:21px;
+        padding:6px 4px;
+        font-size:19px;
+    }
+
+    #rsvpMessage{
+        font-size:19px;
     }
 }
 
-/* =========================================================
-   VERY SMALL PHONES
-========================================================= */
+/* =====================================================
+   SMALL PHONES
+===================================================== */
 
 @media(max-width:380px){
 
-    .corner-flower{
-        width:52px;
-        height:52px;
-    }
-
     .rsvp-form{
-        top:20%;
+        left:19%;
+        right:19%;
+
+        top:24%;
+        bottom:13%;
+
+        gap:4px;
     }
 
     .rsvp-form input,
     .rsvp-form select{
-        font-size:13px;
-        padding:5px 7px;
+        min-height:25px;
+        padding:3px;
+        font-size:12px;
+    }
+
+    .rsvp-button{
+        font-size:18px;
+        padding:5px 3px;
+    }
+
+    #rsvpMessage{
+        font-size:17px;
     }
 }
 
 </style>
 </head>
 
-
 <body>
 
-<!-- ======================================================
+<!-- =====================================================
      BACKGROUND
-====================================================== -->
+===================================================== -->
 
 <div id="background" class="original"></div>
 <div id="glitter"></div>
 
 
-<!-- ======================================================
+<!-- =====================================================
      MUSIC
-====================================================== -->
+===================================================== -->
 
-<audio id="music"
-       src="./dekha%20tenu.mp3"
-       preload="auto"
-       loop>
+<audio
+    id="music"
+    src="./dekha%20tenu.mp3"
+    preload="auto"
+    loop>
 </audio>
 
 <button id="soundButton" type="button">
@@ -837,20 +796,18 @@ body{
 </button>
 
 
-<!-- ======================================================
+<!-- =====================================================
      GATE
-====================================================== -->
+===================================================== -->
 
 <div id="gate">
 
-    <!-- STILL IMAGE -->
     <img
         id="doorStill"
         src="https://files.catbox.moe/8ojdw9.png"
-        alt="Wedding invitation"
+        alt="Wedding Invitation"
     >
 
-    <!-- VIDEO UNDER THE IMAGE -->
     <video
         id="doorVideo"
         src="./darwaza.mp4"
@@ -860,7 +817,6 @@ body{
         preload="auto">
     </video>
 
-    <!-- TAP -->
     <div id="tapArea">
         <div id="tapText">
             Tap to Open Invitation
@@ -870,421 +826,539 @@ body{
 </div>
 
 
-<!-- ======================================================
-     MAIN WEBSITE
-====================================================== -->
+<!-- =====================================================
+     MAIN
+===================================================== -->
 
 <main id="main">
 
 
-    <!-- ==================================================
-         PARENTS
-    ================================================== -->
+<!-- =====================================================
+     PARENTS
+===================================================== -->
 
-    <section id="parents" class="section original-section">
+<section id="parents" class="section">
 
-        <div class="video-wrap original-frame">
-
-            <img
-                class="corner-flower top-left"
-                src="https://files.catbox.moe/kgdqjb.png"
-                alt=""
-            >
-
-            <img
-                class="corner-flower bottom-right"
-                src="https://files.catbox.moe/kgdqjb.png"
-                alt=""
-            >
-
-            <video
-                src="./parents.mp4"
-                autoplay
-                muted
-                loop
-                playsinline
-                webkit-playsinline
-                preload="metadata">
-            </video>
-
-        </div>
-
-    </section>
-
-
-    <!-- ==================================================
-         COUNTDOWN
-    ================================================== -->
-
-    <section id="countdown"
-             class="section original-section">
-
-        <div class="countdown-frame">
-
-            <img
-                src="https://files.catbox.moe/eokc8y.jpeg"
-                alt="Counting Days"
-            >
-
-            <div class="countdown-box">
-
-                <script>
-                (function(d, s, id) {
-                    var js,
-                        pjs = d.getElementsByTagName(s)[0];
-
-                    if (d.getElementById(id)) return;
-
-                    js = d.createElement(s);
-                    js.id = id;
-                    js.src = "https://www.tickcounter.com/static/js/loader.js";
-
-                    pjs.parentNode.insertBefore(js, pjs);
-                }(document, "script", "tickcounter-sdk"));
-                </script>
-
-                <a
-                    data-type="countdown"
-                    data-id="11468420"
-                    class="tickcounter"
-                    style="
-                        display:block;
-                        left:0;
-                        width:100%;
-                        height:0;
-                        position:relative;
-                        padding-bottom:25%;
-                        margin:0 auto;
-                    "
-                    title="My countdown"
-                    href="https://www.tickcounter.com/">
-                    My countdown
-                </a>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- ==================================================
-         DHOLKI
-         PASTEL PINK
-    ================================================== -->
-
-    <section id="dholki"
-             class="section event-section"
-             data-bg="pink">
-
-        <h2 class="event-title">
-            Dholki
-        </h2>
-
-        <div class="video-wrap">
-
-            <img
-                class="corner-flower top-left"
-                src="https://files.catbox.moe/kgdqjb.png"
-                alt=""
-            >
-
-            <img
-                class="corner-flower bottom-right"
-                src="https://files.catbox.moe/kgdqjb.png"
-                alt=""
-            >
-
-            <video
-                src="./dholki.mp4"
-                autoplay
-                muted
-                loop
-                playsinline
-                webkit-playsinline
-                preload="metadata">
-            </video>
-
-        </div>
-
-    </section>
-
-
-    <!-- ==================================================
-         MEHNDI
-         PASTEL GREEN
-    ================================================== -->
-
-    <section id="mehndi"
-             class="section event-section"
-             data-bg="green">
-
-        <h2 class="event-title">
-            Mehndi
-        </h2>
-
-        <div class="video-wrap">
-
-            <img
-                class="corner-flower top-left"
-                src="https://files.catbox.moe/kgdqjb.png"
-                alt=""
-            >
-
-            <img
-                class="corner-flower bottom-right"
-                src="https://files.catbox.moe/kgdqjb.png"
-                alt=""
-            >
-
-            <video
-                src="./mehndi.mp4"
-                autoplay
-                muted
-                loop
-                playsinline
-                webkit-playsinline
-                preload="metadata">
-            </video>
-
-        </div>
-
-    </section>
-
-
-    <!-- ==================================================
-         SHADI
-         PASTEL GOLD
-    ================================================== -->
-
-    <section id="shadi"
-             class="section event-section"
-             data-bg="gold">
-
-        <h2 class="event-title">
-            Shadi
-        </h2>
-
-        <div class="video-wrap">
-
-            <img
-                class="corner-flower top-left"
-                src="https://files.catbox.moe/kgdqjb.png"
-                alt=""
-            >
-
-            <img
-                class="corner-flower bottom-right"
-                src="https://files.catbox.moe/kgdqjb.png"
-                alt=""
-            >
-
-            <video
-                src="./shadi.mp4"
-                autoplay
-                muted
-                loop
-                playsinline
-                webkit-playsinline
-                preload="metadata">
-            </video>
-
-        </div>
-
-    </section>
-
-
-    <!-- ==================================================
-         WALIMA
-         PASTEL PINK
-    ================================================== -->
-
-    <section id="walima"
-             class="section event-section"
-             data-bg="pink">
-
-        <h2 class="event-title">
-            Walima
-        </h2>
-
-        <div class="video-wrap">
-
-            <img
-                class="corner-flower top-left"
-                src="https://files.catbox.moe/kgdqjb.png"
-                alt=""
-            >
-
-            <img
-                class="corner-flower bottom-right"
-                src="https://files.catbox.moe/kgdqjb.png"
-                alt=""
-            >
-
-            <video
-                src="./Walima.mp4"
-                autoplay
-                muted
-                loop
-                playsinline
-                webkit-playsinline
-                preload="metadata">
-            </video>
-
-        </div>
-
-    </section>
-
-
-    <!-- ==================================================
-         DRESS CODE
-         PINK CONTINUES
-    ================================================== -->
-
-    <section id="dresscode"
-             class="section event-section"
-             data-bg="pink">
+    <div class="video-wrap">
 
         <img
-            class="dress-image"
-            src="https://files.catbox.moe/vxcqqa.png"
-            alt="Dress Code"
+            class="corner-flower top-left"
+            src="https://files.catbox.moe/kgdqjb.png"
+            alt=""
         >
 
-    </section>
+        <img
+            class="corner-flower bottom-right"
+            src="https://files.catbox.moe/kgdqjb.png"
+            alt=""
+        >
+
+        <video
+            src="./parents.mp4"
+            autoplay
+            muted
+            loop
+            playsinline
+            webkit-playsinline
+            preload="metadata">
+        </video>
+
+    </div>
+
+</section>
 
 
-    <!-- ==================================================
-         RSVP
-         PINK CONTINUES
-    ================================================== -->
+<!-- =====================================================
+     COUNTDOWN
+===================================================== -->
 
-    <section id="rsvp"
-             class="section event-section"
-             data-bg="pink">
+<section id="countdown" class="section">
 
-        <div class="rsvp-frame">
+    <div class="countdown-frame">
 
-            <img
-                src="https://files.catbox.moe/hsk39c.png"
-                alt="RSVP"
-            >
+        <img
+            src="https://files.catbox.moe/eokc8y.jpeg"
+            alt="Counting Days"
+        >
 
-            <form id="rsvpForm" class="rsvp-form">
+        <div class="countdown-box">
 
-                <input
-                    type="text"
-                    id="guestName"
-                    name="name"
-                    placeholder="Your Name"
-                    required
-                >
+            <script>
+            (function(d, s, id) {
 
-                <select
-                    id="attendance"
-                    name="attendance"
-                    required>
+                var js,
+                    pjs = d.getElementsByTagName(s)[0];
 
-                    <option value="" disabled selected>
-                        Will you be joining us?
-                    </option>
+                if(d.getElementById(id)) return;
 
-                    <option value="Joyfully Accept">
-                        Joyfully Accept
-                    </option>
+                js = d.createElement(s);
+                js.id = id;
 
-                    <option value="Regretfully Reject">
-                        Regretfully Reject
-                    </option>
+                js.src =
+                    "https://www.tickcounter.com/static/js/loader.js";
 
-                </select>
+                pjs.parentNode.insertBefore(js,pjs);
 
-                <select
-                    id="guests"
-                    name="guests"
-                    required>
+            }(document,"script","tickcounter-sdk"));
+            </script>
 
-                    <option value="" disabled selected>
-                        Number of Guests
-                    </option>
-
-                    <option value="1">1 Guest</option>
-                    <option value="2">2 Guests</option>
-                    <option value="3">3 Guests</option>
-                    <option value="4">4 Guests</option>
-                    <option value="5">5 Guests</option>
-                    <option value="6">6 Guests</option>
-
-                </select>
-
-                <button
-                    class="rsvp-button"
-                    type="submit">
-                    Confirm RSVP
-                </button>
-
-                <div id="rsvpMessage"></div>
-
-            </form>
+            <a
+                data-type="countdown"
+                data-id="11468420"
+                class="tickcounter"
+                style="
+                    display:block;
+                    left:0;
+                    width:100%;
+                    height:0;
+                    position:relative;
+                    padding-bottom:25%;
+                    margin:0 auto;
+                "
+                title="My countdown"
+                href="https://www.tickcounter.com/">
+                My countdown
+            </a>
 
         </div>
 
-    </section>
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     DHOLKI — PASTEL PINK
+===================================================== -->
+
+<section
+    id="dholki"
+    class="section event-section"
+    data-bg="pink">
+
+    <h2 class="event-title">
+        Dholki
+    </h2>
+
+    <div class="video-wrap">
+
+        <img
+            class="corner-flower top-left"
+            src="https://files.catbox.moe/kgdqjb.png"
+            alt=""
+        >
+
+        <img
+            class="corner-flower bottom-right"
+            src="https://files.catbox.moe/kgdqjb.png"
+            alt=""
+        >
+
+        <video
+            src="./dholki.mp4"
+            autoplay
+            muted
+            loop
+            playsinline
+            webkit-playsinline
+            preload="metadata">
+        </video>
+
+    </div>
+
+    <div class="event-details">
+
+        <div class="venue">
+            Royal Palace
+        </div>
+
+        <div class="address">
+            Bedian Road, Plot #10, Adjoin Askari 11,
+            Near DHA Phase 5, Ring Road, Lahore
+        </div>
+
+    </div>
+
+    <div class="map-title">
+        Location
+    </div>
+
+    <div class="map-wrap">
+
+        <iframe
+            src="https://www.google.com/maps?q=31.4705,74.4105&z=15&output=embed"
+            loading="lazy"
+            allowfullscreen>
+        </iframe>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     MEHNDI — PASTEL GREEN
+===================================================== -->
+
+<section
+    id="mehndi"
+    class="section event-section"
+    data-bg="green">
+
+    <h2 class="event-title">
+        Mehndi
+    </h2>
+
+    <div class="video-wrap">
+
+        <img
+            class="corner-flower top-left"
+            src="https://files.catbox.moe/kgdqjb.png"
+            alt=""
+        >
+
+        <img
+            class="corner-flower bottom-right"
+            src="https://files.catbox.moe/kgdqjb.png"
+            alt=""
+        >
+
+        <video
+            src="./mehndi.mp4"
+            autoplay
+            muted
+            loop
+            playsinline
+            webkit-playsinline
+            preload="metadata">
+        </video>
+
+    </div>
+
+    <div class="event-details">
+
+        <div class="venue">
+            Le Aura Grand Events &amp; Hotel
+        </div>
+
+        <div class="address">
+            Lahore, Pakistan
+        </div>
+
+    </div>
+
+    <div class="map-title">
+        Location
+    </div>
+
+    <div class="map-wrap">
+
+        <iframe
+            src="https://www.google.com/maps?q=31.5204,74.3587&z=15&output=embed"
+            loading="lazy"
+            allowfullscreen>
+        </iframe>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     SHADI — PASTEL GOLD
+===================================================== -->
+
+<section
+    id="shadi"
+    class="section event-section"
+    data-bg="gold">
+
+    <h2 class="event-title">
+        Shadi
+    </h2>
+
+    <div class="video-wrap">
+
+        <img
+            class="corner-flower top-left"
+            src="https://files.catbox.moe/kgdqjb.png"
+            alt=""
+        >
+
+        <img
+            class="corner-flower bottom-right"
+            src="https://files.catbox.moe/kgdqjb.png"
+            alt=""
+        >
+
+        <video
+            src="./shadi.mp4"
+            autoplay
+            muted
+            loop
+            playsinline
+            webkit-playsinline
+            preload="metadata">
+        </video>
+
+    </div>
+
+    <div class="event-details">
+
+        <div class="venue">
+            Shershah Palace, Marquee &amp; Farmhouse
+        </div>
+
+        <div class="address">
+            Adda Plot, Raiwind Road, Eden Park, Lahore
+        </div>
+
+    </div>
+
+    <div class="map-title">
+        Location
+    </div>
+
+    <div class="map-wrap">
+
+        <iframe
+            src="https://www.google.com/maps?q=31.4075,74.2320&z=15&output=embed"
+            loading="lazy"
+            allowfullscreen>
+        </iframe>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     WALIMA — PASTEL PINK
+===================================================== -->
+
+<section
+    id="walima"
+    class="section event-section"
+    data-bg="pink">
+
+    <h2 class="event-title">
+        Walima
+    </h2>
+
+    <div class="video-wrap">
+
+        <img
+            class="corner-flower top-left"
+            src="https://files.catbox.moe/kgdqjb.png"
+            alt=""
+        >
+
+        <img
+            class="corner-flower bottom-right"
+            src="https://files.catbox.moe/kgdqjb.png"
+            alt=""
+        >
+
+        <video
+            src="./Walima.mp4"
+            autoplay
+            muted
+            loop
+            playsinline
+            webkit-playsinline
+            preload="metadata">
+        </video>
+
+    </div>
+
+    <div class="event-details">
+
+        <div class="venue">
+            Grand Vista
+        </div>
+
+        <div class="address">
+            Lahore, Pakistan
+        </div>
+
+    </div>
+
+    <div class="map-title">
+        Location
+    </div>
+
+    <div class="map-wrap">
+
+        <iframe
+            src="https://www.google.com/maps?q=31.5204,74.3587&z=15&output=embed"
+            loading="lazy"
+            allowfullscreen>
+        </iframe>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     DRESS CODE
+===================================================== -->
+
+<section
+    id="dresscode"
+    class="section event-section"
+    data-bg="pink">
+
+    <img
+        class="dress-image"
+        src="https://files.catbox.moe/vxcqqa.png"
+        alt="Dress Code"
+    >
+
+</section>
+
+
+<!-- =====================================================
+     RSVP
+===================================================== -->
+
+<section
+    id="rsvp"
+    class="section event-section"
+    data-bg="pink">
+
+    <div class="rsvp-frame">
+
+        <img
+            src="https://files.catbox.moe/hsk39c.png"
+            alt="RSVP"
+        >
+
+        <form
+            id="rsvpForm"
+            class="rsvp-form">
+
+            <input
+                type="text"
+                id="guestName"
+                name="name"
+                placeholder="Your Name"
+                required
+            >
+
+            <select
+                id="attendance"
+                name="attendance"
+                required>
+
+                <option value="" disabled selected>
+                    Will you be joining us?
+                </option>
+
+                <option value="Joyfully Accept">
+                    Joyfully Accept
+                </option>
+
+                <option value="Regretfully Reject">
+                    Regretfully Reject
+                </option>
+
+            </select>
+
+            <select
+                id="guests"
+                name="guests"
+                required>
+
+                <option value="" disabled selected>
+                    Number of Guests
+                </option>
+
+                <option value="1">1 Guest</option>
+                <option value="2">2 Guests</option>
+                <option value="3">3 Guests</option>
+                <option value="4">4 Guests</option>
+                <option value="5">5 Guests</option>
+                <option value="6">6 Guests</option>
+
+            </select>
+
+            <button
+                class="rsvp-button"
+                type="submit">
+                Confirm RSVP
+            </button>
+
+            <div id="rsvpMessage"></div>
+
+        </form>
+
+    </div>
+
+</section>
+
 
 </main>
 
 
 <script>
 
-/* =========================================================
+/* =====================================================
    GLITTER
-========================================================= */
+===================================================== */
 
-const glitter = document.getElementById("glitter");
+const glitter =
+document.getElementById("glitter");
 
-for(let i = 0; i < 38; i++){
+for(let i=0;i<38;i++){
 
-    const sparkle = document.createElement("span");
+    const sparkle =
+    document.createElement("span");
 
-    sparkle.className = "sparkle";
+    sparkle.className="sparkle";
 
     sparkle.style.left =
-        Math.random() * 100 + "%";
+        Math.random()*100+"%";
 
     sparkle.style.top =
-        Math.random() * 100 + "%";
+        Math.random()*100+"%";
 
     sparkle.style.animationDelay =
-        (Math.random() * 4) + "s";
+        Math.random()*4+"s";
 
     sparkle.style.animationDuration =
-        (3 + Math.random() * 4) + "s";
+        3+Math.random()*4+"s";
 
     glitter.appendChild(sparkle);
 }
 
 
-/* =========================================================
+/* =====================================================
    GATE
-   IMPORTANT:
-   - still image and video occupy same layer
-   - video is started immediately on tap
-   - music starts from same tap
-   - still image fades instead of disappearing
-========================================================= */
+===================================================== */
 
-const gate = document.getElementById("gate");
-const doorStill = document.getElementById("doorStill");
-const doorVideo = document.getElementById("doorVideo");
-const tapArea = document.getElementById("tapArea");
+const gate =
+document.getElementById("gate");
 
-const music = document.getElementById("music");
-const soundButton = document.getElementById("soundButton");
+const doorStill =
+document.getElementById("doorStill");
 
-let gateOpened = false;
+const doorVideo =
+document.getElementById("doorVideo");
+
+const tapArea =
+document.getElementById("tapArea");
+
+const music =
+document.getElementById("music");
+
+const soundButton =
+document.getElementById("soundButton");
+
+let gateOpened=false;
 
 
-/* Preload gate video */
+/* Preload */
 
 doorVideo.load();
 
@@ -1293,228 +1367,216 @@ function openGate(){
 
     if(gateOpened) return;
 
-    gateOpened = true;
+    gateOpened=true;
 
-    /*
-      MUSIC:
-      This call happens directly from the user's tap.
-    */
 
-    music.volume = 1;
+    /* Music starts from user's tap */
+
+    music.volume=1;
 
     music.play()
-        .then(() => {
-            soundButton.textContent = "🔊 Sound: On";
-        })
-        .catch(() => {
-            soundButton.textContent = "🔇 Sound: Off";
-        });
+    .then(()=>{
+        soundButton.textContent="🔊 Sound: On";
+    })
+    .catch(()=>{
+        soundButton.textContent="🔇 Sound: Off";
+    });
 
 
-    /*
-      GATE VIDEO MUST STAY MUTED.
-    */
+    /* Door video always muted */
 
-    doorVideo.muted = true;
-    doorVideo.volume = 0;
+    doorVideo.muted=true;
+    doorVideo.volume=0;
 
     try{
-        doorVideo.currentTime = 0;
+        doorVideo.currentTime=0;
     }catch(e){}
 
 
-    /*
-      Start video immediately.
-      We do NOT wait for the Promise to finish
-      before beginning the visual transition.
-    */
+    const playPromise =
+        doorVideo.play();
 
-    const videoPromise = doorVideo.play();
-
-    if(videoPromise){
-        videoPromise.catch(() => {});
+    if(playPromise){
+        playPromise.catch(()=>{});
     }
 
 
     /*
-      Give Safari a tiny moment to place the first
-      video frame, then crossfade the still image.
+      Smooth crossfade.
+      No display:none.
     */
 
-    setTimeout(() => {
+    setTimeout(()=>{
 
-        doorVideo.style.opacity = "1";
-        doorStill.style.opacity = "0";
-        tapArea.style.opacity = "0";
+        doorVideo.style.opacity="1";
+        doorStill.style.opacity="0";
+        tapArea.style.opacity="0";
 
-    }, 140);
+    },140);
 
 
-    /*
-      Remove tap layer after fade.
-    */
+    setTimeout(()=>{
 
-    setTimeout(() => {
+        tapArea.style.display="none";
 
-        tapArea.style.display = "none";
-
-    }, 750);
+    },750);
 }
 
 
-/* Tap */
-
-tapArea.addEventListener("click", openGate);
-tapArea.addEventListener("touchend", function(e){
-
-    e.preventDefault();
-    openGate();
-
-}, {passive:false});
+tapArea.addEventListener(
+    "click",
+    openGate
+);
 
 
-/* =========================================================
-   GATE VIDEO END
-========================================================= */
+tapArea.addEventListener(
+    "touchend",
+    function(e){
 
-doorVideo.addEventListener("ended", function(){
+        e.preventDefault();
+        openGate();
 
-    /*
-      Once door video finishes:
-      fade entire gate away.
-    */
-
-    gate.classList.add("hidden");
-
-    setTimeout(() => {
-
-        gate.style.display = "none";
-
-    }, 1300);
-
-});
+    },
+    {passive:false}
+);
 
 
-/* =========================================================
-   SOUND TOGGLE
-========================================================= */
+/* =====================================================
+   GATE END
+===================================================== */
 
-soundButton.addEventListener("click", function(e){
+doorVideo.addEventListener(
+    "ended",
+    function(){
 
-    e.stopPropagation();
+        gate.classList.add("hidden");
 
-    if(music.paused){
+        setTimeout(()=>{
 
-        music.play()
-            .then(() => {
-                soundButton.textContent = "🔊 Sound: On";
-            })
-            .catch(() => {});
+            gate.style.display="none";
 
-    }else{
-
-        music.pause();
-
-        soundButton.textContent = "🔇 Sound: Off";
+        },1300);
 
     }
-
-});
-
-
-/* =========================================================
-   BACKGROUND COLOR CHANGE
-========================================================= */
-
-const background = document.getElementById("background");
-
-const eventSections =
-    document.querySelectorAll(".event-section");
+);
 
 
-const bgObserver =
-    new IntersectionObserver(
-        function(entries){
+/* =====================================================
+   SOUND
+===================================================== */
 
-            entries.forEach(entry => {
+soundButton.addEventListener(
+    "click",
+    function(e){
 
-                if(!entry.isIntersecting) return;
+        e.stopPropagation();
 
-                const color =
-                    entry.target.dataset.bg;
+        if(music.paused){
 
-                if(color === "pink"){
+            music.play()
+            .then(()=>{
+                soundButton.textContent="🔊 Sound: On";
+            })
+            .catch(()=>{});
 
-                    background.className = "pink";
+        }else{
 
-                }
+            music.pause();
 
-                if(color === "green"){
+            soundButton.textContent="🔇 Sound: Off";
 
-                    background.className = "green";
-
-                }
-
-                if(color === "gold"){
-
-                    background.className = "gold";
-
-                }
-
-            });
-
-        },
-        {
-            threshold:0.35
         }
-    );
+
+    }
+);
 
 
-eventSections.forEach(section => {
+/* =====================================================
+   BACKGROUND COLOR
+===================================================== */
 
-    bgObserver.observe(section);
+const background =
+document.getElementById("background");
 
+const sections =
+document.querySelectorAll(
+    ".event-section"
+);
+
+
+const observer =
+new IntersectionObserver(
+    function(entries){
+
+        entries.forEach(entry=>{
+
+            if(!entry.isIntersecting)
+                return;
+
+            const bg =
+                entry.target.dataset.bg;
+
+            if(bg==="pink"){
+                background.className="pink";
+            }
+
+            if(bg==="green"){
+                background.className="green";
+            }
+
+            if(bg==="gold"){
+                background.className="gold";
+            }
+
+        });
+
+    },
+    {
+        threshold:.35
+    }
+);
+
+
+sections.forEach(section=>{
+    observer.observe(section);
 });
 
 
 /*
-  Keep original color while countdown / parents
-  are visible.
-
-  When the first event enters, the pastel sequence starts.
+  Countdown keeps original color.
 */
 
 const countdown =
-    document.getElementById("countdown");
+document.getElementById("countdown");
 
 
 const originalObserver =
-    new IntersectionObserver(
-        function(entries){
+new IntersectionObserver(
+    function(entries){
 
-            entries.forEach(entry => {
+        entries.forEach(entry=>{
 
-                if(entry.isIntersecting){
+            if(entry.isIntersecting){
 
-                    background.className = "original";
+                background.className="original";
 
-                }
+            }
 
-            });
+        });
 
-        },
-        {
-            threshold:0.35
-        }
-    );
+    },
+    {
+        threshold:.35
+    }
+);
 
 
 originalObserver.observe(countdown);
 
 
-/* =========================================================
+/* =====================================================
    RSVP GOOGLE SHEET
-========================================================= */
+===================================================== */
 
 const SCRIPT_URL =
 "https://script.google.com/macros/s/AKfycbwhcI7eEUuhAeb9LDD_iOQV1yOXX-iSxou8kYnM_B9J6Z9Fxjma_F5E0-zGMMi_fKo/exec";
@@ -1523,81 +1585,113 @@ const SCRIPT_URL =
 const rsvpForm =
 document.getElementById("rsvpForm");
 
-
 const rsvpMessage =
 document.getElementById("rsvpMessage");
 
 
-rsvpForm.addEventListener("submit", function(e){
+rsvpForm.addEventListener(
+    "submit",
+    function(e){
 
-    e.preventDefault();
+        e.preventDefault();
 
-    const name =
-        document.getElementById("guestName").value.trim();
+        const name =
+            document.getElementById(
+                "guestName"
+            ).value.trim();
 
-    const attendance =
-        document.getElementById("attendance").value;
+        const attendance =
+            document.getElementById(
+                "attendance"
+            ).value;
 
-    const guests =
-        document.getElementById("guests").value;
+        const guests =
+            document.getElementById(
+                "guests"
+            ).value;
 
 
-    if(!name || !attendance || !guests){
+        if(
+            !name ||
+            !attendance ||
+            !guests
+        ){
+            return;
+        }
 
-        return;
+
+        const data =
+            new URLSearchParams();
+
+        data.append(
+            "name",
+            name
+        );
+
+        data.append(
+            "attendance",
+            attendance
+        );
+
+        data.append(
+            "guests",
+            guests
+        );
+
+        data.append(
+            "timestamp",
+            new Date().toISOString()
+        );
+
+
+        rsvpMessage.textContent =
+            "Sending your response ♡";
+
+
+        fetch(
+            SCRIPT_URL,
+            {
+                method:"POST",
+                mode:"no-cors",
+                body:data
+            }
+        )
+        .then(()=>{
+
+            rsvpMessage.textContent =
+                "Thank you for your response ♡";
+
+            rsvpForm.reset();
+
+        })
+        .catch(()=>{
+
+            rsvpMessage.textContent =
+                "Thank you for your response ♡";
+
+        });
 
     }
+);
 
 
-    const data = new URLSearchParams();
+/* =====================================================
+   MOBILE VIDEO
+===================================================== */
 
-    data.append("name", name);
-    data.append("attendance", attendance);
-    data.append("guests", guests);
-    data.append(
-        "timestamp",
-        new Date().toISOString()
+document
+.querySelectorAll("video")
+.forEach(video=>{
+
+    video.setAttribute(
+        "playsinline",
+        ""
     );
 
-
-    rsvpMessage.textContent =
-        "Sending your response ♡";
-
-
-    fetch(
-        SCRIPT_URL,
-        {
-            method:"POST",
-            mode:"no-cors",
-            body:data
-        }
-    )
-    .then(() => {
-
-        rsvpMessage.textContent =
-            "Thank you for your response ♡";
-
-        rsvpForm.reset();
-
-    })
-    .catch(() => {
-
-        rsvpMessage.textContent =
-            "Thank you for your response ♡";
-
-    });
-
-});
-
-
-/* =========================================================
-   KEEP ALL EVENT VIDEOS MOBILE FRIENDLY
-========================================================= */
-
-document.querySelectorAll("video").forEach(video => {
-
-    video.setAttribute("playsinline","");
-    video.setAttribute("webkit-playsinline","");
+    video.setAttribute(
+        "webkit-playsinline",
+        ""
+    );
 
 });
 
