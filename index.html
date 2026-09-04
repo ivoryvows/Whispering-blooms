@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
 <title>Whispering Blooms</title>
 
@@ -11,915 +14,1122 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
 
-<link
-  rel="stylesheet"
-  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-/>
+<link rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 
 <style>
 
+/* =====================================================
+   BASIC
+===================================================== */
+
 *{
-  box-sizing:border-box;
+    box-sizing:border-box;
 }
 
 html{
-  scroll-behavior:smooth;
+    scroll-behavior:smooth;
 }
 
 body{
-  margin:0;
-  padding:0;
-  background:#f8f3ea;
-  color:#4d2931;
-  overflow-x:hidden;
-}
+    margin:0;
+    padding:0;
+    overflow-x:hidden;
 
-body.locked{
-  overflow:hidden;
+    background:#f8f3ea;
+
+    color:#552b35;
 }
 
 .page{
-  position:relative;
-  min-height:100vh;
-  overflow:hidden;
+    position:relative;
+    width:100%;
+    min-height:100vh;
 
-  background:
+    overflow:hidden;
+
+    background:
+
     radial-gradient(
-      circle at 10% 8%,
-      rgba(235,205,188,.38) 0,
-      rgba(235,205,188,.18) 10%,
-      transparent 30%
+        ellipse at 5% 8%,
+        rgba(225,196,180,.34),
+        transparent 28%
     ),
+
     radial-gradient(
-      circle at 90% 24%,
-      rgba(218,194,180,.30) 0,
-      rgba(218,194,180,.12) 12%,
-      transparent 32%
+        ellipse at 96% 25%,
+        rgba(218,190,175,.28),
+        transparent 30%
     ),
+
     radial-gradient(
-      circle at 15% 65%,
-      rgba(222,198,181,.24) 0,
-      transparent 30%
+        ellipse at 5% 58%,
+        rgba(226,199,184,.25),
+        transparent 28%
     ),
+
     radial-gradient(
-      circle at 88% 82%,
-      rgba(235,211,196,.28) 0,
-      transparent 32%
+        ellipse at 96% 82%,
+        rgba(221,194,178,.25),
+        transparent 30%
     ),
+
     #f8f3ea;
 }
 
-/* --------------------------------------------------
+
+/* =====================================================
    WATERCOLOUR WASHES
--------------------------------------------------- */
+===================================================== */
 
 .wash{
-  position:absolute;
-  pointer-events:none;
-  border-radius:50%;
-  filter:blur(22px);
-  opacity:.35;
+    position:absolute;
+    pointer-events:none;
+    z-index:0;
+
+    border-radius:50%;
+
+    filter:blur(25px);
+
+    opacity:.38;
 }
 
 .wash1{
-  width:300px;
-  height:220px;
-  left:-100px;
-  top:420px;
-  background:rgba(214,177,159,.25);
+    width:320px;
+    height:230px;
+
+    left:-120px;
+    top:450px;
+
+    background:rgba(211,175,158,.25);
 }
 
 .wash2{
-  width:280px;
-  height:250px;
-  right:-100px;
-  top:900px;
-  background:rgba(198,164,148,.22);
+    width:300px;
+    height:250px;
+
+    right:-120px;
+    top:1050px;
+
+    background:rgba(205,172,157,.23);
 }
 
 .wash3{
-  width:320px;
-  height:240px;
-  left:-130px;
-  top:1500px;
-  background:rgba(225,196,181,.25);
+    width:320px;
+    height:260px;
+
+    left:-130px;
+    top:1750px;
+
+    background:rgba(220,191,177,.24);
 }
 
 .wash4{
-  width:300px;
-  height:250px;
-  right:-120px;
-  top:2200px;
-  background:rgba(211,181,166,.23);
+    width:320px;
+    height:250px;
+
+    right:-130px;
+    top:2500px;
+
+    background:rgba(210,180,165,.23);
 }
 
-/* --------------------------------------------------
-   FLOWERS
--------------------------------------------------- */
+
+/* =====================================================
+   SIDE FLOWERS
+===================================================== */
 
 .flower{
-  position:absolute;
-  width:240px;
-  height:auto;
-  z-index:2;
-  pointer-events:none;
+    position:absolute;
 
-  opacity:.94;
+    width:240px;
 
-  mix-blend-mode:multiply;
+    height:auto;
 
-  animation:
-    flowerSway 7s ease-in-out infinite alternate;
+    z-index:2;
+
+    pointer-events:none;
+
+    opacity:.94;
+
+    mix-blend-mode:multiply;
+
+    animation:flowerMove 7s ease-in-out infinite alternate;
 }
 
 .leftTop{
-  left:-125px;
-  top:-30px;
+    left:-125px;
+    top:-30px;
 }
 
 .rightTop{
-  right:-125px;
-  top:350px;
-  transform:scaleX(-1);
-  animation-delay:1.4s;
+    right:-125px;
+    top:430px;
+
+    transform:scaleX(-1);
+
+    animation-name:flowerMoveRight;
+    animation-delay:1s;
 }
 
 .leftMiddle{
-  left:-125px;
-  top:900px;
-  animation-delay:2.2s;
+    left:-125px;
+    top:1000px;
+
+    animation-delay:2s;
 }
 
 .rightMiddle{
-  right:-125px;
-  top:1450px;
-  transform:scaleX(-1);
-  animation-delay:.8s;
+    right:-125px;
+    top:1550px;
+
+    transform:scaleX(-1);
+
+    animation-name:flowerMoveRight;
+    animation-delay:.8s;
 }
 
 .leftBottom{
-  left:-125px;
-  top:2050px;
-  animation-delay:1.8s;
+    left:-125px;
+    top:2200px;
+
+    animation-delay:1.7s;
 }
 
 .rightBottom{
-  right:-125px;
-  top:2700px;
-  transform:scaleX(-1);
-  animation-delay:2.7s;
+    right:-125px;
+    top:2850px;
+
+    transform:scaleX(-1);
+
+    animation-name:flowerMoveRight;
+    animation-delay:2.2s;
 }
 
-@keyframes flowerSway{
+@keyframes flowerMove{
 
-  from{
-    transform:translateY(0) rotate(-1deg);
-  }
+    from{
+        transform:translateY(0) rotate(-1deg);
+    }
 
-  to{
-    transform:translateY(8px) rotate(1.2deg);
-  }
-
+    to{
+        transform:translateY(8px) rotate(1deg);
+    }
 }
 
-/* Preserve mirror on right flowers */
+@keyframes flowerMoveRight{
 
-.rightTop,
-.rightMiddle,
-.rightBottom{
-  animation-name:flowerSwayMirror;
+    from{
+        transform:scaleX(-1) translateY(0) rotate(-1deg);
+    }
+
+    to{
+        transform:scaleX(-1) translateY(8px) rotate(1deg);
+    }
 }
 
-@keyframes flowerSwayMirror{
 
-  from{
-    transform:scaleX(-1) translateY(0) rotate(-1deg);
-  }
-
-  to{
-    transform:scaleX(-1) translateY(8px) rotate(1.2deg);
-  }
-
-}
-
-/* --------------------------------------------------
+/* =====================================================
    FAIRY LIGHTS
--------------------------------------------------- */
+===================================================== */
 
 .fairy{
-  position:absolute;
-  width:3px;
-  height:3px;
-  border-radius:50%;
+    position:absolute;
 
-  background:#d7b45f;
+    width:3px;
+    height:3px;
 
-  box-shadow:
-    0 0 5px rgba(215,180,95,.9),
-    0 0 10px rgba(215,180,95,.45);
+    border-radius:50%;
 
-  animation:flicker 2.8s ease-in-out infinite;
+    background:#d7b45f;
 
-  z-index:3;
-  pointer-events:none;
+    box-shadow:
+        0 0 5px rgba(215,180,95,.9),
+        0 0 10px rgba(215,180,95,.4);
+
+    z-index:3;
+
+    pointer-events:none;
+
+    animation:flicker 2.8s ease-in-out infinite;
 }
 
 @keyframes flicker{
 
-  0%,100%{
-    opacity:.25;
-    transform:scale(.7);
-  }
+    0%,100%{
+        opacity:.25;
+        transform:scale(.7);
+    }
 
-  50%{
-    opacity:1;
-    transform:scale(1.25);
-  }
-
+    50%{
+        opacity:1;
+        transform:scale(1.3);
+    }
 }
 
-/* Individual lights */
-
-.f1{left:8%;top:8%;animation-delay:.2s}
-.f2{left:16%;top:20%;animation-delay:1.2s}
-.f3{left:27%;top:13%;animation-delay:2s}
-.f4{left:77%;top:10%;animation-delay:.8s}
-.f5{left:88%;top:18%;animation-delay:1.7s}
-.f6{left:93%;top:34%;animation-delay:.3s}
+.f1{left:8%;top:7%;animation-delay:.2s}
+.f2{left:17%;top:17%;animation-delay:1.2s}
+.f3{left:28%;top:12%;animation-delay:2s}
+.f4{left:77%;top:9%;animation-delay:.8s}
+.f5{left:89%;top:19%;animation-delay:1.7s}
+.f6{left:94%;top:35%;animation-delay:.3s}
 .f7{left:7%;top:39%;animation-delay:1.4s}
-.f8{left:17%;top:51%;animation-delay:2.2s}
-.f9{left:87%;top:55%;animation-delay:.6s}
-.f10{left:94%;top:67%;animation-delay:1.9s}
-.f11{left:8%;top:72%;animation-delay:.9s}
-.f12{left:18%;top:82%;animation-delay:2.5s}
-.f13{left:82%;top:78%;animation-delay:.4s}
+.f8{left:18%;top:51%;animation-delay:2.2s}
+.f9{left:88%;top:54%;animation-delay:.6s}
+.f10{left:94%;top:68%;animation-delay:1.9s}
+.f11{left:7%;top:72%;animation-delay:.9s}
+.f12{left:18%;top:83%;animation-delay:2.5s}
+.f13{left:82%;top:79%;animation-delay:.4s}
 .f14{left:91%;top:91%;animation-delay:1.1s}
-.f15{left:42%;top:31%;animation-delay:1.8s}
+.f15{left:43%;top:31%;animation-delay:1.8s}
 .f16{left:60%;top:88%;animation-delay:.7s}
 
-/* --------------------------------------------------
-   COMMON SECTIONS
--------------------------------------------------- */
 
-.section{
-  position:relative;
-  width:100%;
-  min-height:100vh;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  padding:70px 20px;
-
-  z-index:5;
-}
-
-.video-section{
-  min-height:100vh;
-  padding:0;
-}
-
-.video-section video{
-  width:100%;
-  height:100vh;
-
-  object-fit:cover;
-  display:block;
-}
-
-/* --------------------------------------------------
+/* =====================================================
    GATE
--------------------------------------------------- */
+===================================================== */
 
 #gateSection{
-  position:relative;
-  width:100%;
-  height:100vh;
-  min-height:100svh;
 
-  z-index:100;
+    position:relative;
 
-  overflow:hidden;
+    width:100%;
 
-  background:#f8f3ea;
+    height:100svh;
+
+    min-height:650px;
+
+    overflow:hidden;
+
+    z-index:50;
+
+    background:#f8f3ea;
 }
+
+
+/*
+   This is the FIRST thing visitor sees.
+*/
+
+#gatePoster{
+
+    position:absolute;
+
+    inset:0;
+
+    z-index:20;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background-color:#f8f3ea;
+
+    background-image:
+        url("https://files.catbox.moe/8ojdw9.png");
+
+    background-repeat:no-repeat;
+
+    background-position:center;
+
+    background-size:contain;
+
+    cursor:pointer;
+
+    transition:
+        opacity .45s ease,
+        visibility .45s ease;
+}
+
+
+/*
+   On phones the picture gets the maximum
+   possible height without stretching.
+*/
+
+#gatePoster.hide{
+
+    opacity:0;
+
+    visibility:hidden;
+
+    pointer-events:none;
+}
+
+
+/* TAP TO OPEN */
+
+#tapToOpen{
+
+    position:absolute;
+
+    left:50%;
+
+    bottom:11%;
+
+    transform:translateX(-50%);
+
+    z-index:25;
+
+    white-space:nowrap;
+
+    font-family:"Alex Brush",cursive;
+
+    font-size:clamp(38px,7vw,62px);
+
+    color:#ffffff;
+
+    text-shadow:
+        0 2px 12px rgba(60,25,30,.75),
+        0 0 8px rgba(255,255,255,.3);
+
+    animation:tapPulse 2s ease-in-out infinite;
+
+    pointer-events:none;
+}
+
+@keyframes tapPulse{
+
+    0%,100%{
+        opacity:.72;
+        transform:translateX(-50%) translateY(0);
+    }
+
+    50%{
+        opacity:1;
+        transform:translateX(-50%) translateY(-7px);
+    }
+}
+
+
+/*
+   Gate video is NOT visible initially.
+*/
 
 #gateVideo{
-  position:absolute;
 
-  inset:0;
+    position:absolute;
 
-  width:100%;
-  height:100%;
+    inset:0;
 
-  object-fit:cover;
+    width:100%;
+    height:100%;
 
-  display:block;
+    object-fit:contain;
 
-  background:#f8f3ea;
+    display:none;
+
+    background:#f8f3ea;
+
+    z-index:10;
 }
 
-#tapOverlay{
-  position:absolute;
 
-  inset:0;
+/*
+   Canvas will contain the final frame
+   after video disappears.
+*/
 
-  display:flex;
-  align-items:center;
-  justify-content:center;
+#gateFinalFrame{
 
-  z-index:20;
+    position:absolute;
 
-  cursor:pointer;
+    inset:0;
 
-  background:transparent;
+    width:100%;
+    height:100%;
+
+    object-fit:contain;
+
+    display:none;
+
+    background:#f8f3ea;
+
+    z-index:9;
 }
 
-#tapText{
-  position:absolute;
 
-  bottom:12%;
+/* =====================================================
+   NORMAL CONTENT
+===================================================== */
 
-  left:50%;
+.content-section{
 
-  transform:translateX(-50%);
+    position:relative;
 
-  color:#fff;
+    z-index:5;
 
-  font-family:"Alex Brush", cursive;
+    width:100%;
 
-  font-size:clamp(34px,6vw,58px);
+    padding:70px 20px;
 
-  text-shadow:
-    0 2px 12px rgba(80,30,35,.65),
-    0 0 8px rgba(255,255,255,.25);
+    display:flex;
 
-  animation:tapFloat 2s ease-in-out infinite;
+    flex-direction:column;
 
-  white-space:nowrap;
+    align-items:center;
+
+    justify-content:center;
 }
 
-@keyframes tapFloat{
 
-  0%,100%{
-    opacity:.75;
-    transform:translateX(-50%) translateY(0);
-  }
-
-  50%{
-    opacity:1;
-    transform:translateX(-50%) translateY(-8px);
-  }
-
-}
-
-#tapOverlay.hidden{
-  pointer-events:none;
-  opacity:0;
-  transition:opacity .7s ease;
-}
-
-/* --------------------------------------------------
-   TEXT
--------------------------------------------------- */
-
-.section-title{
-  font-family:"Alex Brush",cursive;
-
-  font-size:clamp(45px,8vw,75px);
-
-  color:#702536;
-
-  text-align:center;
-
-  margin:0 0 15px;
-}
-
-.section-subtitle{
-  font-family:"Cormorant Garamond",serif;
-
-  font-size:clamp(18px,3vw,25px);
-
-  letter-spacing:2px;
-
-  color:#9c7257;
-
-  text-align:center;
-}
-
-/* --------------------------------------------------
-   PARENTS
--------------------------------------------------- */
+/* =====================================================
+   PARENTS VIDEO
+===================================================== */
 
 #parentsSection{
-  min-height:100vh;
+
+    min-height:auto;
+
+    padding-top:90px;
+    padding-bottom:90px;
 }
 
-/* --------------------------------------------------
+
+/*
+   ALL NORMAL VIDEOS ARE CENTERED
+   and are NOT forced to fill the whole screen.
+*/
+
+.main-video{
+
+    display:block;
+
+    width:min(900px,92vw);
+
+    height:auto;
+
+    max-height:80vh;
+
+    object-fit:contain;
+
+    margin:0 auto;
+
+    background:transparent;
+
+    box-shadow:
+        0 15px 40px rgba(77,39,47,.13);
+}
+
+
+/* =====================================================
    COUNTDOWN
--------------------------------------------------- */
+===================================================== */
 
 #countdownSection{
-  min-height:100vh;
 
-  position:relative;
+    position:relative;
 
-  padding:0;
+    min-height:auto;
+
+    padding-top:80px;
+    padding-bottom:100px;
+}
+
+
+/*
+   Countdown video keeps its ORIGINAL
+   landscape proportions.
+*/
+
+.countdown-video-wrap{
+
+    position:relative;
+
+    width:min(1000px,94vw);
+
+    margin:0 auto;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:transparent;
+
+    overflow:hidden;
 }
 
 .countdown-video{
-  position:absolute;
 
-  inset:0;
+    display:block;
 
-  width:100%;
-  height:100%;
+    width:100%;
 
-  object-fit:cover;
+    height:auto;
+
+    max-height:75vh;
+
+    object-fit:contain;
 }
+
+
+/*
+   TickCounter sits over the clean centre
+   of the countdown video.
+*/
 
 .countdown-overlay{
-  position:absolute;
 
-  z-index:10;
+    position:absolute;
 
-  left:50%;
-  top:50%;
+    left:50%;
+    top:50%;
 
-  transform:translate(-50%,-50%);
+    transform:translate(-50%,-50%);
 
-  width:min(720px,90%);
+    width:72%;
 
-  padding:20px;
+    max-width:700px;
 
-  text-align:center;
+    z-index:5;
 }
 
-/* TickCounter iframe/script container */
 
-.tickcounter{
-  width:100% !important;
-}
-
-/* --------------------------------------------------
+/* =====================================================
    EVENT SECTIONS
--------------------------------------------------- */
+===================================================== */
 
 .event-section{
-  min-height:auto;
 
-  padding:
-    80px 20px
-    100px;
+    position:relative;
 
-  display:flex;
-  flex-direction:column;
-  gap:0;
+    z-index:5;
+
+    width:100%;
+
+    padding:
+        75px 15px
+        100px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
 }
+
+
+/*
+   Video remains central.
+*/
 
 .event-video{
-  width:min(100%,900px);
 
-  height:auto;
+    display:block;
 
-  max-height:80vh;
+    width:min(850px,92vw);
 
-  object-fit:contain;
+    height:auto;
 
-  display:block;
+    max-height:78vh;
 
-  border-radius:2px;
+    object-fit:contain;
 
-  box-shadow:
-    0 12px 40px rgba(83,37,43,.14);
+    margin:0 auto;
+
+    background:transparent;
+
+    box-shadow:
+        0 15px 40px rgba(77,39,47,.13);
 }
 
+
+/* =====================================================
+   MAP CARD
+===================================================== */
+
 .map-card{
-  width:min(100%,900px);
 
-  margin-top:35px;
+    width:min(850px,92vw);
 
-  background:rgba(255,252,246,.94);
+    margin-top:35px;
 
-  border:1px solid #c7a45d;
+    padding:14px;
 
-  box-shadow:
-    0 12px 35px rgba(76,36,43,.12);
+    background:rgba(255,252,246,.96);
 
-  padding:14px;
+    border:1px solid #c7a45d;
 
-  position:relative;
+    box-shadow:
+        0 15px 40px rgba(77,39,47,.12);
 
-  z-index:10;
+    position:relative;
+
+    z-index:10;
 }
 
 .map-title{
-  margin:8px 10px 2px;
 
-  text-align:center;
+    margin:5px 10px 3px;
 
-  font-family:"Cormorant Garamond",serif;
+    text-align:center;
 
-  font-size:30px;
+    font-family:"Cormorant Garamond",serif;
 
-  font-weight:600;
+    font-size:32px;
 
-  color:#702536;
+    font-weight:600;
+
+    color:#702536;
 }
 
 .map-address{
-  margin:0 auto 15px;
 
-  text-align:center;
+    margin:0 auto 16px;
 
-  max-width:700px;
+    text-align:center;
 
-  font-family:"Montserrat",sans-serif;
+    font-family:"Montserrat",sans-serif;
 
-  font-size:13px;
+    font-size:13px;
 
-  line-height:1.7;
+    line-height:1.7;
 
-  color:#70555b;
+    color:#6e555a;
 }
 
 .map{
-  width:100%;
-  height:320px;
 
-  z-index:1;
+    width:100%;
+
+    height:330px;
+
+    z-index:1;
 }
 
 .map-button{
-  display:block;
 
-  width:max-content;
+    display:block;
 
-  margin:16px auto 5px;
+    width:max-content;
 
-  padding:10px 25px;
+    margin:16px auto 5px;
 
-  border-radius:30px;
+    padding:11px 25px;
 
-  background:#702536;
+    border-radius:30px;
 
-  color:white;
+    background:#702536;
 
-  text-decoration:none;
+    color:#fff;
 
-  font-family:"Montserrat",sans-serif;
+    text-decoration:none;
 
-  font-size:12px;
+    font-family:"Montserrat",sans-serif;
 
-  letter-spacing:1px;
+    font-size:12px;
 
-  transition:.3s;
+    letter-spacing:1px;
 }
 
-.map-button:hover{
-  background:#8c354b;
-}
 
-/* --------------------------------------------------
+/* =====================================================
    DRESS CODE
--------------------------------------------------- */
+===================================================== */
 
 #dressSection{
-  padding:60px 20px;
+
+    padding-top:70px;
+
+    padding-bottom:100px;
 }
 
 .dress-image{
-  width:min(100%,900px);
 
-  height:auto;
+    display:block;
 
-  display:block;
+    width:min(850px,92vw);
 
-  object-fit:contain;
+    height:auto;
 
-  box-shadow:
-    0 12px 40px rgba(83,37,43,.14);
+    object-fit:contain;
+
+    margin:0 auto;
+
+    box-shadow:
+        0 15px 40px rgba(77,39,47,.13);
 }
 
-/* --------------------------------------------------
+
+/* =====================================================
    RSVP
--------------------------------------------------- */
+===================================================== */
 
 #rsvpSection{
-  position:relative;
 
-  min-height:100vh;
+    position:relative;
 
-  padding:0;
+    z-index:5;
 
-  display:flex;
+    width:100%;
 
-  justify-content:center;
+    min-height:100svh;
 
-  align-items:center;
+    overflow:hidden;
 
-  overflow:hidden;
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
 }
 
 .rsvp-frame{
-  position:absolute;
 
-  inset:0;
+    position:absolute;
 
-  width:100%;
-  height:100%;
+    inset:0;
 
-  object-fit:cover;
+    width:100%;
+    height:100%;
 
-  z-index:1;
+    object-fit:cover;
+
+    z-index:1;
 }
 
 .rsvp-content{
-  position:relative;
 
-  z-index:5;
+    position:relative;
 
-  width:46%;
+    z-index:5;
 
-  max-width:520px;
+    width:min(470px,66vw);
 
-  text-align:center;
+    text-align:center;
 
-  margin-top:-17vh;
+    margin-top:-17vh;
 
-  color:white;
+    color:#fff;
 }
 
 .rsvp-title{
-  font-family:"Alex Brush",cursive;
 
-  font-size:clamp(52px,8vw,88px);
+    margin:0;
 
-  margin:0;
+    font-family:"Alex Brush",cursive;
 
-  color:#fff;
+    font-size:clamp(55px,9vw,90px);
 
-  text-shadow:
-    0 2px 8px rgba(70,25,30,.35);
+    color:#fff;
 }
 
 .rsvp-subtitle{
-  font-family:"Cormorant Garamond",serif;
 
-  font-size:clamp(18px,3vw,27px);
+    margin-bottom:24px;
 
-  letter-spacing:2px;
+    font-family:"Cormorant Garamond",serif;
 
-  margin-bottom:25px;
+    font-size:clamp(19px,3vw,28px);
 
-  color:#fff;
+    letter-spacing:2px;
+
+    color:#fff;
 }
 
 .rsvp-form{
-  display:flex;
 
-  flex-direction:column;
+    display:flex;
 
-  gap:13px;
+    flex-direction:column;
+
+    gap:12px;
 }
 
 .rsvp-form label{
-  font-family:"Cormorant Garamond",serif;
 
-  font-size:18px;
+    font-family:"Cormorant Garamond",serif;
 
-  color:#fff;
+    font-size:18px;
 
-  text-align:left;
+    text-align:left;
+
+    color:#fff;
 }
 
 .rsvp-form input,
 .rsvp-form select{
-  width:100%;
 
-  border:none;
+    width:100%;
 
-  outline:none;
+    padding:11px 13px;
 
-  background:rgba(255,255,255,.9);
+    border:none;
 
-  padding:11px 13px;
+    outline:none;
 
-  border-radius:4px;
+    border-radius:4px;
 
-  font-family:"Cormorant Garamond",serif;
+    background:rgba(255,255,255,.93);
 
-  font-size:16px;
+    color:#4d2931;
 
-  color:#4d2931;
+    font-family:"Cormorant Garamond",serif;
+
+    font-size:16px;
 }
 
 .radio-group{
-  display:flex;
 
-  justify-content:center;
+    display:flex;
 
-  gap:15px;
+    justify-content:center;
 
-  flex-wrap:wrap;
+    flex-wrap:wrap;
+
+    gap:13px;
 }
 
 .radio-option{
-  display:flex;
 
-  align-items:center;
+    display:flex!important;
 
-  gap:5px;
+    align-items:center;
 
-  font-family:"Cormorant Garamond",serif;
+    gap:5px;
 
-  font-size:16px;
+    font-size:16px!important;
 
-  color:#fff;
-
-  cursor:pointer;
+    cursor:pointer;
 }
 
 .radio-option input{
-  width:auto;
+
+    width:auto;
 }
 
 .rsvp-button{
-  margin-top:10px;
 
-  border:none;
+    border:none;
 
-  cursor:pointer;
+    margin-top:8px;
 
-  padding:12px 25px;
+    padding:12px 25px;
 
-  border-radius:30px;
+    border-radius:30px;
 
-  background:#702536;
+    background:#702536;
 
-  color:#fff;
+    color:#fff;
 
-  font-family:"Cormorant Garamond",serif;
+    cursor:pointer;
 
-  font-size:18px;
+    font-family:"Cormorant Garamond",serif;
 
-  letter-spacing:1px;
+    font-size:18px;
 
-  transition:.3s;
-}
-
-.rsvp-button:hover{
-  background:#8e3a4e;
+    letter-spacing:1px;
 }
 
 #thankYou{
-  display:none;
 
-  font-family:"Alex Brush",cursive;
+    display:none;
 
-  font-size:34px;
+    margin-top:20px;
 
-  color:#fff;
+    font-family:"Alex Brush",cursive;
 
-  margin-top:20px;
+    font-size:34px;
+
+    color:#fff;
 }
 
-/* --------------------------------------------------
+
+/* =====================================================
    FOOTER
--------------------------------------------------- */
+===================================================== */
 
 footer{
-  position:relative;
 
-  z-index:10;
+    position:relative;
 
-  text-align:center;
+    z-index:5;
 
-  padding:50px 20px 70px;
+    padding:55px 20px 70px;
 
-  background:#f8f3ea;
+    text-align:center;
 
-  color:#8a6460;
+    background:#f8f3ea;
 
-  font-family:"Cormorant Garamond",serif;
+    color:#8a6460;
 
-  font-size:18px;
+    font-family:"Cormorant Garamond",serif;
+
+    font-size:19px;
 }
 
 footer strong{
-  color:#702536;
+
+    color:#702536;
 }
 
-/* --------------------------------------------------
+
+/* =====================================================
    MOBILE
--------------------------------------------------- */
+===================================================== */
 
 @media(max-width:600px){
 
-  .section{
-    padding:60px 15px;
-  }
+    .flower{
+        width:190px;
+    }
 
-  .flower{
-    width:190px;
-  }
+    .leftTop{
+        left:-105px;
+        top:-25px;
+    }
 
-  .leftTop{
-    left:-105px;
-    top:-25px;
-  }
+    .rightTop{
+        right:-105px;
+        top:400px;
+    }
 
-  .rightTop{
-    right:-105px;
-    top:330px;
-  }
+    .leftMiddle{
+        left:-105px;
+        top:900px;
+    }
 
-  .leftMiddle{
-    left:-105px;
-    top:850px;
-  }
+    .rightMiddle{
+        right:-105px;
+        top:1450px;
+    }
 
-  .rightMiddle{
-    right:-105px;
-    top:1350px;
-  }
+    .leftBottom{
+        left:-105px;
+        top:2000px;
+    }
 
-  .leftBottom{
-    left:-105px;
-    top:1900px;
-  }
+    .rightBottom{
+        right:-105px;
+        top:2550px;
+    }
 
-  .rightBottom{
-    right:-105px;
-    top:2450px;
-  }
+    .fairy{
+        width:2.5px;
+        height:2.5px;
+    }
 
-  .fairy{
-    width:2.5px;
-    height:2.5px;
-  }
 
-  #tapText{
-    bottom:10%;
+    /*
+       Gate picture stays completely visible.
+    */
 
-    font-size:42px;
-  }
+    #gatePoster{
 
-  .event-section{
-    padding:
-      55px 12px
-      80px;
-  }
+        background-size:contain;
 
-  .event-video{
-    width:100%;
-  }
+        background-position:center;
+    }
 
-  .map-card{
-    padding:10px;
-    margin-top:25px;
-  }
+    #tapToOpen{
 
-  .map{
-    height:280px;
-  }
+        bottom:9%;
 
-  .map-title{
-    font-size:27px;
-  }
+        font-size:42px;
+    }
 
-  .map-address{
-    font-size:12px;
-  }
 
-  .rsvp-content{
-    width:66%;
+    /*
+       Videos stay centered and proportional.
+    */
 
-    margin-top:-19vh;
-  }
+    .main-video,
+    .event-video,
+    .dress-image{
 
-  .rsvp-form{
-    gap:9px;
-  }
+        width:92vw;
 
-  .rsvp-form label{
-    font-size:16px;
-  }
+        max-height:none;
+    }
 
-  .rsvp-form input,
-  .rsvp-form select{
-    padding:9px 10px;
-    font-size:15px;
-  }
 
-  .radio-group{
-    gap:8px;
-  }
+    /*
+       Countdown landscape:
+       NO CROPPING.
+    */
 
-  .radio-option{
-    font-size:14px;
-  }
+    .countdown-video-wrap{
+
+        width:94vw;
+    }
+
+    .countdown-video{
+
+        width:100%;
+
+        height:auto;
+
+        object-fit:contain;
+    }
+
+    .countdown-overlay{
+
+        width:78%;
+    }
+
+
+    .map-card{
+
+        width:92vw;
+
+        margin-top:28px;
+
+        padding:10px;
+    }
+
+    .map{
+
+        height:280px;
+    }
+
+    .map-title{
+
+        font-size:28px;
+    }
+
+    .map-address{
+
+        font-size:12px;
+    }
+
+
+    /*
+       RSVP
+    */
+
+    .rsvp-content{
+
+        width:68%;
+
+        margin-top:-18vh;
+    }
+
+    .rsvp-form{
+
+        gap:9px;
+    }
+
+    .rsvp-form label{
+
+        font-size:16px;
+    }
+
+    .rsvp-form input,
+    .rsvp-form select{
+
+        padding:9px;
+
+        font-size:15px;
+    }
+
+    .radio-option{
+
+        font-size:14px!important;
+    }
 
 }
 
@@ -927,60 +1137,14 @@ footer strong{
 </head>
 
 
-<body class="locked">
-
-
-<!-- ==================================================
-     MAIN PAGE
-================================================== -->
+<body>
 
 <div class="page">
 
 
-<!-- ==================================================
-     FLOWERS
-================================================== -->
-
-<img
-  class="flower leftTop"
-  src="https://files.catbox.moe/kgdqjb.png"
-  alt=""
->
-
-<img
-  class="flower rightTop"
-  src="https://files.catbox.moe/kgdqjb.png"
-  alt=""
->
-
-<img
-  class="flower leftMiddle"
-  src="https://files.catbox.moe/kgdqjb.png"
-  alt=""
->
-
-<img
-  class="flower rightMiddle"
-  src="https://files.catbox.moe/kgdqjb.png"
-  alt=""
->
-
-<img
-  class="flower leftBottom"
-  src="https://files.catbox.moe/kgdqjb.png"
-  alt=""
->
-
-<img
-  class="flower rightBottom"
-  src="https://files.catbox.moe/kgdqjb.png"
-  alt=""
->
-
-
-<!-- ==================================================
-     WATERCOLOUR WASHES
-================================================== -->
+<!-- =====================================================
+     DECORATIVE BACKGROUND
+===================================================== -->
 
 <div class="wash wash1"></div>
 <div class="wash wash2"></div>
@@ -988,9 +1152,42 @@ footer strong{
 <div class="wash wash4"></div>
 
 
-<!-- ==================================================
-     FAIRY LIGHTS
-================================================== -->
+<img
+    class="flower leftTop"
+    src="https://files.catbox.moe/kgdqjb.png"
+    alt=""
+>
+
+<img
+    class="flower rightTop"
+    src="https://files.catbox.moe/kgdqjb.png"
+    alt=""
+>
+
+<img
+    class="flower leftMiddle"
+    src="https://files.catbox.moe/kgdqjb.png"
+    alt=""
+>
+
+<img
+    class="flower rightMiddle"
+    src="https://files.catbox.moe/kgdqjb.png"
+    alt=""
+>
+
+<img
+    class="flower leftBottom"
+    src="https://files.catbox.moe/kgdqjb.png"
+    alt=""
+>
+
+<img
+    class="flower rightBottom"
+    src="https://files.catbox.moe/kgdqjb.png"
+    alt=""
+>
+
 
 <div class="fairy f1"></div>
 <div class="fairy f2"></div>
@@ -1010,469 +1207,526 @@ footer strong{
 <div class="fairy f16"></div>
 
 
-<!-- ==================================================
-     1. FRONT / GATE
-================================================== -->
+<!-- =====================================================
+     GATE
+===================================================== -->
 
 <section id="gateSection">
 
-  <video
-    id="gateVideo"
-    src="darwaza.mp4"
-    playsinline
-    preload="auto"
-    muted
-  ></video>
 
-  <div id="tapOverlay">
+    <!-- FIRST SCREEN IMAGE -->
 
-    <div id="tapText">
-      Tap to Open
+    <div id="gatePoster">
+
+        <div id="tapToOpen">
+            Tap to Open
+        </div>
+
     </div>
 
-  </div>
+
+    <!-- ACTUAL GATE VIDEO -->
+
+    <video
+        id="gateVideo"
+        src="darwaza.mp4"
+        playsinline
+        preload="auto"
+        muted
+    ></video>
+
+
+    <!-- LAST FRAME CANVAS -->
+
+    <canvas id="gateFinalFrame"></canvas>
 
 </section>
 
 
-<!-- ==================================================
+<!-- =====================================================
      MUSIC
-================================================== -->
+===================================================== -->
 
 <audio
-  id="weddingMusic"
-  src="dekha tenu.mp3"
-  preload="auto"
-  loop
+    id="weddingMusic"
+    src="dekha tenu.mp3"
+    preload="auto"
+    loop
 ></audio>
 
 
-<!-- ==================================================
-     2. PARENTS
-================================================== -->
+<!-- =====================================================
+     PARENTS
+===================================================== -->
 
 <section
-  id="parentsSection"
-  class="section video-section"
+    id="parentsSection"
+    class="content-section"
 >
 
-  <video
-    src="parents.mp4"
-    playsinline
-    muted
-    autoplay
-    loop
-  ></video>
+    <video
+        class="main-video"
+        src="parents.mp4"
+        playsinline
+        muted
+        preload="metadata"
+    ></video>
 
 </section>
 
 
-<!-- ==================================================
-     3. COUNTDOWN
-================================================== -->
+<!-- =====================================================
+     COUNTDOWN
+===================================================== -->
 
 <section
-  id="countdownSection"
-  class="section"
+    id="countdownSection"
+    class="content-section"
 >
 
-  <video
-    class="countdown-video"
-    src="countdown.mp4"
-    playsinline
-    muted
-    autoplay
-    loop
-  ></video>
+    <div class="countdown-video-wrap">
+
+        <video
+            class="countdown-video"
+            src="countdown.mp4"
+            playsinline
+            muted
+            preload="metadata"
+        ></video>
 
 
-  <div class="countdown-overlay">
+        <!-- TICKCOUNTER -->
 
-    <script>
-      (function(d, s, id) {
+        <div class="countdown-overlay">
 
-        var js,
-            pjs = d.getElementsByTagName(s)[0];
+            <script>
 
-        if (d.getElementById(id)) return;
+            (function(d,s,id){
 
-        js = d.createElement(s);
+                var js,
+                    pjs =
+                    d.getElementsByTagName(s)[0];
 
-        js.id = id;
+                if(
+                    d.getElementById(id)
+                ) return;
 
-        js.src =
-          "//www.tickcounter.com/static/js/loader.js";
+                js =
+                    d.createElement(s);
 
-        pjs.parentNode.insertBefore(js, pjs);
+                js.id=id;
 
-      }(document, "script", "tickcounter-sdk"));
-    </script>
+                js.src =
+                    "//www.tickcounter.com/static/js/loader.js";
+
+                pjs.parentNode.insertBefore(
+                    js,
+                    pjs
+                );
+
+            }(
+                document,
+                "script",
+                "tickcounter-sdk"
+            ));
+
+            </script>
 
 
-    <a
-      data-type="countdown"
-      data-id="11467815"
-      class="tickcounter"
-      style="
-        display:block;
-        left:0;
-        width:100%;
-        height:0;
-        position:relative;
-        padding-bottom:25%;
-        margin:0 auto;
-      "
-      title="My countdown"
-      href="//www.tickcounter.com/"
-    >
-      My countdown
-    </a>
+            <a
+                data-type="countdown"
+                data-id="11467815"
+                class="tickcounter"
+                style="
+                    display:block;
+                    left:0;
+                    width:100%;
+                    height:0;
+                    position:relative;
+                    padding-bottom:25%;
+                    margin:0 auto;
+                "
+                title="My countdown"
+                href="//www.tickcounter.com/"
+            >
+                My countdown
+            </a>
 
-  </div>
+        </div>
+
+    </div>
 
 </section>
 
 
-<!-- ==================================================
-     4. DHOLKI
-================================================== -->
+<!-- =====================================================
+     DHOLKI
+===================================================== -->
 
 <section class="event-section">
 
-  <video
-    class="event-video"
-    src="dholki.mp4"
-    playsinline
-    muted
-    autoplay
-    loop
-  ></video>
+
+    <video
+        class="event-video"
+        src="dholki.mp4"
+        playsinline
+        muted
+        preload="metadata"
+    ></video>
 
 
-  <div class="map-card">
+    <div class="map-card">
 
-    <h2 class="map-title">
-      Royal Palace
-    </h2>
+        <h2 class="map-title">
+            Royal Palace
+        </h2>
 
-    <p class="map-address">
-      Bedian Road, Plot #10, Adjoin Askari 11,<br>
-      Near DHA Phase 5, Ring Road, Lahore
-    </p>
+        <p class="map-address">
 
-    <div
-      id="dholkiMap"
-      class="map"
-    ></div>
+            Bedian Road, Plot #10,
+            Adjoin Askari 11,<br>
 
-    <a
-      class="map-button"
-      target="_blank"
-      href="https://www.google.com/maps/search/?api=1&query=Royal+Palace+Plot+10+Bedian+Road+Adjoin+Askari+11+Near+DHA+Phase+5+Lahore"
-    >
-      Open in Google Maps
-    </a>
+            Near DHA Phase 5,
+            Ring Road, Lahore
 
-  </div>
+        </p>
+
+
+        <div
+            id="dholkiMap"
+            class="map"
+        ></div>
+
+
+        <a
+            class="map-button"
+            target="_blank"
+            href="https://www.google.com/maps/search/?api=1&query=Royal+Palace+Plot+10+Bedian+Road+Adjoin+Askari+11+Near+DHA+Phase+5+Lahore"
+        >
+            Open in Google Maps
+        </a>
+
+    </div>
 
 </section>
 
 
-<!-- ==================================================
-     5. MEHNDI
-================================================== -->
+<!-- =====================================================
+     MEHNDI
+===================================================== -->
 
 <section class="event-section">
 
-  <video
-    class="event-video"
-    src="mehndi.mp4"
-    playsinline
-    muted
-    autoplay
-    loop
-  ></video>
+
+    <video
+        class="event-video"
+        src="mehndi.mp4"
+        playsinline
+        muted
+        preload="metadata"
+    ></video>
 
 
-  <div class="map-card">
+    <div class="map-card">
 
-    <h2 class="map-title">
-      Le Aura Grand Events &amp; Hotel
-    </h2>
+        <h2 class="map-title">
+            Le Aura Grand Events &amp; Hotel
+        </h2>
 
-    <p class="map-address">
-      Lahore, Pakistan
-    </p>
+        <p class="map-address">
+            Lahore, Pakistan
+        </p>
 
-    <div
-      id="mehndiMap"
-      class="map"
-    ></div>
 
-    <a
-      class="map-button"
-      target="_blank"
-      href="https://www.google.com/maps/search/?api=1&query=Le+Aura+Grand+Events+%26+Hotel+Lahore"
-    >
-      Open in Google Maps
-    </a>
+        <div
+            id="mehndiMap"
+            class="map"
+        ></div>
 
-  </div>
+
+        <a
+            class="map-button"
+            target="_blank"
+            href="https://www.google.com/maps/search/?api=1&query=Le+Aura+Grand+Events+%26+Hotel+Lahore"
+        >
+            Open in Google Maps
+        </a>
+
+    </div>
 
 </section>
 
 
-<!-- ==================================================
-     6. SHADI
-================================================== -->
+<!-- =====================================================
+     SHADI
+===================================================== -->
 
 <section class="event-section">
 
-  <video
-    class="event-video"
-    src="shadi.mp4"
-    playsinline
-    muted
-    autoplay
-    loop
-  ></video>
+
+    <video
+        class="event-video"
+        src="shadi.mp4"
+        playsinline
+        muted
+        preload="metadata"
+    ></video>
 
 
-  <div class="map-card">
+    <div class="map-card">
 
-    <h2 class="map-title">
-      Shershah Palace
-    </h2>
+        <h2 class="map-title">
+            Shershah Palace
+        </h2>
 
-    <p class="map-address">
-      Marquee &amp; Farmhouse<br>
-      Adda Plot, Raiwind Road, Eden Park, Lahore
-    </p>
+        <p class="map-address">
 
-    <div
-      id="shadiMap"
-      class="map"
-    ></div>
+            Marquee &amp; Farmhouse<br>
 
-    <a
-      class="map-button"
-      target="_blank"
-      href="https://www.google.com/maps/search/?api=1&query=Shershah+Palace+Marquee+Farmhouse+Adda+Plot+Raiwind+Road+Eden+Park+Lahore"
-    >
-      Open in Google Maps
-    </a>
+            Adda Plot, Raiwind Road,
+            Eden Park, Lahore
 
-  </div>
+        </p>
+
+
+        <div
+            id="shadiMap"
+            class="map"
+        ></div>
+
+
+        <a
+            class="map-button"
+            target="_blank"
+            href="https://www.google.com/maps/search/?api=1&query=Shershah+Palace+Marquee+Farmhouse+Adda+Plot+Raiwind+Road+Eden+Park+Lahore"
+        >
+            Open in Google Maps
+        </a>
+
+    </div>
 
 </section>
 
 
-<!-- ==================================================
-     7. WALIMA
-================================================== -->
+<!-- =====================================================
+     WALIMA
+===================================================== -->
 
 <section class="event-section">
 
-  <video
-    class="event-video"
-    src="Walima.mp4"
-    playsinline
-    muted
-    autoplay
-    loop
-  ></video>
+
+    <video
+        class="event-video"
+        src="Walima.mp4"
+        playsinline
+        muted
+        preload="metadata"
+    ></video>
 
 
-  <div class="map-card">
+    <div class="map-card">
 
-    <h2 class="map-title">
-      Grand Vista
-    </h2>
+        <h2 class="map-title">
+            Grand Vista
+        </h2>
 
-    <p class="map-address">
-      Lahore
-    </p>
+        <p class="map-address">
+            Lahore
+        </p>
 
-    <div
-      id="walimaMap"
-      class="map"
-    ></div>
 
-    <a
-      class="map-button"
-      target="_blank"
-      href="https://www.google.com/maps/search/?api=1&query=Grand+Vista+Marquee+Lahore"
-    >
-      Open in Google Maps
-    </a>
+        <div
+            id="walimaMap"
+            class="map"
+        ></div>
 
-  </div>
+
+        <a
+            class="map-button"
+            target="_blank"
+            href="https://www.google.com/maps/search/?api=1&query=Grand+Vista+Marquee+Lahore"
+        >
+            Open in Google Maps
+        </a>
+
+    </div>
 
 </section>
 
 
-<!-- ==================================================
-     8. DRESS CODE
-================================================== -->
+<!-- =====================================================
+     DRESS CODE
+===================================================== -->
 
 <section
-  id="dressSection"
-  class="section"
+    id="dressSection"
+    class="content-section"
 >
 
-  <img
-    class="dress-image"
-    src="https://files.catbox.moe/vxcqqa.png"
-    alt="Dress Code"
-  >
+    <img
+        class="dress-image"
+        src="https://files.catbox.moe/vxcqqa.png"
+        alt="Dress Code"
+    >
 
 </section>
 
 
-<!-- ==================================================
-     9. RSVP
-================================================== -->
+<!-- =====================================================
+     RSVP
+===================================================== -->
 
 <section id="rsvpSection">
 
-  <img
-    class="rsvp-frame"
-    src="https://files.catbox.moe/hsk39c.png"
-    alt=""
-  >
 
-
-  <div class="rsvp-content">
-
-    <h1 class="rsvp-title">
-      RSVP
-    </h1>
-
-    <div class="rsvp-subtitle">
-      Kindly Respond
-    </div>
-
-
-    <form
-      id="rsvpForm"
-      class="rsvp-form"
+    <img
+        class="rsvp-frame"
+        src="https://files.catbox.moe/hsk39c.png"
+        alt=""
     >
 
-      <label>
-        Name
-      </label>
 
-      <input
-        type="text"
-        id="guestName"
-        placeholder="Your Name"
-        required
-      >
+    <div class="rsvp-content">
 
 
-      <label>
-        Will you be joining us?
-      </label>
+        <h1 class="rsvp-title">
+            RSVP
+        </h1>
 
 
-      <div class="radio-group">
-
-        <label class="radio-option">
-
-          <input
-            type="radio"
-            name="attendance"
-            value="Joyfully Accept"
-            required
-          >
-
-          Joyfully Accept
-
-        </label>
+        <div class="rsvp-subtitle">
+            Kindly Respond
+        </div>
 
 
-        <label class="radio-option">
-
-          <input
-            type="radio"
-            name="attendance"
-            value="Regretfully Reject"
-          >
-
-          Regretfully Reject
-
-        </label>
-
-      </div>
+        <form
+            id="rsvpForm"
+            class="rsvp-form"
+        >
 
 
-      <label>
-        Number of Guests
-      </label>
+            <label>
+                Name
+            </label>
+
+            <input
+                type="text"
+                id="guestName"
+                placeholder="Your Name"
+                required
+            >
 
 
-      <select
-        id="guestCount"
-        required
-      >
-
-        <option value="">
-          Select
-        </option>
-
-        <option value="1 Guest">
-          1 Guest
-        </option>
-
-        <option value="2 Guests">
-          2 Guests
-        </option>
-
-        <option value="3 Guests">
-          3 Guests
-        </option>
-
-        <option value="4 Guests">
-          4 Guests
-        </option>
-
-        <option value="5 Guests">
-          5 Guests
-        </option>
-
-        <option value="6 Guests">
-          6 Guests
-        </option>
-
-      </select>
+            <label>
+                Will you be joining us?
+            </label>
 
 
-      <button
-        type="submit"
-        class="rsvp-button"
-      >
-        Confirm RSVP
-      </button>
-
-    </form>
+            <div class="radio-group">
 
 
-    <div id="thankYou">
-      Thank you for your response ♡
+                <label class="radio-option">
+
+                    <input
+                        type="radio"
+                        name="attendance"
+                        value="Joyfully Accept"
+                        required
+                    >
+
+                    Joyfully Accept
+
+                </label>
+
+
+                <label class="radio-option">
+
+                    <input
+                        type="radio"
+                        name="attendance"
+                        value="Regretfully Reject"
+                    >
+
+                    Regretfully Reject
+
+                </label>
+
+
+            </div>
+
+
+            <label>
+                Number of Guests
+            </label>
+
+
+            <select
+                id="guestCount"
+                required
+            >
+
+                <option value="">
+                    Select
+                </option>
+
+                <option value="1 Guest">
+                    1 Guest
+                </option>
+
+                <option value="2 Guests">
+                    2 Guests
+                </option>
+
+                <option value="3 Guests">
+                    3 Guests
+                </option>
+
+                <option value="4 Guests">
+                    4 Guests
+                </option>
+
+                <option value="5 Guests">
+                    5 Guests
+                </option>
+
+                <option value="6 Guests">
+                    6 Guests
+                </option>
+
+            </select>
+
+
+            <button
+                type="submit"
+                class="rsvp-button"
+            >
+                Confirm RSVP
+            </button>
+
+
+        </form>
+
+
+        <div id="thankYou">
+
+            Thank you for your response ♡
+
+        </div>
+
+
     </div>
-
-  </div>
 
 </section>
 
 
-<!-- ==================================================
+<!-- =====================================================
      FOOTER
-================================================== -->
+===================================================== -->
 
 <footer>
 
-  With love, <strong>Whispering Blooms</strong> ♡
+    With love,
+    <strong>Whispering Blooms</strong> ♡
 
 </footer>
 
@@ -1480,404 +1734,536 @@ footer strong{
 </div>
 
 
-<!-- ==================================================
+<!-- =====================================================
      LEAFLET
-================================================== -->
+===================================================== -->
 
 <script
-  src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
 ></script>
 
 
 <script>
 
-/* ==================================================
-   GATE + MUSIC
-================================================== */
+/* =====================================================
+   GATE LOGIC
+===================================================== */
+
+const gatePoster =
+    document.getElementById("gatePoster");
 
 const gateVideo =
-  document.getElementById("gateVideo");
+    document.getElementById("gateVideo");
 
-const tapOverlay =
-  document.getElementById("tapOverlay");
-
-const tapText =
-  document.getElementById("tapText");
+const finalCanvas =
+    document.getElementById("gateFinalFrame");
 
 const music =
-  document.getElementById("weddingMusic");
+    document.getElementById("weddingMusic");
 
-let gateStarted = false;
-
-
-/*
-   FIRST TAP:
-   - Music starts
-   - Gate video starts
-   - Tap text disappears
-   - Scrolling becomes available
-*/
-
-tapOverlay.addEventListener("click", function(){
-
-  if(gateStarted) return;
-
-  gateStarted = true;
-
-  document.body.classList.remove("locked");
-
-  tapOverlay.classList.add("hidden");
-
-  /*
-     Music starts immediately from
-     the same user interaction.
-  */
-
-  music.volume = 1;
-
-  const musicPromise =
-    music.play();
-
-  if(musicPromise !== undefined){
-
-    musicPromise.catch(function(error){
-
-      console.log(
-        "Music playback was blocked:",
-        error
-      );
-
-    });
-
-  }
-
-
-  /*
-     Gate video starts.
-     It remains muted because iPhone/Safari
-     can block video audio independently.
-  */
-
-  gateVideo.muted = true;
-
-  const videoPromise =
-    gateVideo.play();
-
-  if(videoPromise !== undefined){
-
-    videoPromise.catch(function(error){
-
-      console.log(
-        "Gate video playback error:",
-        error
-      );
-
-    });
-
-  }
-
-});
+let gateOpened = false;
 
 
 /*
-   When gate video finishes:
-   KEEP THE FINAL OPEN-DOOR FRAME.
+   FIRST TAP
 
-   Do NOT hide the video.
-   Do NOT replace it with white.
+   Static picture disappears.
+   Gate video appears.
+   Music starts.
 */
 
-gateVideo.addEventListener("ended", function(){
+gatePoster.addEventListener(
+    "click",
+    function(){
 
-  gateVideo.pause();
+        if(gateOpened){
+            return;
+        }
 
-  /*
-     Seeking slightly before the exact end
-     helps Safari preserve the final visible frame.
-  */
+        gateOpened = true;
 
-  try{
 
-    if(gateVideo.duration &&
-       isFinite(gateVideo.duration)){
+        /*
+           Start music from the SAME
+           user interaction.
+        */
 
-      gateVideo.currentTime =
-        Math.max(
-          0,
-          gateVideo.duration - 0.05
+        music.volume = 1;
+
+        music.play().catch(
+            function(error){
+                console.log(
+                    "Music could not autoplay:",
+                    error
+                );
+            }
+        );
+
+
+        /*
+           Show actual gate video.
+        */
+
+        gateVideo.style.display =
+            "block";
+
+
+        gatePoster.classList.add(
+            "hide"
+        );
+
+
+        /*
+           Start gate video.
+        */
+
+        gateVideo.currentTime = 0;
+
+        gateVideo.muted = true;
+
+        gateVideo.play().catch(
+            function(error){
+
+                console.log(
+                    "Gate video error:",
+                    error
+                );
+
+            }
         );
 
     }
-
-  }catch(error){
-
-    console.log(error);
-
-  }
-
-});
-
-
-/*
-   Backup for videos where Safari does not
-   fire "ended" normally.
-*/
-
-gateVideo.addEventListener(
-  "timeupdate",
-  function(){
-
-    if(
-      gateVideo.duration &&
-      isFinite(gateVideo.duration) &&
-      gateVideo.currentTime >=
-        gateVideo.duration - 0.08
-    ){
-
-      gateVideo.pause();
-
-    }
-
-  }
 );
 
 
-/* ==================================================
-   EVENT VIDEO AUTOPLAY WHEN VISIBLE
-================================================== */
+/* =====================================================
+   CAPTURE EXACT LAST FRAME
+===================================================== */
 
-const eventVideos =
-  document.querySelectorAll(
-    ".event-video, #parentsSection video, #countdownSection video"
-  );
+function captureGateFinalFrame(){
 
-const videoObserver =
-  new IntersectionObserver(
-    function(entries){
+    if(
+        !gateVideo.videoWidth ||
+        !gateVideo.videoHeight
+    ){
 
-      entries.forEach(function(entry){
+        return;
+    }
 
-        const video = entry.target;
 
-        if(entry.isIntersecting){
+    /*
+       Canvas gets the EXACT dimensions
+       of the actual video.
+    */
 
-          video.play().catch(function(){});
+    finalCanvas.width =
+        gateVideo.videoWidth;
 
-        }else{
+    finalCanvas.height =
+        gateVideo.videoHeight;
 
-          video.pause();
+
+    const ctx =
+        finalCanvas.getContext(
+            "2d"
+        );
+
+
+    /*
+       Capture current final video frame.
+    */
+
+    ctx.drawImage(
+        gateVideo,
+        0,
+        0,
+        finalCanvas.width,
+        finalCanvas.height
+    );
+
+
+    /*
+       NOW the actual video disappears.
+    */
+
+    gateVideo.pause();
+
+    gateVideo.style.display =
+        "none";
+
+
+    /*
+       Only the captured final frame
+       remains visible.
+    */
+
+    finalCanvas.style.display =
+        "block";
+
+
+    /*
+       Gate section itself remains in
+       normal document flow.
+
+       Therefore scrolling starts
+       naturally AFTER this final frame.
+    */
+
+}
+
+
+/* =====================================================
+   WHEN VIDEO COMPLETES
+===================================================== */
+
+gateVideo.addEventListener(
+    "ended",
+    function(){
+
+        captureGateFinalFrame();
+
+    }
+);
+
+
+/*
+   Backup for Safari/iPhone if the
+   ended event behaves unexpectedly.
+*/
+
+gateVideo.addEventListener(
+    "timeupdate",
+    function(){
+
+        if(
+            gateVideo.duration &&
+            isFinite(gateVideo.duration) &&
+            gateVideo.currentTime >=
+            gateVideo.duration - 0.08
+        ){
+
+            /*
+               Don't capture twice.
+            */
+
+            if(
+                finalCanvas.style.display !==
+                "block"
+            ){
+
+                captureGateFinalFrame();
+
+            }
 
         }
 
-      });
-
-    },
-    {
-      threshold:.25
     }
-  );
+);
 
 
-eventVideos.forEach(function(video){
+/* =====================================================
+   NORMAL VIDEOS — PLAY WHEN VISIBLE
+===================================================== */
 
-  videoObserver.observe(video);
+const normalVideos =
+    document.querySelectorAll(
+        ".main-video, .event-video, .countdown-video"
+    );
 
-});
+
+const videoObserver =
+    new IntersectionObserver(
+        function(entries){
+
+            entries.forEach(
+                function(entry){
+
+                    const video =
+                        entry.target;
 
 
-/* ==================================================
+                    if(
+                        entry.isIntersecting
+                    ){
+
+                        video.play().catch(
+                            function(){}
+                        );
+
+                    }else{
+
+                        video.pause();
+
+                    }
+
+                }
+            );
+
+        },
+        {
+            threshold:.25
+        }
+    );
+
+
+normalVideos.forEach(
+    function(video){
+
+        videoObserver.observe(
+            video
+        );
+
+    }
+);
+
+
+/* =====================================================
    LEAFLET MAPS
-================================================== */
+===================================================== */
 
-const mapTile =
-  "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
+const tileURL =
+    "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
 
 
-/* ---------- DHOLKI ---------- */
+/* -----------------------------------------------------
+   DHOLKI
+----------------------------------------------------- */
 
 const dholkiMap =
-  L.map("dholkiMap")
-   .setView(
-      [31.4705,74.4105],
-      15
-    );
+    L.map("dholkiMap")
+     .setView(
+        [31.4705,74.4105],
+        15
+     );
+
 
 L.tileLayer(
-  mapTile,
-  {
-    attribution:
-      '&copy; OpenStreetMap contributors'
-  }
-).addTo(dholkiMap);
+    tileURL,
+    {
+        attribution:
+        "&copy; OpenStreetMap contributors"
+    }
+).addTo(
+    dholkiMap
+);
+
 
 L.marker(
-  [31.4705,74.4105]
+    [31.4705,74.4105]
 )
-.addTo(dholkiMap)
+.addTo(
+    dholkiMap
+)
 .bindPopup(
-  "<b>Royal Palace</b><br>Lahore"
-)
-.openPopup();
+    "<b>Royal Palace</b><br>Lahore"
+);
 
 
-/* ---------- MEHNDI ---------- */
+/* -----------------------------------------------------
+   MEHNDI
+----------------------------------------------------- */
 
 const mehndiMap =
-  L.map("mehndiMap")
-   .setView(
-      [31.5204,74.3587],
-      13
-    );
+    L.map("mehndiMap")
+     .setView(
+        [31.5204,74.3587],
+        13
+     );
+
 
 L.tileLayer(
-  mapTile,
-  {
-    attribution:
-      '&copy; OpenStreetMap contributors'
-  }
-).addTo(mehndiMap);
+    tileURL,
+    {
+        attribution:
+        "&copy; OpenStreetMap contributors"
+    }
+).addTo(
+    mehndiMap
+);
+
 
 L.marker(
-  [31.5204,74.3587]
+    [31.5204,74.3587]
 )
-.addTo(mehndiMap)
+.addTo(
+    mehndiMap
+)
 .bindPopup(
-  "<b>Le Aura Grand Events & Hotel</b><br>Lahore"
-)
-.openPopup();
+    "<b>Le Aura Grand Events & Hotel</b><br>Lahore"
+);
 
 
-/* ---------- SHADI ---------- */
+/* -----------------------------------------------------
+   SHADI
+----------------------------------------------------- */
 
 const shadiMap =
-  L.map("shadiMap")
-   .setView(
-      [31.4075,74.2320],
-      14
-    );
+    L.map("shadiMap")
+     .setView(
+        [31.4075,74.2320],
+        14
+     );
+
 
 L.tileLayer(
-  mapTile,
-  {
-    attribution:
-      '&copy; OpenStreetMap contributors'
-  }
-).addTo(shadiMap);
+    tileURL,
+    {
+        attribution:
+        "&copy; OpenStreetMap contributors"
+    }
+).addTo(
+    shadiMap
+);
+
 
 L.marker(
-  [31.4075,74.2320]
+    [31.4075,74.2320]
 )
-.addTo(shadiMap)
+.addTo(
+    shadiMap
+)
 .bindPopup(
-  "<b>Shershah Palace</b><br>Lahore"
-)
-.openPopup();
+    "<b>Shershah Palace</b><br>Lahore"
+);
 
 
-/* ---------- WALIMA ---------- */
+/* -----------------------------------------------------
+   WALIMA
+----------------------------------------------------- */
 
 const walimaMap =
-  L.map("walimaMap")
-   .setView(
-      [31.5204,74.3587],
-      12
-    );
+    L.map("walimaMap")
+     .setView(
+        [31.5204,74.3587],
+        12
+     );
+
 
 L.tileLayer(
-  mapTile,
-  {
-    attribution:
-      '&copy; OpenStreetMap contributors'
-  }
-).addTo(walimaMap);
+    tileURL,
+    {
+        attribution:
+        "&copy; OpenStreetMap contributors"
+    }
+).addTo(
+    walimaMap
+);
 
 
 /*
-   Search Grand Vista Marquee Lahore
+   Try to locate Grand Vista.
 */
 
 fetch(
-  "https://nominatim.openstreetmap.org/search?format=json&q=Grand%20Vista%20Marquee%20Lahore&limit=1"
+    "https://nominatim.openstreetmap.org/search?format=json&q=Grand%20Vista%20Marquee%20Lahore&limit=1"
 )
-.then(function(response){
+.then(
+    function(response){
 
-  return response.json();
+        return response.json();
 
-})
-.then(function(data){
+    }
+)
+.then(
+    function(data){
 
-  if(data && data.length){
+        if(
+            data &&
+            data.length > 0
+        ){
 
-    const lat =
-      parseFloat(data[0].lat);
+            const lat =
+                parseFloat(
+                    data[0].lat
+                );
 
-    const lon =
-      parseFloat(data[0].lon);
+            const lon =
+                parseFloat(
+                    data[0].lon
+                );
 
-    walimaMap.setView(
-      [lat,lon],
-      15
-    );
+
+            walimaMap.setView(
+                [lat,lon],
+                15
+            );
+
+
+            L.marker(
+                [lat,lon]
+            )
+            .addTo(
+                walimaMap
+            )
+            .bindPopup(
+                "<b>Grand Vista</b><br>Lahore"
+            );
+
+        }else{
+
+            addDefaultWalimaMarker();
+
+        }
+
+    }
+)
+.catch(
+    function(){
+
+        addDefaultWalimaMarker();
+
+    }
+);
+
+
+function addDefaultWalimaMarker(){
 
     L.marker(
-      [lat,lon]
+        [31.5204,74.3587]
     )
-    .addTo(walimaMap)
+    .addTo(
+        walimaMap
+    )
     .bindPopup(
-      "<b>Grand Vista</b><br>Lahore"
-    )
-    .openPopup();
-
-  }else{
-
-    L.marker(
-      [31.5204,74.3587]
-    )
-    .addTo(walimaMap)
-    .bindPopup(
-      "<b>Grand Vista</b><br>Lahore"
+        "<b>Grand Vista</b><br>Lahore"
     );
 
-  }
-
-})
-.catch(function(){
-
-  L.marker(
-    [31.5204,74.3587]
-  )
-  .addTo(walimaMap)
-  .bindPopup(
-    "<b>Grand Vista</b><br>Lahore"
-  );
-
-});
+}
 
 
-/*
-   Leaflet maps sometimes need size recalculation
-   after their section becomes visible.
-*/
+/* =====================================================
+   MAP SIZE FIX
+===================================================== */
 
-setTimeout(function(){
+setTimeout(
+    function(){
 
-  dholkiMap.invalidateSize();
-  mehndiMap.invalidateSize();
-  shadiMap.invalidateSize();
-  walimaMap.invalidateSize();
+        dholkiMap.invalidateSize();
 
-},1000);
+        mehndiMap.invalidateSize();
+
+        shadiMap.invalidateSize();
+
+        walimaMap.invalidateSize();
+
+    },
+    1200
+);
 
 
-/* ==================================================
+/* =====================================================
    RSVP
-================================================== */
+===================================================== */
 
 const rsvpForm =
-  document.getElementById("rsvpForm");
+    document.getElementById(
+        "rsvpForm"
+    );
 
 const thankYou =
-  document.getElementById("thankYou");
+    document.getElementById(
+        "thankYou"
+    );
 
 
 const googleScriptURL =
@@ -1885,94 +2271,89 @@ const googleScriptURL =
 
 
 rsvpForm.addEventListener(
-  "submit",
-  function(event){
+    "submit",
+    function(event){
 
-    event.preventDefault();
-
-
-    const name =
-      document.getElementById(
-        "guestName"
-      ).value.trim();
+        event.preventDefault();
 
 
-    const attendance =
-      document.querySelector(
-        'input[name="attendance"]:checked'
-      ).value;
+        const name =
+            document.getElementById(
+                "guestName"
+            ).value.trim();
 
 
-    const guests =
-      document.getElementById(
-        "guestCount"
-      ).value;
+        const attendance =
+            document.querySelector(
+                'input[name="attendance"]:checked'
+            ).value;
 
 
-    const data = {
-
-      mode:"no-cors",
-
-      name:name,
-
-      attendance:attendance,
-
-      guests:guests,
-
-      timestamp:
-        new Date().toISOString()
-
-    };
+        const guests =
+            document.getElementById(
+                "guestCount"
+            ).value;
 
 
-    /*
-       Send RSVP to Google Apps Script
-    */
+        const data = {
 
-    fetch(
-      googleScriptURL,
-      {
-        method:"POST",
+            mode:"no-cors",
 
-        mode:"no-cors",
+            name:name,
 
-        headers:{
-          "Content-Type":
-            "application/json"
-        },
+            attendance:attendance,
 
-        body:JSON.stringify(data)
+            guests:guests,
 
-      }
-    )
-    .then(function(){
+            timestamp:
+                new Date().toISOString()
 
-      rsvpForm.style.display =
-        "none";
+        };
 
-      thankYou.style.display =
-        "block";
 
-    })
-    .catch(function(error){
+        fetch(
+            googleScriptURL,
+            {
+                method:"POST",
 
-      console.log(error);
+                mode:"no-cors",
 
-      /*
-         Because no-cors does not expose
-         the response, we still show the
-         confirmation after sending.
-      */
+                headers:{
+                    "Content-Type":
+                        "application/json"
+                },
 
-      rsvpForm.style.display =
-        "none";
+                body:
+                    JSON.stringify(data)
 
-      thankYou.style.display =
-        "block";
+            }
+        )
+        .then(
+            function(){
 
-    });
+                rsvpForm.style.display =
+                    "none";
 
-  }
+                thankYou.style.display =
+                    "block";
+
+            }
+        )
+        .catch(
+            function(error){
+
+                console.log(error);
+
+                rsvpForm.style.display =
+                    "none";
+
+                thankYou.style.display =
+                    "block";
+
+            }
+        );
+
+    }
 );
 
 </script>
