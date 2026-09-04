@@ -1,570 +1,532 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wedding Invitation - Timeless Grace</title>
-    <!-- Leaflet CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Great+Vibes&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
-    
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-        body {
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(135deg, #fce4ec, #e8f5e9, #f9fbe7, #f8bbd0);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
-            font-family: 'Montserrat', sans-serif;
-            color: #5d4037;
-            overflow-x: hidden;
-        }
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wedding Invitation - Timeless Grace</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Great+Vibes&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
+<!-- Leaflet CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<style>
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden;
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(135deg, #fce4ec, #e8f5e9, #f9fbe7, #f8bbd0);
+    background-size: 400% 400%;
+    animation: pastelGradient 15s ease infinite;
+    color: #5c4033;
+  }
 
-        /* Glitter / Sparkle Effect Background Overlay */
-        .glitter-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none;
-            background-image: radial-gradient(#d4af37 1px, transparent 1px), radial-gradient(#d4af37 1px, transparent 1px);
-            background-size: 50px 50px;
-            background-position: 0 0, 25px 25px;
-            opacity: 0.15;
-            animation: sparkle 4s linear infinite;
-            z-index: 1;
-        }
-        @keyframes sparkle {
-            0% { transform: translateY(0); opacity: 0.1; }
-            50% { opacity: 0.25; }
-            100% { transform: translateY(-50px); opacity: 0.1; }
-        }
+  @keyframes pastelGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
 
-        /* Animated Corner Flowers */
-        .corner-flower {
-            position: fixed;
-            width: 120px;
-            height: 120px;
-            background: url('https://files.catbox.moe/kgdqjb.png') no-repeat center/contain;
-            pointer-events: none;
-            z-index: 99;
-            animation: floatFlower 6s ease-in-out infinite;
-        }
-        .flower-tl { top: 10px; left: 10px; transform: rotate(0deg); }
-        .flower-tr { top: 10px; right: 10px; transform: rotate(90deg); }
-        .flower-bl { bottom: 10px; left: 10px; transform: rotate(270deg); }
-        .flower-br { bottom: 10px; right: 10px; transform: rotate(180deg); }
+  /* Glitter / Sparkle Effect Overlay */
+  .glitter-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 999;
+    background-image: radial-gradient(white 1px, transparent 0);
+    background-size: 50px 50px;
+    opacity: 0.25;
+    animation: sparkleMove 10s linear infinite;
+  }
+  @keyframes sparkleMove {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(50px); }
+  }
 
-        @keyframes floatFlower {
-            0%, 100% { transform: translateY(0) rotate(var(--rot, 0deg)); }
-            50% { transform: translateY(-8px) rotate(var(--rot, 0deg)); }
-        }
+  /* Side Flowers Background Elements */
+  .side-flowers-left, .side-flowers-right {
+    position: fixed;
+    top: 0; width: 120px; height: 100vh;
+    pointer-events: none;
+    z-index: 1;
+    background: url('https://files.catbox.moe/kgdqjb.png') repeat-y center/contain;
+    opacity: 0.35;
+  }
+  .side-flowers-left { left: 0; }
+  .side-flowers-right { right: 0; transform: scaleX(-1); }
 
-        /* Welcome Overlay (Door / Envelope) */
-        #welcome-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            z-index: 9999;
-            background: #111;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            transition: opacity 1s ease, visibility 1s ease;
-        }
-        #welcome-overlay video {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            object-fit: cover;
-        }
-        .tap-button {
-            position: relative;
-            z-index: 10000;
-            padding: 15px 35px;
-            background: rgba(182, 111, 135, 0.85);
-            color: #fff;
-            border: 2px solid #ffd700;
-            border-radius: 30px;
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 20px;
-            letter-spacing: 2px;
-            cursor: pointer;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
-            animation: pulseBtn 2s infinite;
-        }
-        @keyframes pulseBtn {
-            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,215,0,0.7); }
-            70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(255,215,0,0); }
-            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,215,0,0); }
-        }
+  /* Opening Gate Overlay */
+  #intro-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    z-index: 9999;
+    background: #000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 1s ease;
+  }
+  #intro-video {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    object-fit: cover;
+  }
+  .tap-to-open-btn {
+    position: relative;
+    z-index: 10000;
+    padding: 14px 36px;
+    background: rgba(182, 111, 135, 0.85);
+    color: #fff;
+    border: 2px solid #ffd700;
+    border-radius: 30px;
+    font-family: 'Great Vibes', cursive;
+    font-size: 32px;
+    letter-spacing: 2px;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    transition: transform 0.3s ease, background 0.3s ease;
+    animation: pulseButton 2s infinite;
+  }
+  .tap-to-open-btn:hover {
+    background: rgba(158, 88, 113, 0.95);
+    transform: scale(1.05);
+  }
+  @keyframes pulseButton {
+    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.4); }
+    70% { transform: scale(1.03); box-shadow: 0 0 0 15px rgba(255, 215, 0, 0); }
+    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); }
+  }
 
-        /* Main Content Container */
-        .main-container {
-            position: relative;
-            z-index: 2;
-            max-width: 750px;
-            margin: 0 auto;
-            padding: 20px 10px 60px;
-            display: flex;
-            flex-direction: column;
-            gap: 40px;
-        }
+  /* Main Container */
+  .main-container {
+    position: relative;
+    z-index: 2;
+    max-width: 750px;
+    margin: 0 auto;
+    padding: 20px 10px;
+  }
 
-        /* Section Styling */
-        .invitation-section {
-            background: rgba(255, 255, 255, 0.85);
-            border: 1px solid #d6b77a;
-            border-radius: 20px;
-            padding: 20px;
-            box-shadow: 0 10px 30px rgba(80, 40, 50, 0.1);
-            text-align: center;
-            position: relative;
-        }
+  /* Sections & Videos */
+  .section-card {
+    position: relative;
+    background: rgba(255, 253, 251, 0.88);
+    border: 1px solid #d6b77a;
+    border-radius: 20px;
+    margin: 25px auto;
+    padding: 20px;
+    box-shadow: 0 10px 30px rgba(80, 40, 50, 0.12);
+    text-align: center;
+  }
+  .section-card video, .section-card img {
+    width: 100%;
+    max-height: 450px;
+    object-fit: cover;
+    border-radius: 14px;
+    border: 1px solid #ead7c3;
+    display: block;
+  }
 
-        /* Video Container */
-        .media-box {
-            position: relative;
-            width: 100%;
-            border-radius: 14px;
-            overflow: hidden;
-            background: #000;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        .media-box video {
-            width: 100%;
-            height: auto;
-            display: block;
-            max-height: 450px;
-            object-fit: cover;
-        }
+  /* Countdown Special Layer Styling */
+  .countdown-wrapper {
+    position: relative;
+    width: 100%;
+  }
+  .countdown-embed-layer {
+    position: absolute;
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    z-index: 10;
+    background: rgba(255, 255, 255, 0.65);
+    padding: 10px;
+    border-radius: 12px;
+    backdrop-filter: blur(4px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  }
 
-        /* Countdown Overlay Specific Styling */
-        .countdown-wrapper {
-            position: relative;
-        }
-        .countdown-embed-layer {
-            position: absolute;
-            top: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 90%;
-            max-width: 400px;
-            z-index: 10;
-            background: rgba(255, 255, 255, 0.75);
-            padding: 8px;
-            border-radius: 10px;
-            backdrop-filter: blur(4px);
-            border: 1px solid #d6b77a;
-        }
+  /* Map Styling inside Sections */
+  .map-card {
+    position: relative;
+    margin-top: 15px;
+    padding: 14px;
+    background: #fffdfb;
+    border: 1px solid #d6b77a;
+    border-radius: 15px;
+  }
+  .map-container {
+    height: 280px;
+    width: 100%;
+    border-radius: 12px;
+    border: 1px solid #ead7c3;
+    margin-top: 10px;
+  }
+  .event-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    color: #b66f87;
+    margin: 10px 0 5px;
+  }
+  .event-address {
+    font-size: 12px;
+    color: #765d63;
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+  .pearl-divider {
+    color: #c9a765;
+    font-size: 16px;
+    letter-spacing: 6px;
+    margin: 5px 0;
+  }
+  .map-button {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 10px 24px;
+    background: #b66f87;
+    color: white;
+    text-decoration: none;
+    border-radius: 30px;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    transition: background 0.2s;
+  }
+  .map-button:hover { background: #9e5871; }
 
-        /* Map Card Integration */
-        .map-card {
-            margin-top: 20px;
-            padding: 15px;
-            background: #fffdfb;
-            border: 1px solid #d6b77a;
-            border-radius: 15px;
-        }
-        .pearl {
-            color: #c9a765;
-            font-size: 16px;
-            letter-spacing: 6px;
-            margin-bottom: 5px;
-        }
-        .sec-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 28px;
-            color: #b66f87;
-            margin: 0 0 5px;
-        }
-        .address {
-            font-size: 12px;
-            line-height: 1.5;
-            color: #765d63;
-            margin-bottom: 12px;
-        }
-        .leaflet-map {
-            height: 280px;
-            width: 100%;
-            border-radius: 10px;
-            border: 1px solid #ead7c3;
-        }
-        .map-button {
-            display: inline-block;
-            margin-top: 12px;
-            padding: 10px 24px;
-            background: #b66f87;
-            color: white;
-            text-decoration: none;
-            border-radius: 25px;
-            font-size: 12px;
-            letter-spacing: 0.5px;
-            transition: background 0.3s;
-        }
-        .map-button:hover {
-            background: #9e5871;
-        }
+  /* Audio Floating Control */
+  .audio-control {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    background: #b66f87;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 10px 18px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  }
 
-        /* Dress Code & RSVP Images */
-        .image-banner {
-            width: 100%;
-            border-radius: 14px;
-            border: 1px solid #d6b77a;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        /* RSVP Form Styling inside Frame/Card */
-        .rsvp-card {
-            position: relative;
-            background: url('https://files.catbox.moe/hsk39c.png') no-repeat center center/cover;
-            border-radius: 20px;
-            padding: 40px 20px;
-            border: 1px solid #b99a62;
-        }
-        .rsvp-form-content {
-            background: rgba(255, 255, 255, 0.85);
-            padding: 20px;
-            border-radius: 15px;
-            max-width: 450px;
-            margin: 0 auto;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-        }
-        .rsvp-title {
-            font-family: 'Great Vibes', cursive;
-            font-size: 38px;
-            color: #8b5d65;
-            margin: 0;
-        }
-        .rsvp-subtitle {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 16px;
-            letter-spacing: 2px;
-            color: #765058;
-            margin-bottom: 15px;
-        }
-        label {
-            display: block;
-            text-align: left;
-            margin: 8px 0 4px;
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 15px;
-            font-weight: 600;
-            color: #765058;
-        }
-        input[type="text"], select {
-            width: 100%;
-            padding: 8px 10px;
-            border: 1px solid #b99a62;
-            border-radius: 7px;
-            background: rgba(255,255,255,0.8);
-            color: #765058;
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 14px;
-            outline: none;
-        }
-        .attendance {
-            display: flex;
-            gap: 6px;
-            width: 100%;
-        }
-        .attendance label {
-            flex: 1;
-            margin: 0;
-            padding: 7px 3px;
-            text-align: center;
-            border: 1px solid #b99a62;
-            border-radius: 7px;
-            background: rgba(255,255,255,0.7);
-            font-size: 11px;
-            font-weight: 500;
-            cursor: pointer;
-        }
-        .attendance input {
-            width: auto;
-            margin-right: 4px;
-        }
-        button.submit-btn {
-            width: 100%;
-            margin-top: 14px;
-            padding: 10px;
-            border: none;
-            border-radius: 22px;
-            background: #96636c;
-            color: white;
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 16px;
-            letter-spacing: 1px;
-            cursor: pointer;
-        }
-        button.submit-btn:hover {
-            background: #7a4e56;
-        }
-        #message {
-            margin-top: 8px;
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 14px;
-            color: #765058;
-        }
-
-        /* Floating Audio Control Button */
-        #audio-control {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 999;
-            background: #b66f87;
-            color: #fff;
-            border: 2px solid #ffd700;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            font-size: 20px;
-        }
-    </style>
+  /* RSVP Form Styling */
+  .rsvp-container {
+    position: relative;
+    width: 100%;
+    border-radius: 20px;
+    overflow: hidden;
+    margin: 25px auto;
+    box-shadow: 0 10px 30px rgba(80, 40, 50, 0.15);
+  }
+  .rsvp-bg-img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .rsvp-form-content {
+    position: absolute;
+    top: 22%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 75%;
+    max-width: 400px;
+    text-align: center;
+    color: #765058;
+  }
+  .rsvp-title {
+    margin: 0;
+    font-family: 'Great Vibes', cursive;
+    font-size: 36px;
+    color: #8b5d65;
+  }
+  .rsvp-subtitle {
+    margin: 4px 0 12px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    letter-spacing: 2px;
+  }
+  .rsvp-form-content label {
+    display: block;
+    text-align: left;
+    margin: 6px 0 3px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .rsvp-form-content input, .rsvp-form-content select {
+    width: 100%;
+    padding: 7px 10px;
+    border: 1px solid #b99a62;
+    border-radius: 7px;
+    background: rgba(255,255,255,0.7);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    outline: none;
+  }
+  .attendance-group {
+    display: flex;
+    gap: 6px;
+    margin-top: 4px;
+  }
+  .attendance-group label {
+    flex: 1;
+    margin: 0;
+    padding: 6px 4px;
+    text-align: center;
+    border: 1px solid #b99a62;
+    border-radius: 7px;
+    background: rgba(255,255,255,0.6);
+    font-size: 11px;
+  }
+  .rsvp-submit-btn {
+    width: 100%;
+    margin-top: 12px;
+    padding: 9px;
+    border: none;
+    border-radius: 22px;
+    background: #96636c;
+    color: white;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    letter-spacing: 1px;
+    cursor: pointer;
+  }
+</style>
 </head>
 <body>
 
-    <!-- Glitter & Corner Flowers Background Elements -->
-    <div class="glitter-overlay"></div>
-    <div class="corner-flower flower-tl" style="--rot: 0deg;"></div>
-    <div class="corner-flower flower-tr" style="--rot: 90deg;"></div>
-    <div class="corner-flower flower-bl" style="--rot: 270deg;"></div>
-    <div class="corner-flower flower-br" style="--rot: 180deg;"></div>
+  <!-- Background side floral decor -->
+  <div class="side-flowers-left"></div>
+  <div class="side-flowers-right"></div>
+  <div class="glitter-overlay"></div>
 
-    <!-- Background Audio -->
-    <audio id="bg-music" loop>
-        <source src="dekha tenu.mp3" type="audio/mpeg">
-    </audio>
+  <!-- Opening Gate Intro Screen -->
+  <div id="intro-overlay">
+    <video id="intro-video" src="darwaza.mp4" playsinline muted></video>
+    <button class="tap-to-open-btn" id="openBtn">Tap to Open Invitation</button>
+  </div>
 
-    <!-- Floating Audio Mute/Unmute Button -->
-    <div id="audio-control" onclick="toggleAudio()" title="Mute/Unmute Music">🎵</div>
+  <!-- Background Audio -->
+  <audio id="bgMusic" loop>
+    <source src="dekha tenu.mp3" type="audio/mpeg">
+  </audio>
+  <button class="audio-control" id="audioToggle" onclick="toggleAudio()">🔊 Sound: Off</button>
 
-    <!-- Opening Door / Envelope Overlay -->
-    <div id="welcome-overlay">
-        <video id="door-video" src="darwaza.mp4" muted playsinline autoplay></video>
-        <button class="tap-button" onclick="openInvitation()">✦ Tap to Open Invitation ✦</button>
+  <div class="main-container">
+
+    <!-- 1. Home / Intro Video loop (starts after gate opens) -->
+    <div class="section-card">
+      <video src="darwaza.mp4" autoplay muted loop playsinline></video>
     </div>
 
-    <!-- Main Website Scrollable Content -->
-    <div class="main-container">
-
-        <!-- 1. Parents Video Section -->
-        <div class="invitation-section">
-            <h2 class="sec-title" style="margin-bottom:12px;">With the Blessings of Parents</h2>
-            <div class="media-box">
-                <video src="parents.mp4" autoplay loop muted playsinline></video>
-            </div>
-        </div>
-
-        <!-- 2. Countdown Video Section with Embedded Tickcounter Layer -->
-        <div class="invitation-section">
-            <h2 class="sec-title" style="margin-bottom:12px;">Counting Every Moment</h2>
-            <div class="media-box countdown-wrapper">
-                <video src="countdown.mp4" autoplay loop muted playsinline></video>
-                <div class="countdown-embed-layer">
-                    <script>(function(d, s, id) { var js, pjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = "//www.tickcounter.com/static/js/loader.js"; pjs.parentNode.insertBefore(js, pjs); }(document, "script", "tickcounter-sdk"));</script>
-                    <a data-type="countdown" data-id="11468420" class="tickcounter" style="display:block; left:0; width:100%; height:0; position:relative; padding-bottom:25%; margin:0 auto;" title="My countdown" href="//www.tickcounter.com/">My countdown</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- 3. Dholki Video & Map Section -->
-        <div class="invitation-section">
-            <h2 class="sec-title" style="margin-bottom:12px;">Dholki Celebration</h2>
-            <div class="media-box">
-                <video src="dholki.mp4" autoplay loop muted playsinline></video>
-            </div>
-            <div class="map-card">
-                <div class="pearl">• ◦ • ◦ •</div>
-                <h3 class="sec-title">Royal Palace</h3>
-                <div class="address">Bedian Road, Plot #10, Adjoin Askari 11,<br>Near DHA Phase 5, Ring Road, Lahore</div>
-                <div id="map-dholki" class="leaflet-map"></div>
-                <a class="map-button" href="https://www.google.com/maps/search/?api=1&query=Royal+Palace+Plot+10+Bedian+Road+Adjoin+Askari+11+Near+DHA+Phase+5+Lahore" target="_blank">✦ Open in Google Maps ✦</a>
-            </div>
-        </div>
-
-        <!-- 4. Mehndi Video & Map Section -->
-        <div class="invitation-section">
-            <h2 class="sec-title" style="margin-bottom:12px;">Mehndi Ceremony</h2>
-            <div class="media-box">
-                <video src="mehndi.mp4" autoplay loop muted playsinline></video>
-            </div>
-            <div class="map-card">
-                <div class="pearl">• ◦ • ◦ •</div>
-                <h3 class="sec-title">Le Aura Grand Events & Hotel</h3>
-                <div class="address">Lahore, Pakistan</div>
-                <div id="map-mehndi" class="leaflet-map"></div>
-                <a class="map-button" href="https://www.google.com/maps/search/?api=1&query=Le+Aura+Grand+Events+%26+Hotel+Lahore" target="_blank">✦ Open in Google Maps ✦</a>
-            </div>
-        </div>
-
-        <!-- 5. Shadi Video & Map Section -->
-        <div class="invitation-section">
-            <h2 class="sec-title" style="margin-bottom:12px;">Shadi Ceremony</h2>
-            <div class="media-box">
-                <video src="shadi.mp4" autoplay loop muted playsinline></video>
-            </div>
-            <div class="map-card">
-                <div class="pearl">• ◦ • ◦ •</div>
-                <h3 class="sec-title">Shershah Palace</h3>
-                <div class="address">Marquee & Farmhouse<br>Adda Plot, Raiwind Road, Eden Park, Lahore</div>
-                <div id="map-shadi" class="leaflet-map"></div>
-                <a class="map-button" href="https://www.google.com/maps/search/?api=1&query=Shershah+Palace+Marquee+Farmhouse+Adda+Plot+Raiwind+Road+Eden+Park+Lahore" target="_blank">✦ Open in Google Maps ✦</a>
-            </div>
-        </div>
-
-        <!-- 6. Walima Video & Map Section -->
-        <div class="invitation-section">
-            <h2 class="sec-title" style="margin-bottom:12px;">Walima Reception</h2>
-            <div class="media-box">
-                <video src="Walima.mp4" autoplay loop muted playsinline></video>
-            </div>
-            <div class="map-card">
-                <div class="pearl">• ◦ • ◦ •</div>
-                <h3 class="sec-title">Grand Vista</h3>
-                <div class="address">Lahore</div>
-                <div id="map-walima" class="leaflet-map"></div>
-                <a class="map-button" href="https://www.google.com/maps/search/?api=1&query=Grand+Vista+Marquee+Lahore" target="_blank">✦ Open in Google Maps ✦</a>
-            </div>
-        </div>
-
-        <!-- 7. Dress Code Picture Section -->
-        <div class="invitation-section">
-            <h2 class="sec-title" style="margin-bottom:12px;">Dress Code</h2>
-            <img class="image-banner" src="https://files.catbox.moe/vxcqqa.png" alt="Dress Code">
-        </div>
-
-        <!-- 8. RSVP Section -->
-        <div class="rsvp-card">
-            <div class="rsvp-form-content">
-                <h1 class="rsvp-title">RSVP</h1>
-                <div class="rsvp-subtitle">Kindly Respond</div>
-                <form id="rsvpForm">
-                    <label for="name">Your Name</label>
-                    <input type="text" id="name" name="name" placeholder="Enter your name" required>
-
-                    <label>Will you be joining us?</label>
-                    <div class="attendance">
-                        <label><input type="radio" name="attendance" value="Joyfully Accept" required> Joyfully Accept</label>
-                        <label><input type="radio" name="attendance" value="Regretfully Reject"> Regretfully Reject</label>
-                    </div>
-
-                    <label for="guests">Number of Guests</label>
-                    <select id="guests" name="guests" required>
-                        <option value="">Select</option>
-                        <option value="1">1 Guest</option>
-                        <option value="2">2 Guests</option>
-                        <option value="3">3 Guests</option>
-                        <option value="4">4 Guests</option>
-                        <option value="5">5 Guests</option>
-                        <option value="6">6 Guests</option>
-                    </select>
-
-                    <button type="submit" class="submit-btn">Confirm RSVP</button>
-                </form>
-                <div id="message"></div>
-            </div>
-        </div>
-
+    <!-- 2. Parents Video -->
+    <div class="section-card">
+      <div class="pearl-divider">• ◦ • ◦ •</div>
+      <h2 class="event-title" style="font-size:24px;">With the Blessings of Our Parents</h2>
+      <video src="parents.mp4" autoplay muted loop playsinline></video>
     </div>
 
-    <!-- Leaflet JS -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script>
-        // Opening Interaction Handling
-        function openInvitation() {
-            const overlay = document.getElementById('welcome-overlay');
-            const bgMusic = document.getElementById('bg-music');
-            
-            // Play background music
-            bgMusic.play().catch(e => console.log("Audio autoplay restricted:", e));
+    <!-- 3. Countdown Video with Embed Countdown Layer on Top -->
+    <div class="section-card">
+      <div class="pearl-divider">• ◦ • ◦ •</div>
+      <h2 class="event-title" style="font-size:24px;">Countdown to Forever</h2>
+      <div class="countdown-wrapper">
+        <!-- Tickcounter Embed -->
+        <div class="countdown-embed-layer">
+          <script>(function(d, s, id) { var js, pjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = "//www.tickcounter.com/static/js/loader.js"; pjs.parentNode.insertBefore(js, pjs); }(document, "script", "tickcounter-sdk"));</script>
+          <a data-type="countdown" data-id="11468420" class="tickcounter" style="display:block; left:0; width:100%; height:0; position:relative; padding-bottom:20%; margin:0 auto;" title="My countdown" href="//www.tickcounter.com/">My countdown</a>
+        </div>
+        <video src="countdown.mp4" autoplay muted loop playsinline></video>
+      </div>
+    </div>
 
-            // Fade out welcome door overlay
-            overlay.style.opacity = '0';
-            setTimeout(() => {
-                overlay.style.display = 'none';
-            }, 1000);
-        }
+    <!-- 4. Dholki Video + Map -->
+    <div class="section-card">
+      <video src="dholki.mp4" autoplay muted loop playsinline></video>
+      <div class="map-card">
+        <div class="pearl-divider">• ◦ • ◦ •</div>
+        <h2 class="event-title">Royal Palace</h2>
+        <div class="event-address">Bedian Road, Plot #10, Adjoin Askari 11,<br>Near DHA Phase 5, Ring Road, Lahore</div>
+        <div id="mapDholki" class="map-container"></div>
+        <a class="map-button" href="https://www.google.com/maps/search/?api=1&query=Royal+Palace+Plot+10+Bedian+Road+Adjoin+Askari+11+Near+DHA+Phase+5+Lahore" target="_blank">✦ Open in Google Maps ✦</a>
+      </div>
+    </div>
 
-        // Toggle Audio Control Button
-        let isMuted = false;
-        function toggleAudio() {
-            const bgMusic = document.getElementById('bg-music');
-            const btn = document.getElementById('audio-control');
-            isMuted = !isMuted;
-            bgMusic.muted = isMuted;
-            btn.textContent = isMuted ? '🔇' : '🎵';
-        }
+    <!-- 5. Mehndi Video + Map -->
+    <div class="section-card">
+      <video src="mehndi.mp4" autoplay muted loop playsinline></video>
+      <div class="map-card">
+        <div class="pearl-divider">• ◦ • ◦ •</div>
+        <h2 class="event-title" style="color: #5d7652;">Le Aura Grand Events & Hotel</h2>
+        <div class="event-address">Lahore, Pakistan</div>
+        <div id="mapMehndi" class="map-container"></div>
+        <a class="map-button" style="background:#657b59;" href="https://www.google.com/maps/search/?api=1&query=Le+Aura+Grand+Events+%26+Hotel+Lahore" target="_blank">✦ Open in Google Maps ✦</a>
+      </div>
+    </div>
 
-        // Initialize Leaflet Maps
-        document.addEventListener("DOMContentLoaded", function () {
-            // 1. Dholki Map
-            const mapDholki = L.map('map-dholki').setView([31.4705, 74.4105], 15);
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap' }).addTo(mapDholki);
-            L.marker([31.4705, 74.4105]).addTo(mapDholki).bindPopup("<b>Royal Palace</b><br>Bedian Road, Lahore").openPopup();
+    <!-- 6. Shadi Video + Map -->
+    <div class="section-card">
+      <video src="shadi.mp4" autoplay muted loop playsinline></video>
+      <div class="map-card">
+        <div class="pearl-divider">• ◦ • ◦ •</div>
+        <h2 class="event-title" style="color: #681d2b;">Shershah Palace</h2>
+        <div class="event-address">Marquee & Farmhouse<br>Adda Plot, Raiwind Road, Eden Park, Lahore</div>
+        <div id="mapShadi" class="map-container"></div>
+        <a class="map-button" style="background:#681d2b;" href="https://www.google.com/maps/search/?api=1&query=Shershah+Palace+Marquee+Farmhouse+Adda+Plot+Raiwind+Road+Eden+Park+Lahore" target="_blank">✦ Open in Google Maps ✦</a>
+      </div>
+    </div>
 
-            // 2. Mehndi Map
-            const mapMehndi = L.map('map-mehndi').setView([31.5204, 74.3587], 13);
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap' }).addTo(mapMehndi);
-            L.marker([31.5204, 74.3587]).addTo(mapMehndi).bindPopup("<b>Le Aura Grand Events & Hotel</b>").openPopup();
+    <!-- 7. Walima Video + Map -->
+    <div class="section-card">
+      <video src="Walima.mp4" autoplay muted loop playsinline></video>
+      <div class="map-card">
+        <div class="pearl-divider">• ◦ • ◦ •</div>
+        <h2 class="event-title">Grand Vista</h2>
+        <div class="event-address">Lahore, Pakistan</div>
+        <div id="mapWalima" class="map-container"></div>
+        <a class="map-button" href="https://www.google.com/maps/search/?api=1&query=Grand+Vista+Marquee+Lahore" target="_blank">✦ Open in Google Maps ✦</a>
+      </div>
+    </div>
 
-            // 3. Shadi Map
-            const mapShadi = L.map('map-shadi').setView([31.4075, 74.2320], 16);
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap' }).addTo(mapShadi);
-            L.marker([31.4075, 74.2320]).addTo(mapShadi).bindPopup("<b>Shershah Palace</b><br>Marquee & Farmhouse").openPopup();
+    <!-- 8. Dress Code Picture -->
+    <div class="section-card">
+      <div class="pearl-divider">• ◦ • ◦ •</div>
+      <h2 class="event-title">Dress Code</h2>
+      <img src="https://files.catbox.moe/vxcqqa.png" alt="Dress Code">
+    </div>
 
-            // 4. Walima Map
-            const mapWalima = L.map('map-walima').setView([31.5204, 74.3587], 12);
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap' }).addTo(mapWalima);
-            fetch("https://nominatim.openstreetmap.org/search?format=json&q=Grand%20Vista%20Marquee%20Lahore&limit=1")
-                .then(response => response.json())
-                .then(data => {
-                    if (data.length > 0) {
-                        const lat = parseFloat(data[0].lat);
-                        const lon = parseFloat(data[0].lon);
-                        mapWalima.setView([lat, lon], 16);
-                        L.marker([lat, lon]).addTo(mapWalima).bindPopup("<b>Grand Vista Marquee</b><br>Lahore").openPopup();
-                    }
-                }).catch(err => console.log("Map search error"));
-        });
+    <!-- 9. RSVP Section -->
+    <div class="rsvp-container">
+      <img class="rsvp-bg-img" src="https://files.catbox.moe/hsk39c.png" alt="RSVP Frame">
+      <div class="rsvp-form-content">
+        <h1 class="rsvp-title">RSVP</h1>
+        <div class="rsvp-subtitle">Kindly Respond</div>
+        <form id="rsvpForm">
+          <label for="name">Your Name</label>
+          <input type="text" id="name" name="name" placeholder="Enter your name" required>
 
-        // RSVP Form Submission Handler
-        document.getElementById("rsvpForm").addEventListener("submit", function(e){
-            e.preventDefault();
-            const name = document.getElementById("name").value;
-            const attendanceInput = document.querySelector('input[name="attendance"]:checked');
-            const attendance = attendanceInput ? attendanceInput.value : '';
-            const guests = document.getElementById("guests").value;
+          <label>Will you be joining us?</label>
+          <div class="attendance-group">
+            <label><input type="radio" name="attendance" value="Joyfully Accept" required> Joyfully Accept</label>
+            <label><input type="radio" name="attendance" value="Regretfully Reject"> Regretfully Reject</label>
+          </div>
 
-            const data = {
-                name: name,
-                attendance: attendance,
-                guests: guests,
-                timestamp: new Date().toISOString()
-            };
+          <label for="guests">Number of Guests</label>
+          <select id="guests" name="guests" required>
+            <option value="">Select</option>
+            <option value="1">1 Guest</option>
+            <option value="2">2 Guests</option>
+            <option value="3">3 Guests</option>
+            <option value="4">4 Guests</option>
+            <option value="5">5 Guests</option>
+            <option value="6">6 Guests</option>
+          </select>
 
-            fetch("https://script.google.com/macros/s/AKfycbwhcI7eEUuhAeb9LDD_iOQV1yOXX-iSxou8kYnM_B9J6Z9Fxjma_F5E0-zGMMi_fKo/exec", {
-                method: "POST",
-                mode: "no-cors",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(data)
-            });
+          <button type="submit" class="rsvp-submit-btn">Confirm RSVP</button>
+        </form>
+        <div id="message" style="margin-top:6px; font-size:13px;"></div>
+      </div>
+    </div>
 
-            document.getElementById("message").innerHTML = "Thank you for your response ♡";
-            this.reset();
-        });
-    </script>
+  </div>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    // Handle Intro Gate Tap & Play Transition
+    const introOverlay = document.getElementById('intro-overlay');
+    const introVideo = document.getElementById('intro-video');
+    const openBtn = document.getElementById('openBtn');
+    const bgMusic = document.getElementById('bgMusic');
+    const audioToggle = document.getElementById('audioToggle');
+
+    let isAudioPlaying = false;
+
+    openBtn.addEventListener('click', () => {
+      introVideo.muted = false; // enable audio for intro video if needed
+      introVideo.play().then(() => {
+        openBtn.style.display = 'none';
+      }).catch(err => {
+        console.log("Autoplay blocked, starting direct transition", err);
+        finishIntro();
+      });
+
+      // Start background music as well
+      bgMusic.play().then(() => {
+        isAudioPlaying = true;
+        audioToggle.innerText = "🔊 Sound: On";
+      }).catch(e => console.log("Audio play deferred"));
+    });
+
+    introVideo.addEventListener('ended', () => {
+      finishIntro();
+    });
+
+    function finishIntro() {
+      introOverlay.style.opacity = '0';
+      setTimeout(() => {
+        introOverlay.style.display = 'none';
+      }, 1000);
+    }
+
+    // Toggle Audio Button Function
+    function toggleAudio() {
+      if (isAudioPlaying) {
+        bgMusic.pause();
+        isAudioPlaying = false;
+        audioToggle.innerText = "🔇 Sound: Off";
+      } else {
+        bgMusic.play();
+        isAudioPlaying = true;
+        audioToggle.innerText = "🔊 Sound: On";
+      }
+    }
+
+    // Initialize Leaflet Maps
+    function initMap(elementId, coords, zoom, title, address) {
+      const map = L.map(elementId).setView(coords, zoom);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '© OpenStreetMap contributors'
+      }).addTo(map);
+      L.marker(coords).addTo(map).bindPopup(`<b>${title}</b><br>${address}`).openPopup();
+    }
+
+    // Load Maps after DOM load
+    window.addEventListener('DOMContentLoaded', () => {
+      initMap('mapDholki', [31.4705, 74.4105], 15, 'Royal Palace', 'Bedian Road, Lahore');
+      initMap('mapMehndi', [31.5204, 74.3587], 13, 'Le Aura Grand Events & Hotel', 'Lahore');
+      initMap('mapShadi', [31.4075, 74.2320], 16, 'Shershah Palace', 'Raiwind Road, Lahore');
+      initMap('mapWalima', [31.5204, 74.3587], 14, 'Grand Vista Marquee', 'Lahore');
+    });
+
+    // RSVP Google Script Form Submission
+    document.getElementById("rsvpForm").addEventListener("submit", function(e){
+      e.preventDefault();
+      const name = document.getElementById("name").value;
+      const attendance = document.querySelector('input[name="attendance"]:checked').value;
+      const guests = document.getElementById("guests").value;
+
+      const data = {
+        name: name,
+        attendance: attendance,
+        guests: guests,
+        timestamp: new Date().toISOString()
+      };
+
+      fetch("https://script.google.com/macros/s/AKfycbwhcI7eEUuhAeb9LDD_iOQV1yOXX-iSxou8kYnM_B9J6Z9Fxjma_F5E0-zGMMi_fKo/exec", {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      });
+
+      document.getElementById("message").innerHTML = "Thank you for your response ♡";
+      this.reset();
+    });
+  </script>
 </body>
 </html>
