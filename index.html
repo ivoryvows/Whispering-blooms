@@ -4,16 +4,20 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Dreamy Wedding Invitation</title>
+<title>Whispering Blooms</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Great+Vibes&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
 
+/* =========================
+   BASIC
+========================= */
+
 *{
+    box-sizing:border-box;
     margin:0;
     padding:0;
-    box-sizing:border-box;
 }
 
 html{
@@ -21,617 +25,629 @@ html{
 }
 
 body{
-    background:#f9f5f0;
-    color:#5d4650;
-    font-family:'Cormorant Garamond',serif;
+    background:#fbf6ef;
+    color:#51353b;
+    font-family:'Montserrat',sans-serif;
     overflow-x:hidden;
+    position:relative;
 }
 
-/* =================================================
-   DREAMY CONTINUOUS BACKGROUND
-================================================= */
 
-body::before{
+/* =========================
+   DREAMY IVORY BACKGROUND
+========================= */
+
+body::before,
+body::after{
     content:"";
     position:fixed;
-    inset:0;
-    z-index:-10;
+    top:0;
+    bottom:0;
+    width:145px;
+    z-index:0;
+    pointer-events:none;
+    opacity:.62;
+}
+
+
+/* LEFT FLORALS */
+
+body::before{
+    left:0;
 
     background:
-        radial-gradient(circle at 15% 15%, rgba(255,190,190,.28), transparent 28%),
-        radial-gradient(circle at 85% 25%, rgba(210,240,215,.24), transparent 30%),
-        radial-gradient(circle at 20% 70%, rgba(248,220,190,.28), transparent 30%),
-        radial-gradient(circle at 85% 80%, rgba(220,195,215,.25), transparent 30%),
-        linear-gradient(135deg,#fffaf6,#f8f1ed,#fffaf5);
 
-    animation:dreamGlow 12s ease-in-out infinite alternate;
+    /* burgundy roses */
+    radial-gradient(
+        circle at 8% 7%,
+        rgba(111,42,55,.38) 0 18px,
+        transparent 20px
+    ),
+
+    radial-gradient(
+        circle at 24% 12%,
+        rgba(124,49,62,.28) 0 14px,
+        transparent 16px
+    ),
+
+    /* peach flowers */
+    radial-gradient(
+        circle at 4% 20%,
+        rgba(238,173,153,.43) 0 23px,
+        transparent 25px
+    ),
+
+    radial-gradient(
+        circle at 25% 27%,
+        rgba(247,194,174,.38) 0 18px,
+        transparent 20px
+    ),
+
+    /* white blossoms */
+    radial-gradient(
+        circle at 10% 37%,
+        rgba(255,255,250,.92) 0 11px,
+        transparent 13px
+    ),
+
+    radial-gradient(
+        circle at 28% 41%,
+        rgba(255,255,250,.8) 0 9px,
+        transparent 11px
+    ),
+
+    /* burgundy flowers */
+    radial-gradient(
+        circle at 3% 55%,
+        rgba(119,43,57,.30) 0 20px,
+        transparent 22px
+    ),
+
+    radial-gradient(
+        circle at 24% 64%,
+        rgba(130,51,64,.28) 0 15px,
+        transparent 17px
+    ),
+
+    /* peach */
+    radial-gradient(
+        circle at 8% 76%,
+        rgba(236,166,147,.40) 0 22px,
+        transparent 24px
+    ),
+
+    radial-gradient(
+        circle at 28% 86%,
+        rgba(245,190,170,.35) 0 18px,
+        transparent 20px
+    ),
+
+    /* soft green leaves */
+    radial-gradient(
+        ellipse at 45% 18%,
+        rgba(116,139,101,.23) 0 15px,
+        transparent 17px
+    ),
+
+    radial-gradient(
+        ellipse at 40% 72%,
+        rgba(112,137,97,.20) 0 16px,
+        transparent 18px
+    );
+
+    filter:blur(1.2px);
 }
 
-@keyframes dreamGlow{
-    0%{
-        filter:hue-rotate(0deg);
+
+/* RIGHT FLORALS */
+
+body::after{
+    right:0;
+
+    background:
+
+    radial-gradient(
+        circle at 92% 8%,
+        rgba(111,42,55,.36) 0 18px,
+        transparent 20px
+    ),
+
+    radial-gradient(
+        circle at 76% 14%,
+        rgba(124,49,62,.27) 0 14px,
+        transparent 16px
+    ),
+
+    radial-gradient(
+        circle at 97% 23%,
+        rgba(238,173,153,.42) 0 23px,
+        transparent 25px
+    ),
+
+    radial-gradient(
+        circle at 76% 31%,
+        rgba(247,194,174,.36) 0 18px,
+        transparent 20px
+    ),
+
+    radial-gradient(
+        circle at 91% 40%,
+        rgba(255,255,250,.9) 0 10px,
+        transparent 12px
+    ),
+
+    radial-gradient(
+        circle at 74% 50%,
+        rgba(119,43,57,.30) 0 20px,
+        transparent 22px
+    ),
+
+    radial-gradient(
+        circle at 96% 62%,
+        rgba(130,51,64,.28) 0 16px,
+        transparent 18px
+    ),
+
+    radial-gradient(
+        circle at 77% 75%,
+        rgba(236,166,147,.40) 0 22px,
+        transparent 24px
+    ),
+
+    radial-gradient(
+        circle at 96% 87%,
+        rgba(245,190,170,.35) 0 18px,
+        transparent 20px
+    ),
+
+    radial-gradient(
+        ellipse at 55% 20%,
+        rgba(116,139,101,.22) 0 15px,
+        transparent 17px
+    ),
+
+    radial-gradient(
+        ellipse at 60% 72%,
+        rgba(112,137,97,.20) 0 16px,
+        transparent 18px
+    );
+
+    filter:blur(1.2px);
+}
+
+
+/* =========================
+   GOLD DECORATIVE LINES
+========================= */
+
+body{
+    background-image:
+
+    linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(183,145,94,.08) 3%,
+        transparent 10%,
+        transparent 90%,
+        rgba(183,145,94,.08) 97%,
+        transparent 100%
+    );
+
+}
+
+
+/* =========================
+   CONTENT
+========================= */
+
+main,
+section,
+header,
+footer{
+    position:relative;
+    z-index:2;
+}
+
+section{
+    width:100%;
+    padding:24px 14px !important;
+    margin:0 !important;
+    min-height:auto !important;
+}
+
+section + section{
+    padding-top:12px !important;
+}
+
+
+/* =========================
+   GENERAL TEXT
+========================= */
+
+h1,
+h2,
+h3{
+    font-family:'Cormorant Garamond',serif;
+    font-weight:500;
+    color:#713d49;
+}
+
+h1{
+    font-size:clamp(38px,10vw,70px);
+}
+
+h2{
+    font-size:clamp(30px,8vw,50px);
+    margin-bottom:8px;
+}
+
+p{
+    line-height:1.6;
+}
+
+
+/* =========================
+   VIDEOS
+========================= */
+
+video{
+    display:block;
+    width:100%;
+    max-width:900px;
+    height:auto;
+    margin:0 auto;
+    border-radius:12px;
+}
+
+
+/* =========================
+   GATE
+========================= */
+
+#gate{
+    position:relative;
+    width:100%;
+    height:100vh;
+    min-height:100vh;
+    padding:0 !important;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+}
+
+#gateVideo{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    border-radius:0;
+}
+
+#tapText{
+    position:absolute;
+    z-index:5;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-size:32px;
+    color:white;
+
+    text-shadow:
+        0 1px 8px rgba(70,30,40,.7),
+        0 0 15px rgba(255,255,255,.3);
+
+    animation:tapGlow 2.2s ease-in-out infinite;
+    pointer-events:none;
+}
+
+@keyframes tapGlow{
+
+    0%,100%{
+        opacity:.72;
+        transform:translate(-50%,-50%) scale(1);
     }
-    100%{
-        filter:hue-rotate(8deg);
+
+    50%{
+        opacity:1;
+        transform:translate(-50%,-50%) scale(1.04);
     }
 }
 
-/* =================================================
-   FLOATING PEARLS
-================================================= */
+
+/* =========================
+   GATE REVEAL
+========================= */
+
+#gateReveal{
+    display:none;
+    min-height:auto !important;
+    padding:14px 15px !important;
+    text-align:center;
+}
+
+
+/* =========================
+   EVENT SECTIONS
+========================= */
+
+.event-section{
+    padding:18px 10px !important;
+    text-align:center;
+}
+
+.event-section video{
+    margin-bottom:10px;
+}
+
+.event-map{
+    width:100%;
+    max-width:900px;
+    margin:0 auto;
+}
+
+.event-map iframe{
+    width:100%;
+    min-height:250px;
+    border:0;
+    border-radius:12px;
+}
+
+
+/* =========================
+   COUNTDOWN
+========================= */
+
+.countdown-section{
+    text-align:center;
+    padding:20px 12px !important;
+}
+
+.countdown-frame{
+    position:relative;
+    width:100%;
+    max-width:700px;
+    margin:0 auto;
+}
+
+.countdown-frame video{
+    width:100%;
+}
+
+.countdown-overlay{
+    position:absolute;
+    inset:0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    pointer-events:none;
+}
+
+.countdown{
+    display:flex;
+    gap:12px;
+    justify-content:center;
+    align-items:center;
+    font-family:'Cormorant Garamond',serif;
+    color:#713d49;
+    font-size:clamp(22px,6vw,38px);
+}
+
+.countdown-item{
+    text-align:center;
+}
+
+.countdown-number{
+    font-size:1.4em;
+}
+
+.countdown-label{
+    display:block;
+    font-family:'Montserrat',sans-serif;
+    font-size:9px;
+    letter-spacing:1px;
+    text-transform:uppercase;
+}
+
+
+/* =========================
+   DRESS CODE
+========================= */
+
+.dress-section{
+    text-align:center;
+    padding:20px 12px !important;
+}
+
+
+/* =========================
+   RSVP
+========================= */
+
+.rsvp-section{
+    text-align:center;
+    padding:25px 14px !important;
+}
+
+.rsvp-box{
+    width:100%;
+    max-width:600px;
+    margin:0 auto;
+    padding:20px 16px;
+    background:rgba(255,250,244,.55);
+    border:1px solid rgba(157,110,92,.18);
+    border-radius:16px;
+    backdrop-filter:blur(3px);
+}
+
+.rsvp-box input,
+.rsvp-box select{
+    width:100%;
+    padding:12px;
+    margin:7px 0;
+    border:1px solid rgba(125,75,84,.25);
+    border-radius:8px;
+    background:rgba(255,255,255,.7);
+    font-family:'Montserrat',sans-serif;
+}
+
+.rsvp-button{
+    margin-top:10px;
+    padding:12px 25px;
+    border:0;
+    border-radius:30px;
+    background:#713d49;
+    color:white;
+    font-family:'Cormorant Garamond',serif;
+    font-size:18px;
+    cursor:pointer;
+}
+
+
+/* =========================
+   PEARLS
+========================= */
 
 .pearl{
     position:fixed;
     width:7px;
     height:7px;
     border-radius:50%;
-    background:rgba(255,255,255,.85);
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            white 0 20%,
+            rgba(255,255,255,.85) 35%,
+            rgba(208,188,174,.45) 70%,
+            transparent 100%
+        );
+
     box-shadow:
-        0 0 8px rgba(255,255,255,.9),
-        0 0 15px rgba(220,190,180,.35);
+        0 0 6px rgba(255,255,255,.8);
 
-    z-index:-2;
-    animation:floatPearl linear infinite;
+    opacity:.55;
+    z-index:1;
+    pointer-events:none;
 }
 
-@keyframes floatPearl{
-    0%{
-        transform:translateY(110vh) translateX(0);
-        opacity:0;
-    }
-
-    15%{
-        opacity:.8;
-    }
-
-    50%{
-        transform:translateY(50vh) translateX(20px);
-    }
-
-    100%{
-        transform:translateY(-10vh) translateX(-15px);
-        opacity:0;
-    }
+.p1{
+    left:6%;
+    top:18%;
 }
 
-/* =================================================
+.p2{
+    right:7%;
+    top:34%;
+}
+
+.p3{
+    left:8%;
+    top:58%;
+}
+
+.p4{
+    right:6%;
+    top:73%;
+}
+
+.p5{
+    left:12%;
+    top:91%;
+}
+
+
+/* =========================
    BUTTERFLIES
-================================================= */
+========================= */
 
 .butterfly{
     position:fixed;
-    z-index:-1;
-    font-size:18px;
-    opacity:.45;
-    filter:blur(.2px);
-    animation:butterflyFloat linear infinite;
+    z-index:1;
+    pointer-events:none;
+
+    font-size:17px;
+    opacity:.20;
+
+    animation:
+        butterflyFloat 8s ease-in-out infinite;
+}
+
+.b1{
+    left:6%;
+    top:25%;
+}
+
+.b2{
+    right:6%;
+    top:48%;
+    animation-delay:2s;
+}
+
+.b3{
+    left:8%;
+    top:82%;
+    animation-delay:4s;
 }
 
 @keyframes butterflyFloat{
 
-    0%{
-        transform:translate(0,110vh) rotate(-8deg);
-        opacity:0;
-    }
-
-    15%{
-        opacity:.45;
-    }
-
-    40%{
-        transform:translate(35px,65vh) rotate(10deg);
-    }
-
-    70%{
-        transform:translate(-25px,30vh) rotate(-5deg);
-    }
-
-    100%{
-        transform:translate(20px,-15vh) rotate(8deg);
-        opacity:0;
-    }
-}
-
-/* =================================================
-   GENERAL SECTIONS
-================================================= */
-
-.section{
-    position:relative;
-    width:100%;
-    min-height:100vh;
-
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-
-    padding:70px 20px;
-
-    overflow:hidden;
-}
-
-.section-title{
-    font-family:'Great Vibes',cursive;
-    font-size:48px;
-    font-weight:400;
-    color:#754d5d;
-    margin-bottom:25px;
-    text-align:center;
-}
-
-.section-subtitle{
-    font-family:'Montserrat',sans-serif;
-    font-size:11px;
-    letter-spacing:4px;
-    text-transform:uppercase;
-    color:#92747d;
-    margin-bottom:25px;
-    text-align:center;
-}
-
-/* =================================================
-   1. GATE
-================================================= */
-
-#gate{
-    position:relative;
-    width:100%;
-    height:100vh;
-    min-height:650px;
-
-    overflow:hidden;
-
-    cursor:pointer;
-
-    background:#eee;
-}
-
-#gateVideo{
-    position:absolute;
-    inset:0;
-
-    width:100%;
-    height:100%;
-
-    object-fit:cover;
-
-    z-index:1;
-}
-
-/* dark/light dreamy overlay */
-
-.gateGlow{
-    position:absolute;
-    inset:0;
-    z-index:2;
-
-    background:
-        radial-gradient(
-            circle at center,
-            rgba(255,255,255,.02),
-            rgba(60,30,35,.12)
-        );
-
-    pointer-events:none;
-}
-
-/* Tap to Open */
-
-.tapText{
-    position:absolute;
-    z-index:5;
-
-    left:50%;
-    top:82%;
-
-    transform:translate(-50%,-50%);
-
-    font-family:'Great Vibes',cursive;
-    font-size:42px;
-
-    color:#fff;
-
-    text-shadow:
-        0 2px 10px rgba(0,0,0,.4),
-        0 0 15px rgba(255,255,255,.5);
-
-    animation:tapPulse 2s ease-in-out infinite;
-
-    pointer-events:none;
-}
-
-@keyframes tapPulse{
-
     0%,100%{
-        opacity:.75;
-        transform:translate(-50%,-50%) scale(1);
+        transform:translateY(0) rotate(-5deg);
     }
 
     50%{
-        opacity:1;
-        transform:translate(-50%,-50%) scale(1.05);
+        transform:translateY(-13px) rotate(5deg);
     }
 }
 
-/* =================================================
-   GATE TEXT REVEAL
-================================================= */
 
-#gateReveal{
-    display:none;
-
-    min-height:100vh;
-
-    text-align:center;
-
-    padding:80px 25px;
-
-    background:transparent;
-
-    position:relative;
-}
-
-.revealContent{
-    max-width:750px;
-    margin:auto;
-}
-
-.smallGold{
-    font-family:'Montserrat',sans-serif;
-    letter-spacing:5px;
-    font-size:11px;
-    text-transform:uppercase;
-    color:#a68b65;
-    margin-bottom:25px;
-}
-
-.revealTitle{
-    font-family:'Great Vibes',cursive;
-    font-size:70px;
-    color:#704957;
-    margin-bottom:20px;
-}
-
-.revealText{
-    font-size:23px;
-    line-height:1.7;
-    color:#765d65;
-}
-
-/* =================================================
-   VIDEO PLACEHOLDERS
-================================================= */
-
-.video-frame{
-    width:min(90%,900px);
-    height:65vh;
-    min-height:420px;
-
-    border-radius:18px;
-
-    position:relative;
-    overflow:hidden;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(255,255,255,.55),
-            rgba(245,224,218,.4),
-            rgba(235,244,231,.4)
-        );
-
-    box-shadow:
-        0 20px 60px rgba(90,60,70,.13);
-
-    border:1px solid rgba(255,255,255,.8);
-}
-
-.video-placeholder{
-    position:absolute;
-    inset:0;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    text-align:center;
-
-    font-family:'Montserrat',sans-serif;
-    font-size:11px;
-    letter-spacing:3px;
-    color:#92747d;
-}
-
-/* =================================================
-   EVENT SECTIONS
-================================================= */
-
-.event-section{
-    min-height:auto;
-    padding-top:100px;
-    padding-bottom:100px;
-}
-
-.event-label{
-    font-family:'Great Vibes',cursive;
-    font-size:54px;
-    color:#704957;
-    margin-bottom:25px;
-}
-
-.event-video{
-    width:min(92%,850px);
-    aspect-ratio:16/9;
-
-    border-radius:16px;
-
-    position:relative;
-    overflow:hidden;
-
-    background:rgba(255,255,255,.42);
-
-    box-shadow:
-        0 20px 60px rgba(100,70,80,.12);
-
-    border:1px solid rgba(255,255,255,.8);
-}
-
-/* =================================================
-   MAP
-================================================= */
-
-.map-wrapper{
-    width:min(88%,750px);
-    height:330px;
-
-    margin-top:25px;
-
-    border-radius:18px;
-
-    overflow:hidden;
-
-    background:rgba(255,255,255,.55);
-
-    border:1px solid rgba(255,255,255,.85);
-
-    box-shadow:
-        0 15px 40px rgba(90,60,70,.10);
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    text-align:center;
-}
-
-.map-placeholder{
-    font-family:'Montserrat',sans-serif;
-    font-size:10px;
-    letter-spacing:3px;
-    color:#92747d;
-}
-
-/* =================================================
-   COUNTDOWN
-================================================= */
-
-.countdownFrame{
-    width:min(90%,850px);
-    height:500px;
-
-    position:relative;
-
-    border-radius:20px;
-    overflow:hidden;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(255,235,226,.65),
-            rgba(255,250,245,.75),
-            rgba(231,243,230,.55)
-        );
-
-    box-shadow:
-        0 20px 60px rgba(100,70,80,.12);
-}
-
-.countdownInner{
-    position:absolute;
-    inset:0;
-
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-
-    text-align:center;
-}
-
-.countdownTitle{
-    font-family:'Great Vibes',cursive;
-    font-size:52px;
-    color:#704957;
-}
-
-.countdownNumbers{
-    display:flex;
-    gap:25px;
-    margin-top:25px;
-}
-
-.timeBox{
-    min-width:75px;
-}
-
-.number{
-    font-family:'Cormorant Garamond',serif;
-    font-size:42px;
-    color:#704957;
-}
-
-.unit{
-    font-family:'Montserrat',sans-serif;
-    font-size:9px;
-    letter-spacing:2px;
-    color:#a68b65;
-}
-
-/* =================================================
-   DRESS CODE
-================================================= */
-
-.dress-placeholder{
-    width:min(90%,800px);
-    height:500px;
-
-    border-radius:20px;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(255,220,220,.4),
-            rgba(255,248,240,.6),
-            rgba(220,240,220,.4)
-        );
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    box-shadow:0 20px 60px rgba(90,60,70,.12);
-}
-
-/* =================================================
-   RSVP
-================================================= */
-
-.rsvp-box{
-    width:min(90%,600px);
-
-    padding:55px 35px;
-
-    border-radius:25px;
-
-    background:rgba(255,255,255,.42);
-
-    border:1px solid rgba(255,255,255,.8);
-
-    box-shadow:
-        0 20px 60px rgba(90,60,70,.12);
-
-    text-align:center;
-}
-
-.rsvp-input{
-    width:100%;
-    padding:15px;
-    margin:8px 0;
-
-    border:none;
-    outline:none;
-
-    border-bottom:1px solid rgba(130,90,100,.3);
-
-    background:transparent;
-
-    font-family:'Cormorant Garamond',serif;
-    font-size:18px;
-
-    text-align:center;
-}
-
-.rsvp-button{
-    margin-top:25px;
-
-    padding:14px 40px;
-
-    border:none;
-    border-radius:30px;
-
-    background:#754d5d;
-    color:white;
-
-    font-family:'Montserrat',sans-serif;
-    font-size:10px;
-    letter-spacing:3px;
-
-    cursor:pointer;
-}
-
-/* =================================================
+/* =========================
    MOBILE
-================================================= */
+========================= */
 
 @media(max-width:600px){
 
-    .section{
-        padding:65px 15px;
+    body::before,
+    body::after{
+        width:95px;
+        opacity:.52;
     }
 
-    .section-title{
-        font-size:40px;
+    section{
+        padding:20px 10px !important;
     }
 
-    .tapText{
-        font-size:36px;
-        top:84%;
+    section + section{
+        padding-top:10px !important;
     }
 
-    .revealTitle{
-        font-size:55px;
+    .event-section{
+        padding:15px 8px !important;
     }
 
-    .revealText{
-        font-size:19px;
+    .countdown-section{
+        padding:16px 8px !important;
     }
 
-    .video-frame{
-        width:94%;
-        height:65vh;
-        min-height:450px;
+    .dress-section{
+        padding:16px 8px !important;
     }
 
-    .event-video{
-        width:94%;
-        aspect-ratio:9/16;
+    .rsvp-section{
+        padding:18px 8px !important;
     }
 
-    .event-label{
-        font-size:46px;
+    video{
+        border-radius:9px;
     }
 
-    .map-wrapper{
-        width:94%;
-        height:280px;
-    }
-
-    .countdownFrame{
-        width:94%;
-        height:430px;
-    }
-
-    .countdownNumbers{
-        gap:12px;
-    }
-
-    .timeBox{
-        min-width:60px;
-    }
-
-    .number{
-        font-size:34px;
-    }
-
-    .dress-placeholder{
-        width:94%;
-        height:430px;
-    }
-
-    .rsvp-box{
-        width:94%;
-        padding:45px 22px;
+    #tapText{
+        font-size:28px;
     }
 }
 
@@ -642,147 +658,189 @@ body::before{
 <body>
 
 
-<!-- =================================================
-     DREAMY FLOATING ELEMENTS
-================================================= -->
+<!-- =========================
+     SUBTLE PEARLS
+========================= -->
 
-<div class="pearl" style="left:8%;animation-duration:14s;"></div>
-<div class="pearl" style="left:22%;animation-duration:18s;animation-delay:3s;"></div>
-<div class="pearl" style="left:40%;animation-duration:16s;animation-delay:6s;"></div>
-<div class="pearl" style="left:58%;animation-duration:20s;animation-delay:1s;"></div>
-<div class="pearl" style="left:75%;animation-duration:15s;animation-delay:4s;"></div>
-<div class="pearl" style="left:90%;animation-duration:19s;animation-delay:8s;"></div>
-
-<div class="butterfly" style="left:12%;animation-duration:22s;">🦋</div>
-<div class="butterfly" style="left:70%;animation-duration:26s;animation-delay:5s;">🦋</div>
-<div class="butterfly" style="left:45%;animation-duration:30s;animation-delay:10s;">🦋</div>
+<div class="pearl p1"></div>
+<div class="pearl p2"></div>
+<div class="pearl p3"></div>
+<div class="pearl p4"></div>
+<div class="pearl p5"></div>
 
 
-<!-- =================================================
-     1. GATE
-================================================= -->
+<!-- =========================
+     SUBTLE BUTTERFLIES
+========================= -->
+
+<div class="butterfly b1">🦋</div>
+<div class="butterfly b2">🦋</div>
+<div class="butterfly b3">🦋</div>
+
+
+
+<!-- =========================
+     OPENING GATE
+========================= -->
 
 <section id="gate">
 
-    <!-- LATER: replace this with YOUR gate video -->
-    <video id="gateVideo"
-           muted
-           playsinline
-           preload="auto"
-           poster="">
+    <video
+        id="gateVideo"
+        playsinline
+        preload="auto"
+        muted
+    >
 
-        <source src="" type="video/mp4">
+        <!-- PUT YOUR GATE VIDEO LINK HERE -->
+
+        <source
+            src=""
+            type="video/mp4"
+        >
 
     </video>
 
-    <div class="gateGlow"></div>
 
-    <div class="tapText" id="tapText">
+    <div id="tapText">
         Tap to Open
     </div>
 
 </section>
 
 
-<!-- =================================================
-     2. GATE TEXT REVEAL
-================================================= -->
+
+<!-- =========================
+     GATE REVEAL / TEXT
+========================= -->
 
 <section id="gateReveal">
 
-    <div class="revealContent">
+    <h1>Whispering Blooms</h1>
 
-        <div class="smallGold">
-            With Love & Blessings
-        </div>
-
-        <div class="revealTitle">
-            Together With Their Families
-        </div>
-
-        <div class="revealText">
-            We invite you to celebrate<br>
-            the beginning of a beautiful new journey.
-        </div>
-
-    </div>
+    <p>
+        With hearts full of joy,
+        we invite you to celebrate
+        these beautiful moments with us.
+    </p>
 
 </section>
 
 
-<!-- =================================================
-     3. WE REQUEST YOU
-================================================= -->
 
-<section class="section">
+<!-- =========================
+     WE REQUEST YOU
+========================= -->
 
-    <div class="section-subtitle">
-        An Invitation From Our Hearts
-    </div>
+<section>
 
-    <div class="section-title">
-        We Request You...
-    </div>
+    <video
+        playsinline
+        controls
+        preload="metadata"
+    >
 
-    <div class="video-frame">
+        <!-- PUT YOUR WE REQUEST YOU VIDEO LINK HERE -->
 
-        <!-- LATER: YOUR REQUEST VIDEO -->
+        <source
+            src=""
+            type="video/mp4"
+        >
 
-        <div class="video-placeholder">
-            WE REQUEST YOU VIDEO
-        </div>
-
-    </div>
+    </video>
 
 </section>
 
 
-<!-- =================================================
-     4. COUNTDOWN
-================================================= -->
 
-<section class="section">
+<!-- =========================
+     COUNTDOWN
+========================= -->
 
-    <div class="section-subtitle">
-        The Celebration Begins In
-    </div>
+<section class="countdown-section">
 
-    <div class="countdownFrame">
+    <h2>Counting the Moments</h2>
 
-        <!-- LATER:
-             YOUR COUNTDOWN FRAME VIDEO
-        -->
+    <div class="countdown-frame">
 
-        <div class="countdownInner">
+        <!-- PUT YOUR COUNTDOWN FRAME VIDEO HERE -->
 
-            <div class="countdownTitle">
-                Counting The Moments
+        <video
+            playsinline
+            autoplay
+            muted
+            loop
+        >
+
+            <source
+                src=""
+                type="video/mp4"
+            >
+
+        </video>
+
+
+        <div class="countdown-overlay">
+
+            <div class="countdown">
+
+                <div class="countdown-item">
+                    <span
+                        id="days"
+                        class="countdown-number"
+                    >
+                        00
+                    </span>
+
+                    <span class="countdown-label">
+                        Days
+                    </span>
+                </div>
+
+
+                <div class="countdown-item">
+                    <span
+                        id="hours"
+                        class="countdown-number"
+                    >
+                        00
+                    </span>
+
+                    <span class="countdown-label">
+                        Hours
+                    </span>
+                </div>
+
+
+                <div class="countdown-item">
+                    <span
+                        id="minutes"
+                        class="countdown-number"
+                    >
+                        00
+                    </span>
+
+                    <span class="countdown-label">
+                        Minutes
+                    </span>
+                </div>
+
+
+                <div class="countdown-item">
+                    <span
+                        id="seconds"
+                        class="countdown-number"
+                    >
+                        00
+                    </span>
+
+                    <span class="countdown-label">
+                        Seconds
+                    </span>
+                </div>
+
             </div>
 
-            <div class="countdownNumbers">
-
-                <div class="timeBox">
-                    <div class="number" id="days">00</div>
-                    <div class="unit">DAYS</div>
-                </div>
-
-                <div class="timeBox">
-                    <div class="number" id="hours">00</div>
-                    <div class="unit">HOURS</div>
-                </div>
-
-                <div class="timeBox">
-                    <div class="number" id="minutes">00</div>
-                    <div class="unit">MINUTES</div>
-                </div>
-
-                <div class="timeBox">
-                    <div class="number" id="seconds">00</div>
-                    <div class="unit">SECONDS</div>
-                </div>
-
-            </div>
-
         </div>
 
     </div>
@@ -790,193 +848,233 @@ body::before{
 </section>
 
 
-<!-- =================================================
-     5. DHOLKI
-================================================= -->
 
-<section class="section event-section">
+<!-- =========================
+     DHOLKI
+========================= -->
 
-    <div class="event-label">
-        Dholki Night
-    </div>
+<section class="event-section">
 
-    <div class="event-video">
+    <video
+        playsinline
+        controls
+        preload="metadata"
+    >
 
-        <!-- YOUR DHOLKI VIDEO WILL GO HERE -->
+        <!-- DHOLKI VIDEO -->
 
-        <div class="video-placeholder">
-            DHOLKI INVITATION VIDEO
-        </div>
+        <source
+            src=""
+            type="video/mp4"
+        >
 
-    </div>
-
-    <div class="map-wrapper">
-
-        <!-- YOUR DHOLKI MAP WILL GO HERE -->
-
-        <div class="map-placeholder">
-            DHOLKI MAP
-        </div>
-
-    </div>
-
-</section>
+    </video>
 
 
-<!-- =================================================
-     6. MEHNDI
-================================================= -->
+    <div class="event-map">
 
-<section class="section event-section">
+        <!-- DHOLKI MAP -->
 
-    <div class="event-label">
-        Mehndi
-    </div>
-
-    <div class="event-video">
-
-        <!-- YOUR MEHNDI VIDEO -->
-
-        <div class="video-placeholder">
-            MEHNDI INVITATION VIDEO
-        </div>
-
-    </div>
-
-    <div class="map-wrapper">
-
-        <!-- YOUR MEHNDI MAP -->
-
-        <div class="map-placeholder">
-            MEHNDI MAP
-        </div>
+        <iframe
+            src=""
+            loading="lazy">
+        </iframe>
 
     </div>
 
 </section>
 
 
-<!-- =================================================
-     7. SHADI
-================================================= -->
 
-<section class="section event-section">
+<!-- =========================
+     MEHNDI
+========================= -->
 
-    <div class="event-label">
-        Shadi
-    </div>
+<section class="event-section">
 
-    <div class="event-video">
+    <video
+        playsinline
+        controls
+        preload="metadata"
+    >
 
-        <!-- YOUR SHADI VIDEO -->
+        <!-- MEHNDI VIDEO -->
 
-        <div class="video-placeholder">
-            SHADI INVITATION VIDEO
-        </div>
+        <source
+            src=""
+            type="video/mp4"
+        >
 
-    </div>
-
-    <div class="map-wrapper">
-
-        <!-- YOUR SHADI MAP -->
-
-        <div class="map-placeholder">
-            SHADI MAP
-        </div>
-
-    </div>
-
-</section>
+    </video>
 
 
-<!-- =================================================
-     8. WALIMA
-================================================= -->
+    <div class="event-map">
 
-<section class="section event-section">
+        <!-- MEHNDI MAP -->
 
-    <div class="event-label">
-        Walima
-    </div>
-
-    <div class="event-video">
-
-        <!-- YOUR WALIMA VIDEO -->
-
-        <div class="video-placeholder">
-            WALIMA INVITATION VIDEO
-        </div>
-
-    </div>
-
-    <div class="map-wrapper">
-
-        <!-- YOUR WALIMA MAP -->
-
-        <div class="map-placeholder">
-            WALIMA MAP
-        </div>
+        <iframe
+            src=""
+            loading="lazy">
+        </iframe>
 
     </div>
 
 </section>
 
 
-<!-- =================================================
-     9. DRESS CODE
-================================================= -->
 
-<section class="section">
+<!-- =========================
+     SHADI
+========================= -->
 
-    <div class="section-subtitle">
-        A Celebration Of Style
-    </div>
+<section class="event-section">
 
-    <div class="section-title">
-        Dress Code
-    </div>
+    <video
+        playsinline
+        controls
+        preload="metadata"
+    >
 
-    <div class="dress-placeholder">
+        <!-- SHADI VIDEO -->
 
-        <!-- YOUR DRESS CODE IMAGE/VIDEO -->
+        <source
+            src=""
+            type="video/mp4"
+        >
 
-        <div class="video-placeholder">
-            DRESS CODE
-        </div>
+    </video>
+
+
+    <div class="event-map">
+
+        <!-- SHADI MAP -->
+
+        <iframe
+            src=""
+            loading="lazy">
+        </iframe>
 
     </div>
 
 </section>
 
 
-<!-- =================================================
-     10. RSVP
-================================================= -->
 
-<section class="section">
+<!-- =========================
+     WALIMA
+========================= -->
 
-    <div class="section-subtitle">
-        We Would Love To Celebrate With You
+<section class="event-section">
+
+    <video
+        playsinline
+        controls
+        preload="metadata"
+    >
+
+        <!-- WALIMA VIDEO -->
+
+        <source
+            src=""
+            type="video/mp4"
+        >
+
+    </video>
+
+
+    <div class="event-map">
+
+        <!-- WALIMA MAP -->
+
+        <iframe
+            src=""
+            loading="lazy">
+        </iframe>
+
     </div>
 
-    <div class="section-title">
-        RSVP
-    </div>
+</section>
+
+
+
+<!-- =========================
+     DRESS CODE
+========================= -->
+
+<section class="dress-section">
+
+    <h2>Dress Code</h2>
+
+    <video
+        playsinline
+        controls
+        preload="metadata"
+    >
+
+        <!-- DRESS CODE VIDEO -->
+
+        <source
+            src=""
+            type="video/mp4"
+        >
+
+    </video>
+
+</section>
+
+
+
+<!-- =========================
+     RSVP
+========================= -->
+
+<section class="rsvp-section">
+
+    <h2>RSVP</h2>
+
+    <p>
+        We would be delighted to celebrate
+        with you.
+    </p>
+
 
     <div class="rsvp-box">
 
         <input
-            class="rsvp-input"
             type="text"
-            placeholder="Your Name">
+            placeholder="Your Name"
+        >
+
+
+        <select>
+
+            <option value="">
+                Will you be joining us?
+            </option>
+
+            <option>
+                Joyfully Accept
+            </option>
+
+            <option>
+                Regretfully Reject
+            </option>
+
+        </select>
+
 
         <input
-            class="rsvp-input"
             type="number"
-            placeholder="Number of Guests">
+            min="1"
+            placeholder="Number of Guests"
+        >
 
-        <button class="rsvp-button">
-            CONFIRM RSVP
+
+        <button
+            class="rsvp-button"
+            type="button"
+        >
+            Confirm RSVP
         </button>
 
     </div>
@@ -984,158 +1082,222 @@ body::before{
 </section>
 
 
+
 <script>
 
-/* =================================================
-   GATE INTERACTION
-================================================= */
+/* =========================
+   GATE VIDEO
+========================= */
 
-const gate = document.getElementById("gate");
-const gateVideo = document.getElementById("gateVideo");
-const tapText = document.getElementById("tapText");
-const gateReveal = document.getElementById("gateReveal");
+const gate =
+    document.getElementById("gate");
+
+const gateVideo =
+    document.getElementById("gateVideo");
+
+const tapText =
+    document.getElementById("tapText");
+
+const gateReveal =
+    document.getElementById("gateReveal");
 
 
 let gateStarted = false;
 
 
 /*
-   USER CAN TAP ANYWHERE ON THE GATE
-   No separate button.
+   Tap anywhere on opening video
 */
 
-gate.addEventListener("click", function(){
+gate.addEventListener(
+    "click",
+    function(){
 
-    if(gateStarted) return;
+        if(gateStarted){
+            return;
+        }
 
-    gateStarted = true;
+        gateStarted = true;
 
-    tapText.style.opacity = "0";
+        tapText.style.opacity = "0";
 
-    /*
-       IMPORTANT:
-       Your video is 11 seconds.
-       We let the complete video play.
-    */
+        gateVideo.muted = false;
 
-    gateVideo.play();
-
-});
-
-
-/*
-   At 9 seconds:
-   the last 2 seconds contain the full text.
-
-   We fade the gate itself away,
-   revealing the text section underneath.
-*/
-
-gateVideo.addEventListener("timeupdate", function(){
-
-    if(gateVideo.currentTime >= 9 && !gate.classList.contains("revealing")){
-
-        gate.classList.add("revealing");
-
-        gate.style.transition = "opacity 1.2s ease";
-
-        gate.style.opacity = "0";
-
-        setTimeout(function(){
-
-            gate.style.display = "none";
-
-            gateReveal.style.display = "flex";
-
-            gateReveal.style.opacity = "0";
-
-            requestAnimationFrame(function(){
-
-                gateReveal.style.transition =
-                    "opacity 1.2s ease";
-
-                gateReveal.style.opacity = "1";
-
-            });
-
-        },1200);
+        gateVideo.play().catch(
+            function(){
+                gateVideo.muted = true;
+                gateVideo.play();
+            }
+        );
 
     }
+);
 
-});
 
-
-/* =================================================
-   COUNTDOWN
-================================================= */
 
 /*
-   CHANGE THIS DATE LATER
+   Around 9 seconds:
+   opening part disappears
+   text/reveal remains
+*/
+
+gateVideo.addEventListener(
+    "timeupdate",
+    function(){
+
+        if(
+            gateVideo.currentTime >= 9 &&
+            !gate.classList.contains("revealing")
+        ){
+
+            gate.classList.add("revealing");
+
+            gate.style.transition =
+                "opacity 1.2s ease";
+
+            gate.style.opacity = "0";
+
+
+            setTimeout(
+                function(){
+
+                    gate.style.display =
+                        "none";
+
+                    gateReveal.style.display =
+                        "block";
+
+                    gateReveal.style.opacity =
+                        "0";
+
+
+                    requestAnimationFrame(
+                        function(){
+
+                            gateReveal.style.transition =
+                                "opacity 1.2s ease";
+
+                            gateReveal.style.opacity =
+                                "1";
+
+                        }
+                    );
+
+                },
+                1200
+            );
+
+        }
+
+    }
+);
+
+
+
+/* =========================
+   COUNTDOWN
+========================= */
+
+/*
+   CHANGE THIS DATE
+   TO THE ACTUAL WEDDING DATE
 */
 
 const weddingDate =
-new Date("December 31, 2026 20:30:00").getTime();
+    new Date(
+        "December 31, 2026 20:00:00"
+    ).getTime();
 
 
 function updateCountdown(){
 
-    const now = new Date().getTime();
+    const now =
+        new Date().getTime();
 
-    const distance = weddingDate - now;
+    const difference =
+        weddingDate - now;
 
-    if(distance <= 0){
 
-        document.getElementById("days").innerText = "00";
-        document.getElementById("hours").innerText = "00";
-        document.getElementById("minutes").innerText = "00";
-        document.getElementById("seconds").innerText = "00";
+    if(difference <= 0){
+
+        document.getElementById("days")
+            .innerText = "00";
+
+        document.getElementById("hours")
+            .innerText = "00";
+
+        document.getElementById("minutes")
+            .innerText = "00";
+
+        document.getElementById("seconds")
+            .innerText = "00";
 
         return;
+
     }
 
+
     const days =
-        Math.floor(distance / (1000*60*60*24));
+        Math.floor(
+            difference /
+            (1000 * 60 * 60 * 24)
+        );
+
 
     const hours =
         Math.floor(
-            (distance % (1000*60*60*24))
-            / (1000*60*60)
+            (difference %
+            (1000 * 60 * 60 * 24)) /
+            (1000 * 60 * 60)
         );
+
 
     const minutes =
         Math.floor(
-            (distance % (1000*60*60))
-            / (1000*60)
+            (difference %
+            (1000 * 60 * 60)) /
+            (1000 * 60)
         );
+
 
     const seconds =
         Math.floor(
-            (distance % (1000*60))
-            / 1000
+            (difference %
+            (1000 * 60)) /
+            1000
         );
 
 
-    document.getElementById("days").innerText =
+    document.getElementById("days")
+        .innerText =
         String(days).padStart(2,"0");
 
-    document.getElementById("hours").innerText =
+
+    document.getElementById("hours")
+        .innerText =
         String(hours).padStart(2,"0");
 
-    document.getElementById("minutes").innerText =
+
+    document.getElementById("minutes")
+        .innerText =
         String(minutes).padStart(2,"0");
 
-    document.getElementById("seconds").innerText =
+
+    document.getElementById("seconds")
+        .innerText =
         String(seconds).padStart(2,"0");
 
 }
 
+
 updateCountdown();
 
-setInterval(updateCountdown,1000);
+setInterval(
+    updateCountdown,
+    1000
+);
 
 </script>
 
 </body>
 </html>
-
-<!-- GitHub Pages deployment trigger -->
