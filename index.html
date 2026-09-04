@@ -1,1029 +1,1981 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Whispering Blooms — Luxury Wedding Invitation</title>
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Montserrat:wght@300;400;500&family=Alex+Brush&display=swap" rel="stylesheet">
-    
-    <style>
-        /* ==========================================
-           CSS RESET & BASE STYLING
-           ================================---------- */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        :root {
-            --ivory: #FDFBF7;
-            --pearl-white: #F9F6F0;
-            --cream: #F4EFE6;
-            --champagne: #EBE3D5;
-            --antique-gold: #C5A059;
-            --antique-gold-light: #DFCDA2;
-            --burgundy: #4A1525;
-            --burgundy-light: #6E2338;
-            --blush-pink: #F5E6E8;
-            --muted-peach: #F6EDE4;
-            --dusty-rose: #D4B2B6;
-            --sage-green: #9FA8A3;
-            --charcoal: #333333;
-            --font-script: 'Alex Brush', cursive;
-            --font-serif: 'Cormorant Garamond', serif;
-            --font-sans: 'Montserrat', sans-serif;
-        }
-
-        html, body {
-            width: 100%;
-            overflow-x: hidden;
-            background-color: var(--ivory);
-            color: var(--charcoal);
-            font-family: var(--font-serif);
-            -webkit-font-smoothing: antialiased;
-        }
-
-        /* Continuous Luxury Stationery Watercolor Background */
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: 
-                radial-gradient(circle at 10% 10%, rgba(245, 230, 232, 0.4) 0%, transparent 40%),
-                radial-gradient(circle at 90% 90%, rgba(235, 227, 213, 0.5) 0%, transparent 45%),
-                radial-gradient(circle at 50% 50%, rgba(249, 246, 240, 0.8) 0%, rgba(253, 251, 247, 0.9) 100%),
-                url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
-            z-index: -1;
-            pointer-events: none;
-        }
-
-        /* ==========================================
-           GOLDEN FAIRY LIGHTS & PARTICLES
-           ================================---------- */
-        .fairy-lights-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-            overflow: hidden;
-        }
-
-        .fairy-light {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background-color: var(--antique-gold);
-            border-radius: 50%;
-            box-shadow: 0 0 8px 2px rgba(197, 160, 89, 0.6);
-            animation: flicker 4s infinite ease-in-out;
-        }
-
-        @keyframes flicker {
-            0%, 100% { opacity: 0.2; transform: scale(0.8); }
-            50% { opacity: 0.9; transform: scale(1.2); }
-        }
-
-        /* ==========================================
-           WATERCOLOR BOTANICAL CORNERS & EDGES
-           ================================---------- */
-        .botanical-bg {
-            position: relative;
-        }
-
-        .botanical-bg::before, .botanical-bg::after {
-            content: "";
-            position: absolute;
-            width: 180px;
-            height: 180px;
-            background-size: contain;
-            background-repeat: no-repeat;
-            opacity: 0.35;
-            pointer-events: none;
-            z-index: 2;
-        }
-
-        /* Custom Watercolor Floral SVG Overlay elements */
-        .waterflower-top-left {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 150px;
-            height: 150px;
-            background: radial-gradient(circle, rgba(110,35,56,0.15) 0%, rgba(159,168,163,0.1) 50%, transparent 70%);
-            border-bottom-right-radius: 100%;
-            pointer-events: none;
-            z-index: 2;
-        }
-
-        /* ==========================================
-           BUTTERFLIES
-           ================================---------- /
-        .butterfly {
-            position: absolute;
-            width: 24px;
-            height: 24px;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%234A1525'%3E%3Cpath d='M12 12c-2-3-5-4-8-3 2 3 5 4 8 3zm0 0c2-3 5-4 8-3-2 3-5 4-8 3zm0 0c-1 3-3 6-6 8 3-1 6-3 7-6 1 3 4 5 7 6-3-2-5-5-6-8z'/%3E%3C/svg%3E");
-            background-size: contain;
-            background-repeat: no-repeat;
-            opacity: 0.6;
-            pointer-events: none;
-            z-index: 3;
-            animation: floatButterfly 12s infinite ease-in-out;
-        }
-
-        @keyframes floatButterfly {
-            0% { transform: translate(0, 0) rotate(0deg); opacity: 0.2; }
-            50% { transform: translate(30px, -40px) rotate(15deg); opacity: 0.7; }
-            100% { transform: translate(-20px, -80px) rotate(-10deg); opacity: 0.2; }
-        }
-
-        /* ==========================================
-           SECTION 1 & 2: OPENING GATE EXPERIENCE
-           ================================---------- */
-        #gate-section {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: 9999;
-            background-color: var(--ivory);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            transition: opacity 1s ease-in-out;
-        }
-
-        #gate-video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            position: absolute;
-            top: 0;
-            left: 0;
-        }
-
-        .tap-to-open-overlay {
-            position: absolute;
-            inset: 0;
-            background: rgba(74, 21, 37, 0.25);
-            backdrop-filter: blur(2px);
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            align-items: center;
-            padding-bottom: 8vh;
-            z-index: 10000;
-            cursor: pointer;
-            transition: opacity 0.8s ease;
-        }
-
-        .tap-content {
-            text-align: center;
-            color: var(--pearl-white);
-            animation: gentleFloat 2.5s infinite ease-in-out;
-        }
-
-        .tap-content h1 {
-            font-family: var(--font-serif);
-            font-size: 2.2rem;
-            font-weight: 400;
-            letter-spacing: 0.15em;
-            margin-bottom: 0.5rem;
-            color: var(--antique-gold-light);
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-        }
-
-        .tap-content p {
-            font-family: var(--font-script);
-            font-size: 2.5rem;
-            color: var(--blush-pink);
-            letter-spacing: 0.05em;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-        }
-
-        @keyframes gentleFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
-        }
-
-        /* ==========================================
-           MAIN WEBSITE CONTENT WRAPPER
-           ================================---------- */
-        #main-content {
-            opacity: 0;
-            transition: opacity 1.2s ease-in;
-            visibility: hidden;
-        }
-
-        #main-content.visible {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .invitation-container {
-            max-width: 480px;
-            margin: 0 auto;
-            position: relative;
-            background-color: var(--ivory);
-            box-shadow: 0 0 40px rgba(74, 21, 37, 0.05);
-            overflow: hidden;
-        }
-
-        /* Hero / Frozen Open Door Area */
-        .frozen-hero {
-            position: relative;
-            width: 100%;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            align-items: center;
-            text-align: center;
-            padding-bottom: 5vh;
-            background-size: cover;
-            background-position: center;
-        }
-        
-        .hero-text-card {
-            background: rgba(253, 251, 247, 0.88);
-            backdrop-filter: blur(6px);
-            padding: 2.5rem 1.5rem;
-            width: 88%;
-            border-radius: 4px;
-            border: 1px solid rgba(197, 160, 89, 0.3);
-            box-shadow: 0 10px 30px rgba(74, 21, 37, 0.08);
-            position: relative;
-        }
-
-        .hero-text-card::after {
-            content: "";
-            position: absolute;
-            inset: 6px;
-            border: 1px solid rgba(197, 160, 89, 0.15);
-            pointer-events: none;
-        }
-
-        .sub-heading {
-            font-family: var(--font-sans);
-            font-size: 0.75rem;
-            letter-spacing: 0.3em;
-            text-transform: uppercase;
-            color: var(--antique-gold);
-            margin-bottom: 0.8rem;
-        }
-
-        .main-names {
-            font-family: var(--font-script);
-            font-size: 3.8rem;
-            color: var(--burgundy);
-            line-height: 1.1;
-            margin-bottom: 0.8rem;
-        }
-
-        .ampersand {
-            font-family: var(--font-serif);
-            font-style: italic;
-            font-size: 2.2rem;
-            color: var(--antique-gold);
-            display: inline-block;
-            margin: 0 0.2rem;
-        }
-
-        .date-badge {
-            font-family: var(--font-sans);
-            font-size: 0.85rem;
-            letter-spacing: 0.2em;
-            color: var(--charcoal);
-            margin-top: 0.5rem;
-            font-weight: 400;
-        }
-
-        /* ==========================================
-           SECTION STYLING: VIDEOS & MAPS
-           ================================---------- */
-        .section-block {
-            padding: 3rem 1.5rem;
-            text-align: center;
-            position: relative;
-            border-bottom: 1px solid rgba(197, 160, 89, 0.15);
-        }
-
-        .section-title {
-            font-family: var(--font-serif);
-            font-size: 2rem;
-            color: var(--burgundy);
-            margin-bottom: 1.5rem;
-            font-weight: 400;
-            letter-spacing: 0.05em;
-        }
-
-        .section-title span {
-            display: block;
-            font-family: var(--font-sans);
-            font-size: 0.7rem;
-            letter-spacing: 0.3em;
-            text-transform: uppercase;
-            color: var(--antique-gold);
-            margin-bottom: 0.4rem;
-        }
-
-        .media-container {
-            width: 100%;
-            border-radius: 4px;
-            overflow: hidden;
-            box-shadow: 0 8px 25px rgba(74, 21, 37, 0.1);
-            background: var(--champagne);
-            border: 1px solid rgba(197, 160, 89, 0.3);
-            margin-bottom: 1.2rem;
-            position: relative;
-        }
-
-        .media-container video {
-            width: 100%;
-            height: auto;
-            display: block;
-            aspect-ratio: 9/16;
-            object-fit: cover;
-        }
-
-        /* Map Integration */
-        .map-wrapper {
-            width: 100%;
-            border-radius: 4px;
-            overflow: hidden;
-            border: 1px solid rgba(197, 160, 89, 0.4);
-            box-shadow: 0 4px 15px rgba(74, 21, 37, 0.06);
-            background: var(--pearl-white);
-            padding: 6px;
-        }
-
-        .map-frame {
-            width: 100%;
-            height: 220px;
-            border: none;
-            border-radius: 2px;
-            filter: saturate(0.85) contrast(1.05);
-        }
-
-        .location-name {
-            font-family: var(--font-serif);
-            font-size: 1.1rem;
-            color: var(--burgundy);
-            margin-top: 0.8rem;
-            font-weight: 500;
-        }
-
-        .location-address {
-            font-family: var(--font-sans);
-            font-size: 0.8rem;
-            color: #666;
-            margin-top: 0.3rem;
-            line-height: 1.4;
-        }
-
-        /* ==========================================
-           COUNTDOWN SECTION
-           ================================---------- */
-        .countdown-block {
-            padding: 3.5rem 1.5rem;
-            text-align: center;
-            background: linear-gradient(180deg, rgba(249,246,240,0.5) 0%, rgba(244,239,230,0.8) 100%);
-            position: relative;
-        }
-
-        .countdown-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 0.8rem;
-            margin-top: 1.5rem;
-            max-width: 380px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .countdown-box {
-            background: var(--ivory);
-            padding: 1rem 0.5rem;
-            border-radius: 4px;
-            border: 1px solid rgba(197, 160, 89, 0.3);
-            box-shadow: 0 4px 12px rgba(74, 21, 37, 0.05);
-        }
-
-        .countdown-number {
-            font-family: var(--font-serif);
-            font-size: 1.8rem;
-            color: var(--burgundy);
-            font-weight: 500;
-            line-height: 1;
-        }
-
-        .countdown-label {
-            font-family: var(--font-sans);
-            font-size: 0.65rem;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: var(--antique-gold);
-            margin-top: 0.4rem;
-        }
-
-        /* ==========================================
-           DRESS CODE SECTION
-           ================================---------- */
-        .dress-code-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 1.2rem;
-            margin-top: 1.5rem;
-        }
-
-        .dress-item {
-            background: var(--pearl-white);
-            padding: 1.2rem;
-            border-radius: 4px;
-            border: 1px solid rgba(197, 160, 89, 0.25);
-            text-align: left;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .dress-info h4 {
-            font-family: var(--font-serif);
-            font-size: 1.2rem;
-            color: var(--burgundy);
-            margin-bottom: 0.2rem;
-        }
-
-        .dress-info p {
-            font-family: var(--font-sans);
-            font-size: 0.78rem;
-            color: #555;
-        }
-
-        .color-swatches {
-            display: flex;
-            gap: 6px;
-        }
-
-        .swatch {
-            width: 22px;
-            height: 22px;
-            border-radius: 50%;
-            border: 1px solid rgba(197, 160, 89, 0.5);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        /* ==========================================
-           RSVP SECTION
-           ================================---------- */
-        .rsvp-section {
-            padding: 4rem 1.5rem;
-            background: linear-gradient(135deg, var(--pearl-white) 0%, var(--blush-pink) 100%);
-            text-align: center;
-            position: relative;
-        }
-
-        .rsvp-form {
-            background: var(--ivory);
-            padding: 2.5rem 1.5rem;
-            border-radius: 4px;
-            border: 1px solid rgba(197, 160, 89, 0.4);
-            box-shadow: 0 10px 30px rgba(74, 21, 37, 0.08);
-            margin-top: 1.5rem;
-            text-align: left;
-            position: relative;
-        }
-
-        .rsvp-form::after {
-            content: "";
-            position: absolute;
-            inset: 6px;
-            border: 1px solid rgba(197, 160, 89, 0.15);
-            pointer-events: none;
-        }
-
-        .form-group {
-            margin-bottom: 1.4rem;
-        }
-
-        .form-label {
-            display: block;
-            font-family: var(--font-sans);
-            font-size: 0.75rem;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: var(--burgundy);
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-        }
-
-        .form-input, .form-select {
-            width: 100%;
-            padding: 0.8rem 1rem;
-            font-family: var(--font-serif);
-            font-size: 1rem;
-            background: var(--pearl-white);
-            border: 1px solid rgba(197, 160, 89, 0.3);
-            border-radius: 2px;
-            color: var(--charcoal);
-            outline: none;
-            transition: border-color 0.3s;
-        }
-
-        .form-input:focus, .form-select:focus {
-            border-color: var(--burgundy);
-        }
-
-        .radio-group {
-            display: flex;
-            gap: 1.5rem;
-            margin-top: 0.5rem;
-        }
-
-        .radio-label {
-            font-family: var(--font-sans);
-            font-size: 0.85rem;
-            color: var(--charcoal);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            cursor: pointer;
-        }
-
-        .radio-label input[type="radio"] {
-            accent-color: var(--burgundy);
-        }
-
-        .submit-btn {
-            width: 100%;
-            padding: 1rem;
-            background: var(--burgundy);
-            color: var(--antique-gold-light);
-            font-family: var(--font-sans);
-            font-size: 0.8rem;
-            letter-spacing: 0.25em;
-            text-transform: uppercase;
-            border: none;
-            border-radius: 2px;
-            cursor: pointer;
-            transition: background 0.3s, transform 0.2s;
-            box-shadow: 0 4px 12px rgba(74, 21, 37, 0.2);
-            margin-top: 0.5rem;
-        }
-
-        .submit-btn:hover {
-            background: var(--burgundy-light);
-        }
-
-        /* Success Message State */
-        .rsvp-success {
-            display: none;
-            text-align: center;
-            padding: 2rem 0;
-            font-family: var(--font-serif);
-            color: var(--burgundy);
-        }
-
-        .rsvp-success h3 {
-            font-size: 2rem;
-            margin-bottom: 0.8rem;
-        }
-
-        .rsvp-success p {
-            font-family: var(--font-sans);
-            font-size: 0.85rem;
-            color: #555;
-            letter-spacing: 0.05em;
-        }
-
-        /* ==========================================
-           FOOTER SECTION
-           ================================---------- */
-        .footer-section {
-            padding: 4rem 1.5rem;
-            text-align: center;
-            background: var(--champagne);
-            position: relative;
-        }
-
-        .footer-monogram {
-            font-family: var(--font-script);
-            font-size: 3.5rem;
-            color: var(--burgundy);
-            margin-bottom: 1rem;
-        }
-
-        .footer-text {
-            font-family: var(--font-serif);
-            font-style: italic;
-            font-size: 1.1rem;
-            color: var(--charcoal);
-            max-width: 300px;
-            margin: 0 auto 1.5rem auto;
-            line-height: 1.5;
-        }
-
-        .footer-brand {
-            font-family: var(--font-sans);
-            font-size: 0.65rem;
-            letter-spacing: 0.3em;
-            text-transform: uppercase;
-            color: var(--antique-gold);
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+<title>Whispering Blooms</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+/>
+
+<style>
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  padding:0;
+  background:#f8f3ea;
+  color:#4d2931;
+  overflow-x:hidden;
+}
+
+body.locked{
+  overflow:hidden;
+}
+
+.page{
+  position:relative;
+  min-height:100vh;
+  overflow:hidden;
+
+  background:
+    radial-gradient(
+      circle at 10% 8%,
+      rgba(235,205,188,.38) 0,
+      rgba(235,205,188,.18) 10%,
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 90% 24%,
+      rgba(218,194,180,.30) 0,
+      rgba(218,194,180,.12) 12%,
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at 15% 65%,
+      rgba(222,198,181,.24) 0,
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 88% 82%,
+      rgba(235,211,196,.28) 0,
+      transparent 32%
+    ),
+    #f8f3ea;
+}
+
+/* --------------------------------------------------
+   WATERCOLOUR WASHES
+-------------------------------------------------- */
+
+.wash{
+  position:absolute;
+  pointer-events:none;
+  border-radius:50%;
+  filter:blur(22px);
+  opacity:.35;
+}
+
+.wash1{
+  width:300px;
+  height:220px;
+  left:-100px;
+  top:420px;
+  background:rgba(214,177,159,.25);
+}
+
+.wash2{
+  width:280px;
+  height:250px;
+  right:-100px;
+  top:900px;
+  background:rgba(198,164,148,.22);
+}
+
+.wash3{
+  width:320px;
+  height:240px;
+  left:-130px;
+  top:1500px;
+  background:rgba(225,196,181,.25);
+}
+
+.wash4{
+  width:300px;
+  height:250px;
+  right:-120px;
+  top:2200px;
+  background:rgba(211,181,166,.23);
+}
+
+/* --------------------------------------------------
+   FLOWERS
+-------------------------------------------------- */
+
+.flower{
+  position:absolute;
+  width:240px;
+  height:auto;
+  z-index:2;
+  pointer-events:none;
+
+  opacity:.94;
+
+  mix-blend-mode:multiply;
+
+  animation:
+    flowerSway 7s ease-in-out infinite alternate;
+}
+
+.leftTop{
+  left:-125px;
+  top:-30px;
+}
+
+.rightTop{
+  right:-125px;
+  top:350px;
+  transform:scaleX(-1);
+  animation-delay:1.4s;
+}
+
+.leftMiddle{
+  left:-125px;
+  top:900px;
+  animation-delay:2.2s;
+}
+
+.rightMiddle{
+  right:-125px;
+  top:1450px;
+  transform:scaleX(-1);
+  animation-delay:.8s;
+}
+
+.leftBottom{
+  left:-125px;
+  top:2050px;
+  animation-delay:1.8s;
+}
+
+.rightBottom{
+  right:-125px;
+  top:2700px;
+  transform:scaleX(-1);
+  animation-delay:2.7s;
+}
+
+@keyframes flowerSway{
+
+  from{
+    transform:translateY(0) rotate(-1deg);
+  }
+
+  to{
+    transform:translateY(8px) rotate(1.2deg);
+  }
+
+}
+
+/* Preserve mirror on right flowers */
+
+.rightTop,
+.rightMiddle,
+.rightBottom{
+  animation-name:flowerSwayMirror;
+}
+
+@keyframes flowerSwayMirror{
+
+  from{
+    transform:scaleX(-1) translateY(0) rotate(-1deg);
+  }
+
+  to{
+    transform:scaleX(-1) translateY(8px) rotate(1.2deg);
+  }
+
+}
+
+/* --------------------------------------------------
+   FAIRY LIGHTS
+-------------------------------------------------- */
+
+.fairy{
+  position:absolute;
+  width:3px;
+  height:3px;
+  border-radius:50%;
+
+  background:#d7b45f;
+
+  box-shadow:
+    0 0 5px rgba(215,180,95,.9),
+    0 0 10px rgba(215,180,95,.45);
+
+  animation:flicker 2.8s ease-in-out infinite;
+
+  z-index:3;
+  pointer-events:none;
+}
+
+@keyframes flicker{
+
+  0%,100%{
+    opacity:.25;
+    transform:scale(.7);
+  }
+
+  50%{
+    opacity:1;
+    transform:scale(1.25);
+  }
+
+}
+
+/* Individual lights */
+
+.f1{left:8%;top:8%;animation-delay:.2s}
+.f2{left:16%;top:20%;animation-delay:1.2s}
+.f3{left:27%;top:13%;animation-delay:2s}
+.f4{left:77%;top:10%;animation-delay:.8s}
+.f5{left:88%;top:18%;animation-delay:1.7s}
+.f6{left:93%;top:34%;animation-delay:.3s}
+.f7{left:7%;top:39%;animation-delay:1.4s}
+.f8{left:17%;top:51%;animation-delay:2.2s}
+.f9{left:87%;top:55%;animation-delay:.6s}
+.f10{left:94%;top:67%;animation-delay:1.9s}
+.f11{left:8%;top:72%;animation-delay:.9s}
+.f12{left:18%;top:82%;animation-delay:2.5s}
+.f13{left:82%;top:78%;animation-delay:.4s}
+.f14{left:91%;top:91%;animation-delay:1.1s}
+.f15{left:42%;top:31%;animation-delay:1.8s}
+.f16{left:60%;top:88%;animation-delay:.7s}
+
+/* --------------------------------------------------
+   COMMON SECTIONS
+-------------------------------------------------- */
+
+.section{
+  position:relative;
+  width:100%;
+  min-height:100vh;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  padding:70px 20px;
+
+  z-index:5;
+}
+
+.video-section{
+  min-height:100vh;
+  padding:0;
+}
+
+.video-section video{
+  width:100%;
+  height:100vh;
+
+  object-fit:cover;
+  display:block;
+}
+
+/* --------------------------------------------------
+   GATE
+-------------------------------------------------- */
+
+#gateSection{
+  position:relative;
+  width:100%;
+  height:100vh;
+  min-height:100svh;
+
+  z-index:100;
+
+  overflow:hidden;
+
+  background:#f8f3ea;
+}
+
+#gateVideo{
+  position:absolute;
+
+  inset:0;
+
+  width:100%;
+  height:100%;
+
+  object-fit:cover;
+
+  display:block;
+
+  background:#f8f3ea;
+}
+
+#tapOverlay{
+  position:absolute;
+
+  inset:0;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  z-index:20;
+
+  cursor:pointer;
+
+  background:transparent;
+}
+
+#tapText{
+  position:absolute;
+
+  bottom:12%;
+
+  left:50%;
+
+  transform:translateX(-50%);
+
+  color:#fff;
+
+  font-family:"Alex Brush", cursive;
+
+  font-size:clamp(34px,6vw,58px);
+
+  text-shadow:
+    0 2px 12px rgba(80,30,35,.65),
+    0 0 8px rgba(255,255,255,.25);
+
+  animation:tapFloat 2s ease-in-out infinite;
+
+  white-space:nowrap;
+}
+
+@keyframes tapFloat{
+
+  0%,100%{
+    opacity:.75;
+    transform:translateX(-50%) translateY(0);
+  }
+
+  50%{
+    opacity:1;
+    transform:translateX(-50%) translateY(-8px);
+  }
+
+}
+
+#tapOverlay.hidden{
+  pointer-events:none;
+  opacity:0;
+  transition:opacity .7s ease;
+}
+
+/* --------------------------------------------------
+   TEXT
+-------------------------------------------------- */
+
+.section-title{
+  font-family:"Alex Brush",cursive;
+
+  font-size:clamp(45px,8vw,75px);
+
+  color:#702536;
+
+  text-align:center;
+
+  margin:0 0 15px;
+}
+
+.section-subtitle{
+  font-family:"Cormorant Garamond",serif;
+
+  font-size:clamp(18px,3vw,25px);
+
+  letter-spacing:2px;
+
+  color:#9c7257;
+
+  text-align:center;
+}
+
+/* --------------------------------------------------
+   PARENTS
+-------------------------------------------------- */
+
+#parentsSection{
+  min-height:100vh;
+}
+
+/* --------------------------------------------------
+   COUNTDOWN
+-------------------------------------------------- */
+
+#countdownSection{
+  min-height:100vh;
+
+  position:relative;
+
+  padding:0;
+}
+
+.countdown-video{
+  position:absolute;
+
+  inset:0;
+
+  width:100%;
+  height:100%;
+
+  object-fit:cover;
+}
+
+.countdown-overlay{
+  position:absolute;
+
+  z-index:10;
+
+  left:50%;
+  top:50%;
+
+  transform:translate(-50%,-50%);
+
+  width:min(720px,90%);
+
+  padding:20px;
+
+  text-align:center;
+}
+
+/* TickCounter iframe/script container */
+
+.tickcounter{
+  width:100% !important;
+}
+
+/* --------------------------------------------------
+   EVENT SECTIONS
+-------------------------------------------------- */
+
+.event-section{
+  min-height:auto;
+
+  padding:
+    80px 20px
+    100px;
+
+  display:flex;
+  flex-direction:column;
+  gap:0;
+}
+
+.event-video{
+  width:min(100%,900px);
+
+  height:auto;
+
+  max-height:80vh;
+
+  object-fit:contain;
+
+  display:block;
+
+  border-radius:2px;
+
+  box-shadow:
+    0 12px 40px rgba(83,37,43,.14);
+}
+
+.map-card{
+  width:min(100%,900px);
+
+  margin-top:35px;
+
+  background:rgba(255,252,246,.94);
+
+  border:1px solid #c7a45d;
+
+  box-shadow:
+    0 12px 35px rgba(76,36,43,.12);
+
+  padding:14px;
+
+  position:relative;
+
+  z-index:10;
+}
+
+.map-title{
+  margin:8px 10px 2px;
+
+  text-align:center;
+
+  font-family:"Cormorant Garamond",serif;
+
+  font-size:30px;
+
+  font-weight:600;
+
+  color:#702536;
+}
+
+.map-address{
+  margin:0 auto 15px;
+
+  text-align:center;
+
+  max-width:700px;
+
+  font-family:"Montserrat",sans-serif;
+
+  font-size:13px;
+
+  line-height:1.7;
+
+  color:#70555b;
+}
+
+.map{
+  width:100%;
+  height:320px;
+
+  z-index:1;
+}
+
+.map-button{
+  display:block;
+
+  width:max-content;
+
+  margin:16px auto 5px;
+
+  padding:10px 25px;
+
+  border-radius:30px;
+
+  background:#702536;
+
+  color:white;
+
+  text-decoration:none;
+
+  font-family:"Montserrat",sans-serif;
+
+  font-size:12px;
+
+  letter-spacing:1px;
+
+  transition:.3s;
+}
+
+.map-button:hover{
+  background:#8c354b;
+}
+
+/* --------------------------------------------------
+   DRESS CODE
+-------------------------------------------------- */
+
+#dressSection{
+  padding:60px 20px;
+}
+
+.dress-image{
+  width:min(100%,900px);
+
+  height:auto;
+
+  display:block;
+
+  object-fit:contain;
+
+  box-shadow:
+    0 12px 40px rgba(83,37,43,.14);
+}
+
+/* --------------------------------------------------
+   RSVP
+-------------------------------------------------- */
+
+#rsvpSection{
+  position:relative;
+
+  min-height:100vh;
+
+  padding:0;
+
+  display:flex;
+
+  justify-content:center;
+
+  align-items:center;
+
+  overflow:hidden;
+}
+
+.rsvp-frame{
+  position:absolute;
+
+  inset:0;
+
+  width:100%;
+  height:100%;
+
+  object-fit:cover;
+
+  z-index:1;
+}
+
+.rsvp-content{
+  position:relative;
+
+  z-index:5;
+
+  width:46%;
+
+  max-width:520px;
+
+  text-align:center;
+
+  margin-top:-17vh;
+
+  color:white;
+}
+
+.rsvp-title{
+  font-family:"Alex Brush",cursive;
+
+  font-size:clamp(52px,8vw,88px);
+
+  margin:0;
+
+  color:#fff;
+
+  text-shadow:
+    0 2px 8px rgba(70,25,30,.35);
+}
+
+.rsvp-subtitle{
+  font-family:"Cormorant Garamond",serif;
+
+  font-size:clamp(18px,3vw,27px);
+
+  letter-spacing:2px;
+
+  margin-bottom:25px;
+
+  color:#fff;
+}
+
+.rsvp-form{
+  display:flex;
+
+  flex-direction:column;
+
+  gap:13px;
+}
+
+.rsvp-form label{
+  font-family:"Cormorant Garamond",serif;
+
+  font-size:18px;
+
+  color:#fff;
+
+  text-align:left;
+}
+
+.rsvp-form input,
+.rsvp-form select{
+  width:100%;
+
+  border:none;
+
+  outline:none;
+
+  background:rgba(255,255,255,.9);
+
+  padding:11px 13px;
+
+  border-radius:4px;
+
+  font-family:"Cormorant Garamond",serif;
+
+  font-size:16px;
+
+  color:#4d2931;
+}
+
+.radio-group{
+  display:flex;
+
+  justify-content:center;
+
+  gap:15px;
+
+  flex-wrap:wrap;
+}
+
+.radio-option{
+  display:flex;
+
+  align-items:center;
+
+  gap:5px;
+
+  font-family:"Cormorant Garamond",serif;
+
+  font-size:16px;
+
+  color:#fff;
+
+  cursor:pointer;
+}
+
+.radio-option input{
+  width:auto;
+}
+
+.rsvp-button{
+  margin-top:10px;
+
+  border:none;
+
+  cursor:pointer;
+
+  padding:12px 25px;
+
+  border-radius:30px;
+
+  background:#702536;
+
+  color:#fff;
+
+  font-family:"Cormorant Garamond",serif;
+
+  font-size:18px;
+
+  letter-spacing:1px;
+
+  transition:.3s;
+}
+
+.rsvp-button:hover{
+  background:#8e3a4e;
+}
+
+#thankYou{
+  display:none;
+
+  font-family:"Alex Brush",cursive;
+
+  font-size:34px;
+
+  color:#fff;
+
+  margin-top:20px;
+}
+
+/* --------------------------------------------------
+   FOOTER
+-------------------------------------------------- */
+
+footer{
+  position:relative;
+
+  z-index:10;
+
+  text-align:center;
+
+  padding:50px 20px 70px;
+
+  background:#f8f3ea;
+
+  color:#8a6460;
+
+  font-family:"Cormorant Garamond",serif;
+
+  font-size:18px;
+}
+
+footer strong{
+  color:#702536;
+}
+
+/* --------------------------------------------------
+   MOBILE
+-------------------------------------------------- */
+
+@media(max-width:600px){
+
+  .section{
+    padding:60px 15px;
+  }
+
+  .flower{
+    width:190px;
+  }
+
+  .leftTop{
+    left:-105px;
+    top:-25px;
+  }
+
+  .rightTop{
+    right:-105px;
+    top:330px;
+  }
+
+  .leftMiddle{
+    left:-105px;
+    top:850px;
+  }
+
+  .rightMiddle{
+    right:-105px;
+    top:1350px;
+  }
+
+  .leftBottom{
+    left:-105px;
+    top:1900px;
+  }
+
+  .rightBottom{
+    right:-105px;
+    top:2450px;
+  }
+
+  .fairy{
+    width:2.5px;
+    height:2.5px;
+  }
+
+  #tapText{
+    bottom:10%;
+
+    font-size:42px;
+  }
+
+  .event-section{
+    padding:
+      55px 12px
+      80px;
+  }
+
+  .event-video{
+    width:100%;
+  }
+
+  .map-card{
+    padding:10px;
+    margin-top:25px;
+  }
+
+  .map{
+    height:280px;
+  }
+
+  .map-title{
+    font-size:27px;
+  }
+
+  .map-address{
+    font-size:12px;
+  }
+
+  .rsvp-content{
+    width:66%;
+
+    margin-top:-19vh;
+  }
+
+  .rsvp-form{
+    gap:9px;
+  }
+
+  .rsvp-form label{
+    font-size:16px;
+  }
+
+  .rsvp-form input,
+  .rsvp-form select{
+    padding:9px 10px;
+    font-size:15px;
+  }
+
+  .radio-group{
+    gap:8px;
+  }
+
+  .radio-option{
+    font-size:14px;
+  }
+
+}
+
+</style>
 </head>
-<body>
 
-    <!-- Fairy Lights Dynamic Container -->
-    <div class="fairy-lights-container" id="fairyLights"></div>
 
-    <!-- Floating Butterflies -->
-    <div class="butterfly" style="top: 25%; left: 10%; animation-delay: 0s;"></div>
-    <div class="butterfly" style="top: 55%; right: 8%; animation-delay: 4s;"></div>
-    <div class="butterfly" style="top: 82%; left: 15%; animation-delay: 8s;"></div>
+<body class="locked">
 
-    <!-- ==========================================
-       SECTION 1: OPENING GATE EXPERIENCE
-       ================================---------- -->
-    <div id="gate-section">
-        <!-- CHANGE GATE VIDEO HERE -->
-        <video id="gate-video" src="https://ivoryvows.github.io/Whispering-blooms/darwaza.mp4" playsinline muted preload="auto"></video>
-        <div class="tap-to-open-overlay" id="tapOverlay">
-            <div class="tap-content">
-                <h1>Whispering Blooms</h1>
-                <p>Tap to Open</p>
-            </div>
-        </div>
+
+<!-- ==================================================
+     MAIN PAGE
+================================================== -->
+
+<div class="page">
+
+
+<!-- ==================================================
+     FLOWERS
+================================================== -->
+
+<img
+  class="flower leftTop"
+  src="https://files.catbox.moe/kgdqjb.png"
+  alt=""
+>
+
+<img
+  class="flower rightTop"
+  src="https://files.catbox.moe/kgdqjb.png"
+  alt=""
+>
+
+<img
+  class="flower leftMiddle"
+  src="https://files.catbox.moe/kgdqjb.png"
+  alt=""
+>
+
+<img
+  class="flower rightMiddle"
+  src="https://files.catbox.moe/kgdqjb.png"
+  alt=""
+>
+
+<img
+  class="flower leftBottom"
+  src="https://files.catbox.moe/kgdqjb.png"
+  alt=""
+>
+
+<img
+  class="flower rightBottom"
+  src="https://files.catbox.moe/kgdqjb.png"
+  alt=""
+>
+
+
+<!-- ==================================================
+     WATERCOLOUR WASHES
+================================================== -->
+
+<div class="wash wash1"></div>
+<div class="wash wash2"></div>
+<div class="wash wash3"></div>
+<div class="wash wash4"></div>
+
+
+<!-- ==================================================
+     FAIRY LIGHTS
+================================================== -->
+
+<div class="fairy f1"></div>
+<div class="fairy f2"></div>
+<div class="fairy f3"></div>
+<div class="fairy f4"></div>
+<div class="fairy f5"></div>
+<div class="fairy f6"></div>
+<div class="fairy f7"></div>
+<div class="fairy f8"></div>
+<div class="fairy f9"></div>
+<div class="fairy f10"></div>
+<div class="fairy f11"></div>
+<div class="fairy f12"></div>
+<div class="fairy f13"></div>
+<div class="fairy f14"></div>
+<div class="fairy f15"></div>
+<div class="fairy f16"></div>
+
+
+<!-- ==================================================
+     1. FRONT / GATE
+================================================== -->
+
+<section id="gateSection">
+
+  <video
+    id="gateVideo"
+    src="darwaza.mp4"
+    playsinline
+    preload="auto"
+    muted
+  ></video>
+
+  <div id="tapOverlay">
+
+    <div id="tapText">
+      Tap to Open
     </div>
 
-    <!-- ==========================================
-       MAIN CONTENT CONTAINER
-       ================================---------- -->
-    <div id="main-content">
-        <div class="invitation-container">
+  </div>
 
-            <!-- ==========================================
-               SECTION 2: FROZEN OPEN-DOOR HERO SECTION
-               ================================---------- -->
-            <section class="frozen-hero" id="heroSection">
-                <div class="hero-text-card">
-                    <div class="sub-heading">The Wedding Celebration</div>
-                    <div class="main-names">
-                        Ayesha <span class="ampersand">&amp;</span> Daniyal
-                    </div>
-                    <div class="date-badge">DECEMBER 31, 2026</div>
-                </div>
-            </section>
+</section>
 
-            <!-- ==========================================
-               SECTION 3: YOU ARE INVITED VIDEO
-               ================================---------- -->
-            <section class="section-block">
-                <div class="section-title">
-                    <span>With Great Joy</span>
-                    You Are Invited
-                </div>
-                <!-- CHANGE INVITATION VIDEO URL HERE -->
-                <div class="media-container">
-                    <video src="https://ivoryvows.github.io/Whispering-blooms/YouAreInvited.mp4" playsinline muted autoplay loop></video>
-                </div>
-            </section>
 
-            <!-- ==========================================
-               SECTION 4: COUNTDOWN SECTION
-               ================================---------- -->
-            <section class="countdown-block">
-                <div class="waterflower-top-left"></div>
-                <div class="section-title" style="margin-bottom: 0.5rem;">
-                    <span>Counting Every Moment</span>
-                    The Big Day
-                </div>
-                <div style="font-family: var(--font-serif); font-style: italic; color: var(--burgundy); font-size: 1.1rem; margin-bottom: 1rem;">
-                    December 31, 2026 — 8:00 PM
-                </div>
-                
-                <div class="countdown-grid">
-                    <div class="countdown-box">
-                        <div class="countdown-number" id="days">00</div>
-                        <div class="countdown-label">Days</div>
-                    </div>
-                    <div class="countdown-box">
-                        <div class="countdown-number" id="hours">00</div>
-                        <div class="countdown-label">Hours</div>
-                    </div>
-                    <div class="countdown-box">
-                        <div class="countdown-number" id="minutes">00</div>
-                        <div class="countdown-label">Minutes</div>
-                    </div>
-                    <div class="countdown-box">
-                        <div class="countdown-number" id="seconds">00</div>
-                        <div class="countdown-label">Seconds</div>
-                    </div>
-                </div>
-            </section>
+<!-- ==================================================
+     MUSIC
+================================================== -->
 
-            <!-- ==========================================
-               SECTION 5 & 6: DHOLKI SECTION
-               ================================---------- -->
-            <section class="section-block">
-                <div class="section-title">
-                    <span>Musical Evening</span>
-                    Dholki
-                </div>
-                <!-- CHANGE DHOLKI VIDEO HERE -->
-                <div class="media-container">
-                    <video src="https://ivoryvows.github.io/Whispering-blooms/Dholki.mp4" playsinline muted preload="metadata"></video>
-                </div>
-                
-                <!-- CHANGE DHOLKI MAP HERE -->
-                <div class="map-wrapper">
-                    <iframe class="map-frame" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3312.569472392724!2d73.047889!3d33.684422!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzPCsDQxJzAzLjkiTiA3M8KwMDInNTIuNCJF!5e0!3m2!1sen!2s!4v1620000000000!5m2!1sen!2s" allowfullscreen="" loading="lazy"></iframe>
-                    <div class="location-name">The Royal Palm Lawns</div>
-                    <div class="location-address">Main Boulevard, Gulberg, Lahore</div>
-                </div>
-            </section>
+<audio
+  id="weddingMusic"
+  src="dekha tenu.mp3"
+  preload="auto"
+  loop
+></audio>
 
-            <!-- ==========================================
-               SECTION 7 & 8: MEHNDI SECTION
-               ================================---------- -->
-            <section class="section-block">
-                <div class="section-title">
-                    <span>Rhythm & Colors</span>
-                    Mehndi
-                </div>
-                <!-- CHANGE MEHNDI VIDEO HERE -->
-                <div class="media-container">
-                    <video src="https://ivoryvows.github.io/Whispering-blooms/Mehndi.mp4" playsinline muted preload="metadata"></video>
-                </div>
-                
-                <!-- CHANGE MEHNDI MAP HERE -->
-                <div class="map-wrapper">
-                    <iframe class="map-frame" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3405.0000000000005!2d74.3587!3d31.5204!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzHCsDMxJzEzLjQiTiA3NMKwMjEnMzEuMyJF!5e0!3m2!1sen!2s!4v1620000000000!5m2!1sen!2s" allowfullscreen="" loading="lazy"></iframe>
-                    <div class="location-name">Haveli Restaurant & Gardens</div>
-                    <div class="location-address">Fort Road, Shahi Qila, Lahore</div>
-                </div>
-            </section>
 
-            <!-- ==========================================
-               SECTION 9 & 10: SHADI SECTION
-               ================================---------- -->
-            <section class="section-block">
-                <div class="section-title">
-                    <span>The Sacred Vows</span>
-                    Shadi / Nikkah
-                </div>
-                <!-- CHANGE SHADI VIDEO HERE -->
-                <div class="media-container">
-                    <video src="https://ivoryvows.github.io/Whispering-blooms/Shadi.mp4" playsinline muted preload="metadata"></video>
-                </div>
-                
-                <!-- CHANGE SHADI MAP HERE -->
-                <div class="map-wrapper">
-                    <iframe class="map-frame" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3401.0000000000005!2d74.3000!3d31.5000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzHCsDMwJzAwLjAiTiA3NMKwMTgnMDAuMCJF!5e0!3m2!1sen!2s!4v1620000000000!5m2!1sen!2s" allowfullscreen="" loading="lazy"></iframe>
-                    <div class="location-name">Pearl Continental Banquet Hall</div>
-                    <div class="location-address">Shahrah-e-Quaid-e-Azam, Lahore</div>
-                </div>
-            </section>
+<!-- ==================================================
+     2. PARENTS
+================================================== -->
 
-            <!-- ==========================================
-               SECTION 11 & 12: WALIMA SECTION
-               ================================---------- -->
-            <section class="section-block">
-                <div class="section-title">
-                    <span>A Grand Reception</span>
-                    Walima
-                </div>
-                <!-- CHANGE WALIMA VIDEO HERE -->
-                <div class="media-container">
-                    <video src="https://ivoryvows.github.io/Whispering-blooms/Walima.mp4" playsinline muted preload="metadata"></video>
-                </div>
-                
-                <!-- CHANGE WALIMA MAP HERE -->
-                <div class="map-wrapper">
-                    <iframe class="map-frame" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3403.0000000000005!2d74.3400!3d31.5100!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzHCsDMsMDAnMCJOIDc0wrAyMCcwMC4wRSJF!5e0!3m2!1sen!2s!4v1620000000000!5m2!1sen!2s" allowfullscreen="" loading="lazy"></iframe>
-                    <div class="location-name">The Nishat Hotel Banquet</div>
-                    <div class="location-address">Emporium Mall Complex, Abdul Haque Rd, Lahore</div>
-                </div>
-            </section>
+<section
+  id="parentsSection"
+  class="section video-section"
+>
 
-            <!-- ==========================================
-               SECTION 13: DRESS CODE SECTION
-               ================================---------- -->
-            <section class="section-block">
-                <div class="section-title">
-                    <span>Attire & Palette</span>
-                    Dress Code
-                </div>
-                <!-- CHANGE DRESS CODE VIDEO HERE -->
-                <div class="media-container">
-                    <video src="https://ivoryvows.github.io/Whispering-blooms/DressCode.mp4" playsinline muted preload="metadata"></video>
-                </div>
+  <video
+    src="parents.mp4"
+    playsinline
+    muted
+    autoplay
+    loop
+  ></video>
 
-                <div class="dress-code-grid">
-                    <div class="dress-item">
-                        <div class="dress-info">
-                            <h4>Dholki & Mehndi</h4>
-                            <p>Vibrant hues, mustard, burnt orange, & floral prints</p>
-                        </div>
-                        <div class="color-swatches">
-                            <div class="swatch" style="background: #E5A93B;"></div>
-                            <div class="swatch" style="background: #C05A3E;"></div>
-                            <div class="swatch" style="background: #6E2338;"></div>
-                        </div>
-                    </div>
-                    <div class="dress-item">
-                        <div class="dress-info">
-                            <h4>Shadi & Walima</h4>
-                            <p>Deep burgundy, antique gold, ivory, & pastels</p>
-                        </div>
-                        <div class="color-swatches">
-                            <div class="swatch" style="background: #4A1525;"></div>
-                            <div class="swatch" style="background: #C5A059;"></div>
-                            <div class="swatch" style="background: #FDFBF7;"></div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+</section>
 
-            <!-- ==========================================
-               SECTION 14: RSVP SECTION
-               ================================---------- -->
-            <section class="rsvp-section">
-                <div class="section-title" style="margin-bottom: 0.2rem;">
-                    <span>Kindly Respond</span>
-                    RSVP
-                </div>
-                <p style="font-family: var(--font-serif); font-style: italic; color: #555; font-size: 0.95rem;">
-                    Please confirm your gracious presence by December 15, 2026
-                </p>
 
-                <div class="rsvp-form" id="rsvpFormContainer">
-                    <form id="rsvpForm">
-                        <div class="form-group">
-                            <label class="form-label" for="guestName">Full Name</label>
-                            <input type="text" id="guestName" class="form-input" placeholder="Enter your full name" required>
-                        </div>
+<!-- ==================================================
+     3. COUNTDOWN
+================================================== -->
 
-                        <div class="form-group">
-                            <label class="form-label">Will you be joining us?</label>
-                            <div class="radio-group">
-                                <label class="radio-label">
-                                    <input type="radio" name="attendance" value="Joyfully Accept" checked> Joyfully Accept
-                                </label>
-                                <label class="radio-label">
-                                    <input type="radio" name="attendance" value="Regretfully Reject"> Regretfully Reject
-                                </label>
-                            </div>
-                        </div>
+<section
+  id="countdownSection"
+  class="section"
+>
 
-                        <div class="form-group">
-                            <label class="form-label" for="guestCount">Number of Guests</label>
-                            <select id="guestCount" class="form-select">
-                                <option value="1">1 Person</option>
-                                <option value="2">2 Persons</option>
-                                <option value="3">3 Persons</option>
-                                <option value="4">4 Persons</option>
-                            </select>
-                        </div>
+  <video
+    class="countdown-video"
+    src="countdown.mp4"
+    playsinline
+    muted
+    autoplay
+    loop
+  ></video>
 
-                        <button type="submit" class="submit-btn">Confirm RSVP</button>
-                    </form>
-                </div>
 
-                <div class="rsvp-success" id="rsvpSuccess">
-                    <h3>Thank You</h3>
-                    <p>Your response has been warmly received. We look forward to celebrating with you.</p>
-                </div>
-            </section>
+  <div class="countdown-overlay">
 
-            <!-- ==========================================
-               SECTION 15: CLOSING FOOTER
-               ================================---------- -->
-            <footer class="footer-section">
-                <div class="footer-monogram">A &amp; D</div>
-                <div class="footer-text">
-                    With love and joy, we look forward to celebrating this magical milestone with you.
-                </div>
-                <div class="footer-brand">Whispering Blooms Luxury Stationery</div>
-            </footer>
-
-        </div>
-    </div>
-
-    <!-- ==========================================
-       JAVASCRIPT LOGIC
-       ================================---------- -->
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            // 1. Generate Dynamic Fairy Lights
-            const lightsContainer = document.getElementById("fairyLights");
-            const lightCount = 20;
-            for (let i = 0; i < lightCount; i++) {
-                const light = document.createElement("div");
-                light.className = "fairy-light";
-                light.style.top = `${Math.random() * 100}vh`;
-                light.style.left = `${Math.random() * 100}vw`;
-                light.style.animationDelay = `${Math.random() * 4}s`;
-                light.style.animationDuration = `${3 + Math.random() * 3}s`;
-                lightsContainer.appendChild(light);
-            }
+      (function(d, s, id) {
 
-            // 2. Opening Gate Experience & Logic
-            const gateSection = document.getElementById("gate-section");
-            const gateVideo = document.getElementById("gate-video");
-            const tapOverlay = document.getElementById("tapOverlay");
-            const mainContent = document.getElementById("main-content");
-            
-            let isOpened = false;
+        var js,
+            pjs = d.getElementsByTagName(s)[0];
 
-            tapOverlay.addEventListener("click", () => {
-                if (isOpened) return;
-                isOpened = true;
+        if (d.getElementById(id)) return;
 
-                tapOverlay.style.opacity = "0";
-                setTimeout(() => {
-                    tapOverlay.style.display = "none";
-                }, 800);
+        js = d.createElement(s);
 
-                // Play gate opening video
-                gateVideo.play().catch(error => {
-                    console.log("Autoplay restricted, trying muted play", error);
-                });
+        js.id = id;
 
-                // Gate video freezes around 9 seconds (9000 ms) as specified
-                setTimeout(() => {
-                    gateVideo.pause();
-                    
-                    // Fade out gate wrapper smoothly to reveal main content beneath
-                    gateSection.style.opacity = "0";
-                    setTimeout(() => {
-                        gateSection.style.display = "none";
-                        mainContent.classList.add("visible");
-                        
-                        // Trigger video autoplays safely after entering
-                        document.querySelectorAll('.media-container video').forEach(v => {
-                            v.play().catch(e => console.log("Video auto-play deferred"));
-                        });
-                    }, 1000);
-                }, 9000);
-            });
+        js.src =
+          "//www.tickcounter.com/static/js/loader.js";
 
-            // 3. Countdown Timer Logic (CHANGE COUNTDOWN DATE HERE)
-            // Target Date: December 31, 2026, at 8:00 PM
-            const targetDate = new Date("December 31, 2026 20:00:00").getTime();
+        pjs.parentNode.insertBefore(js, pjs);
 
-            function updateCountdown() {
-                const now = new Date().getTime();
-                const difference = targetDate - now;
-
-                if (difference > 0) {
-                    const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-                    const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                    const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-                    const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-
-                    document.getElementById("days").innerText = String(days).padStart(2, '0');
-                    document.getElementById("hours").innerText = String(hours).padStart(2, '0');
-                    document.getElementById("minutes").innerText = String(minutes).padStart(2, '0');
-                    document.getElementById("seconds").innerText = String(seconds).padStart(2, '0');
-                } else {
-                    document.getElementById("days").innerText = "00";
-                    document.getElementById("hours").innerText = "00";
-                    document.getElementById("minutes").innerText = "00";
-                    document.getElementById("seconds").innerText = "00";
-                }
-            }
-
-            setInterval(updateCountdown, 1000);
-            updateCountdown();
-
-            // 4. RSVP Form Submission Handling
-            const rsvpForm = document.getElementById("rsvpForm");
-            const rsvpFormContainer = document.getElementById("rsvpFormContainer");
-            const rsvpSuccess = document.getElementById("rsvpSuccess");
-
-            rsvpForm.addEventListener("submit", (e) => {
-                e.preventDefault();
-                // Smooth transition from form to success message
-                rsvpFormContainer.style.opacity = "0";
-                setTimeout(() => {
-                    rsvpFormContainer.style.display = "none";
-                    rsvpSuccess.style.display = "block";
-                }, 400);
-            });
-        });
+      }(document, "script", "tickcounter-sdk"));
     </script>
+
+
+    <a
+      data-type="countdown"
+      data-id="11467815"
+      class="tickcounter"
+      style="
+        display:block;
+        left:0;
+        width:100%;
+        height:0;
+        position:relative;
+        padding-bottom:25%;
+        margin:0 auto;
+      "
+      title="My countdown"
+      href="//www.tickcounter.com/"
+    >
+      My countdown
+    </a>
+
+  </div>
+
+</section>
+
+
+<!-- ==================================================
+     4. DHOLKI
+================================================== -->
+
+<section class="event-section">
+
+  <video
+    class="event-video"
+    src="dholki.mp4"
+    playsinline
+    muted
+    autoplay
+    loop
+  ></video>
+
+
+  <div class="map-card">
+
+    <h2 class="map-title">
+      Royal Palace
+    </h2>
+
+    <p class="map-address">
+      Bedian Road, Plot #10, Adjoin Askari 11,<br>
+      Near DHA Phase 5, Ring Road, Lahore
+    </p>
+
+    <div
+      id="dholkiMap"
+      class="map"
+    ></div>
+
+    <a
+      class="map-button"
+      target="_blank"
+      href="https://www.google.com/maps/search/?api=1&query=Royal+Palace+Plot+10+Bedian+Road+Adjoin+Askari+11+Near+DHA+Phase+5+Lahore"
+    >
+      Open in Google Maps
+    </a>
+
+  </div>
+
+</section>
+
+
+<!-- ==================================================
+     5. MEHNDI
+================================================== -->
+
+<section class="event-section">
+
+  <video
+    class="event-video"
+    src="mehndi.mp4"
+    playsinline
+    muted
+    autoplay
+    loop
+  ></video>
+
+
+  <div class="map-card">
+
+    <h2 class="map-title">
+      Le Aura Grand Events &amp; Hotel
+    </h2>
+
+    <p class="map-address">
+      Lahore, Pakistan
+    </p>
+
+    <div
+      id="mehndiMap"
+      class="map"
+    ></div>
+
+    <a
+      class="map-button"
+      target="_blank"
+      href="https://www.google.com/maps/search/?api=1&query=Le+Aura+Grand+Events+%26+Hotel+Lahore"
+    >
+      Open in Google Maps
+    </a>
+
+  </div>
+
+</section>
+
+
+<!-- ==================================================
+     6. SHADI
+================================================== -->
+
+<section class="event-section">
+
+  <video
+    class="event-video"
+    src="shadi.mp4"
+    playsinline
+    muted
+    autoplay
+    loop
+  ></video>
+
+
+  <div class="map-card">
+
+    <h2 class="map-title">
+      Shershah Palace
+    </h2>
+
+    <p class="map-address">
+      Marquee &amp; Farmhouse<br>
+      Adda Plot, Raiwind Road, Eden Park, Lahore
+    </p>
+
+    <div
+      id="shadiMap"
+      class="map"
+    ></div>
+
+    <a
+      class="map-button"
+      target="_blank"
+      href="https://www.google.com/maps/search/?api=1&query=Shershah+Palace+Marquee+Farmhouse+Adda+Plot+Raiwind+Road+Eden+Park+Lahore"
+    >
+      Open in Google Maps
+    </a>
+
+  </div>
+
+</section>
+
+
+<!-- ==================================================
+     7. WALIMA
+================================================== -->
+
+<section class="event-section">
+
+  <video
+    class="event-video"
+    src="Walima.mp4"
+    playsinline
+    muted
+    autoplay
+    loop
+  ></video>
+
+
+  <div class="map-card">
+
+    <h2 class="map-title">
+      Grand Vista
+    </h2>
+
+    <p class="map-address">
+      Lahore
+    </p>
+
+    <div
+      id="walimaMap"
+      class="map"
+    ></div>
+
+    <a
+      class="map-button"
+      target="_blank"
+      href="https://www.google.com/maps/search/?api=1&query=Grand+Vista+Marquee+Lahore"
+    >
+      Open in Google Maps
+    </a>
+
+  </div>
+
+</section>
+
+
+<!-- ==================================================
+     8. DRESS CODE
+================================================== -->
+
+<section
+  id="dressSection"
+  class="section"
+>
+
+  <img
+    class="dress-image"
+    src="https://files.catbox.moe/vxcqqa.png"
+    alt="Dress Code"
+  >
+
+</section>
+
+
+<!-- ==================================================
+     9. RSVP
+================================================== -->
+
+<section id="rsvpSection">
+
+  <img
+    class="rsvp-frame"
+    src="https://files.catbox.moe/hsk39c.png"
+    alt=""
+  >
+
+
+  <div class="rsvp-content">
+
+    <h1 class="rsvp-title">
+      RSVP
+    </h1>
+
+    <div class="rsvp-subtitle">
+      Kindly Respond
+    </div>
+
+
+    <form
+      id="rsvpForm"
+      class="rsvp-form"
+    >
+
+      <label>
+        Name
+      </label>
+
+      <input
+        type="text"
+        id="guestName"
+        placeholder="Your Name"
+        required
+      >
+
+
+      <label>
+        Will you be joining us?
+      </label>
+
+
+      <div class="radio-group">
+
+        <label class="radio-option">
+
+          <input
+            type="radio"
+            name="attendance"
+            value="Joyfully Accept"
+            required
+          >
+
+          Joyfully Accept
+
+        </label>
+
+
+        <label class="radio-option">
+
+          <input
+            type="radio"
+            name="attendance"
+            value="Regretfully Reject"
+          >
+
+          Regretfully Reject
+
+        </label>
+
+      </div>
+
+
+      <label>
+        Number of Guests
+      </label>
+
+
+      <select
+        id="guestCount"
+        required
+      >
+
+        <option value="">
+          Select
+        </option>
+
+        <option value="1 Guest">
+          1 Guest
+        </option>
+
+        <option value="2 Guests">
+          2 Guests
+        </option>
+
+        <option value="3 Guests">
+          3 Guests
+        </option>
+
+        <option value="4 Guests">
+          4 Guests
+        </option>
+
+        <option value="5 Guests">
+          5 Guests
+        </option>
+
+        <option value="6 Guests">
+          6 Guests
+        </option>
+
+      </select>
+
+
+      <button
+        type="submit"
+        class="rsvp-button"
+      >
+        Confirm RSVP
+      </button>
+
+    </form>
+
+
+    <div id="thankYou">
+      Thank you for your response ♡
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ==================================================
+     FOOTER
+================================================== -->
+
+<footer>
+
+  With love, <strong>Whispering Blooms</strong> ♡
+
+</footer>
+
+
+</div>
+
+
+<!-- ==================================================
+     LEAFLET
+================================================== -->
+
+<script
+  src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+></script>
+
+
+<script>
+
+/* ==================================================
+   GATE + MUSIC
+================================================== */
+
+const gateVideo =
+  document.getElementById("gateVideo");
+
+const tapOverlay =
+  document.getElementById("tapOverlay");
+
+const tapText =
+  document.getElementById("tapText");
+
+const music =
+  document.getElementById("weddingMusic");
+
+let gateStarted = false;
+
+
+/*
+   FIRST TAP:
+   - Music starts
+   - Gate video starts
+   - Tap text disappears
+   - Scrolling becomes available
+*/
+
+tapOverlay.addEventListener("click", function(){
+
+  if(gateStarted) return;
+
+  gateStarted = true;
+
+  document.body.classList.remove("locked");
+
+  tapOverlay.classList.add("hidden");
+
+  /*
+     Music starts immediately from
+     the same user interaction.
+  */
+
+  music.volume = 1;
+
+  const musicPromise =
+    music.play();
+
+  if(musicPromise !== undefined){
+
+    musicPromise.catch(function(error){
+
+      console.log(
+        "Music playback was blocked:",
+        error
+      );
+
+    });
+
+  }
+
+
+  /*
+     Gate video starts.
+     It remains muted because iPhone/Safari
+     can block video audio independently.
+  */
+
+  gateVideo.muted = true;
+
+  const videoPromise =
+    gateVideo.play();
+
+  if(videoPromise !== undefined){
+
+    videoPromise.catch(function(error){
+
+      console.log(
+        "Gate video playback error:",
+        error
+      );
+
+    });
+
+  }
+
+});
+
+
+/*
+   When gate video finishes:
+   KEEP THE FINAL OPEN-DOOR FRAME.
+
+   Do NOT hide the video.
+   Do NOT replace it with white.
+*/
+
+gateVideo.addEventListener("ended", function(){
+
+  gateVideo.pause();
+
+  /*
+     Seeking slightly before the exact end
+     helps Safari preserve the final visible frame.
+  */
+
+  try{
+
+    if(gateVideo.duration &&
+       isFinite(gateVideo.duration)){
+
+      gateVideo.currentTime =
+        Math.max(
+          0,
+          gateVideo.duration - 0.05
+        );
+
+    }
+
+  }catch(error){
+
+    console.log(error);
+
+  }
+
+});
+
+
+/*
+   Backup for videos where Safari does not
+   fire "ended" normally.
+*/
+
+gateVideo.addEventListener(
+  "timeupdate",
+  function(){
+
+    if(
+      gateVideo.duration &&
+      isFinite(gateVideo.duration) &&
+      gateVideo.currentTime >=
+        gateVideo.duration - 0.08
+    ){
+
+      gateVideo.pause();
+
+    }
+
+  }
+);
+
+
+/* ==================================================
+   EVENT VIDEO AUTOPLAY WHEN VISIBLE
+================================================== */
+
+const eventVideos =
+  document.querySelectorAll(
+    ".event-video, #parentsSection video, #countdownSection video"
+  );
+
+const videoObserver =
+  new IntersectionObserver(
+    function(entries){
+
+      entries.forEach(function(entry){
+
+        const video = entry.target;
+
+        if(entry.isIntersecting){
+
+          video.play().catch(function(){});
+
+        }else{
+
+          video.pause();
+
+        }
+
+      });
+
+    },
+    {
+      threshold:.25
+    }
+  );
+
+
+eventVideos.forEach(function(video){
+
+  videoObserver.observe(video);
+
+});
+
+
+/* ==================================================
+   LEAFLET MAPS
+================================================== */
+
+const mapTile =
+  "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
+
+
+/* ---------- DHOLKI ---------- */
+
+const dholkiMap =
+  L.map("dholkiMap")
+   .setView(
+      [31.4705,74.4105],
+      15
+    );
+
+L.tileLayer(
+  mapTile,
+  {
+    attribution:
+      '&copy; OpenStreetMap contributors'
+  }
+).addTo(dholkiMap);
+
+L.marker(
+  [31.4705,74.4105]
+)
+.addTo(dholkiMap)
+.bindPopup(
+  "<b>Royal Palace</b><br>Lahore"
+)
+.openPopup();
+
+
+/* ---------- MEHNDI ---------- */
+
+const mehndiMap =
+  L.map("mehndiMap")
+   .setView(
+      [31.5204,74.3587],
+      13
+    );
+
+L.tileLayer(
+  mapTile,
+  {
+    attribution:
+      '&copy; OpenStreetMap contributors'
+  }
+).addTo(mehndiMap);
+
+L.marker(
+  [31.5204,74.3587]
+)
+.addTo(mehndiMap)
+.bindPopup(
+  "<b>Le Aura Grand Events & Hotel</b><br>Lahore"
+)
+.openPopup();
+
+
+/* ---------- SHADI ---------- */
+
+const shadiMap =
+  L.map("shadiMap")
+   .setView(
+      [31.4075,74.2320],
+      14
+    );
+
+L.tileLayer(
+  mapTile,
+  {
+    attribution:
+      '&copy; OpenStreetMap contributors'
+  }
+).addTo(shadiMap);
+
+L.marker(
+  [31.4075,74.2320]
+)
+.addTo(shadiMap)
+.bindPopup(
+  "<b>Shershah Palace</b><br>Lahore"
+)
+.openPopup();
+
+
+/* ---------- WALIMA ---------- */
+
+const walimaMap =
+  L.map("walimaMap")
+   .setView(
+      [31.5204,74.3587],
+      12
+    );
+
+L.tileLayer(
+  mapTile,
+  {
+    attribution:
+      '&copy; OpenStreetMap contributors'
+  }
+).addTo(walimaMap);
+
+
+/*
+   Search Grand Vista Marquee Lahore
+*/
+
+fetch(
+  "https://nominatim.openstreetmap.org/search?format=json&q=Grand%20Vista%20Marquee%20Lahore&limit=1"
+)
+.then(function(response){
+
+  return response.json();
+
+})
+.then(function(data){
+
+  if(data && data.length){
+
+    const lat =
+      parseFloat(data[0].lat);
+
+    const lon =
+      parseFloat(data[0].lon);
+
+    walimaMap.setView(
+      [lat,lon],
+      15
+    );
+
+    L.marker(
+      [lat,lon]
+    )
+    .addTo(walimaMap)
+    .bindPopup(
+      "<b>Grand Vista</b><br>Lahore"
+    )
+    .openPopup();
+
+  }else{
+
+    L.marker(
+      [31.5204,74.3587]
+    )
+    .addTo(walimaMap)
+    .bindPopup(
+      "<b>Grand Vista</b><br>Lahore"
+    );
+
+  }
+
+})
+.catch(function(){
+
+  L.marker(
+    [31.5204,74.3587]
+  )
+  .addTo(walimaMap)
+  .bindPopup(
+    "<b>Grand Vista</b><br>Lahore"
+  );
+
+});
+
+
+/*
+   Leaflet maps sometimes need size recalculation
+   after their section becomes visible.
+*/
+
+setTimeout(function(){
+
+  dholkiMap.invalidateSize();
+  mehndiMap.invalidateSize();
+  shadiMap.invalidateSize();
+  walimaMap.invalidateSize();
+
+},1000);
+
+
+/* ==================================================
+   RSVP
+================================================== */
+
+const rsvpForm =
+  document.getElementById("rsvpForm");
+
+const thankYou =
+  document.getElementById("thankYou");
+
+
+const googleScriptURL =
+"https://script.google.com/macros/s/AKfycbwhcI7eEUuhAeb9LDD_iOQV1yOXX-iSxou8kYnM_B9J6Z9Fxjma_F5E0-zGMMi_fKo/exec";
+
+
+rsvpForm.addEventListener(
+  "submit",
+  function(event){
+
+    event.preventDefault();
+
+
+    const name =
+      document.getElementById(
+        "guestName"
+      ).value.trim();
+
+
+    const attendance =
+      document.querySelector(
+        'input[name="attendance"]:checked'
+      ).value;
+
+
+    const guests =
+      document.getElementById(
+        "guestCount"
+      ).value;
+
+
+    const data = {
+
+      mode:"no-cors",
+
+      name:name,
+
+      attendance:attendance,
+
+      guests:guests,
+
+      timestamp:
+        new Date().toISOString()
+
+    };
+
+
+    /*
+       Send RSVP to Google Apps Script
+    */
+
+    fetch(
+      googleScriptURL,
+      {
+        method:"POST",
+
+        mode:"no-cors",
+
+        headers:{
+          "Content-Type":
+            "application/json"
+        },
+
+        body:JSON.stringify(data)
+
+      }
+    )
+    .then(function(){
+
+      rsvpForm.style.display =
+        "none";
+
+      thankYou.style.display =
+        "block";
+
+    })
+    .catch(function(error){
+
+      console.log(error);
+
+      /*
+         Because no-cors does not expose
+         the response, we still show the
+         confirmation after sending.
+      */
+
+      rsvpForm.style.display =
+        "none";
+
+      thankYou.style.display =
+        "block";
+
+    });
+
+  }
+);
+
+</script>
+
 </body>
 </html>
