@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -12,9 +13,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <link rel="stylesheet"
-href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 
 <style>
+
+/* =====================================================
+   RESET
+===================================================== */
 
 *{
     margin:0;
@@ -27,457 +32,945 @@ html{
 }
 
 body{
-    background:#fbf8f1;
-    color:#4d2430;
+    background:#f8f2e7;
+    color:#5b2634;
     font-family:'Cormorant Garamond',serif;
     overflow-x:hidden;
 }
 
-/* =========================
-   FLOWER BACKGROUND
-========================= */
 
-#flowers{
+/* =====================================================
+   BACKGROUND
+===================================================== */
+
+body::before{
+
+    content:"";
+
     position:fixed;
     inset:0;
-    pointer-events:none;
+
+    z-index:-5;
+
+    background:
+    linear-gradient(
+        rgba(248,242,231,.68),
+        rgba(248,242,231,.68)
+    ),
+    url("https://files.catbox.moe/kgdqjb.png");
+
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+}
+
+
+/* =====================================================
+   SIDE FLOWERS
+===================================================== */
+
+#flowers{
+
+    position:fixed;
+    inset:0;
+
     z-index:0;
+
+    pointer-events:none;
+
     overflow:hidden;
 }
 
 .flower{
+
     position:absolute;
-    width:190px;
-    opacity:.34;
-    animation:sway 7s ease-in-out infinite;
+
+    width:225px;
+
+    opacity:1;
+
 }
 
 .flower.left{
-    left:-65px;
+    left:-105px;
 }
 
 .flower.right{
-    right:-65px;
+    right:-105px;
     transform:scaleX(-1);
 }
 
-.f1{top:8%;}
-.f2{top:42%;animation-delay:2s;}
-.f3{top:75%;animation-delay:4s;}
-
-@keyframes sway{
-    0%,100%{
-        transform:rotate(-2deg);
-    }
-    50%{
-        transform:rotate(3deg);
-    }
+.f1{
+    top:3%;
 }
 
-/* =========================
-   COMMON
-========================= */
+.f2{
+    top:38%;
+}
+
+.f3{
+    top:73%;
+}
+
+
+/* =====================================================
+   MAIN
+===================================================== */
+
+main,
+footer{
+
+    position:relative;
+
+    z-index:3;
+}
 
 section{
+
     position:relative;
-    z-index:2;
+
     min-height:100vh;
-    padding:80px 20px;
+
+    padding:90px 18px;
+
     display:flex;
+
     align-items:center;
+
     justify-content:center;
 }
 
 .content{
+
     width:100%;
-    max-width:850px;
+
+    max-width:900px;
+
     text-align:center;
 }
 
-.script{
-    font-family:'Great Vibes',cursive;
-    color:#9a7650;
+
+/* =====================================================
+   TEXT
+===================================================== */
+
+.subheading{
+
+    font-family:'Montserrat',sans-serif;
+
+    font-size:11px;
+
+    letter-spacing:4px;
+
+    text-transform:uppercase;
+
+    color:#987653;
+
+    margin-bottom:18px;
 }
 
 .heading{
-    font-size:52px;
-    font-weight:500;
-    color:#651f2c;
-    margin-bottom:15px;
-}
 
-.subheading{
-    font-family:'Montserrat',sans-serif;
-    font-size:12px;
-    letter-spacing:4px;
-    text-transform:uppercase;
-    color:#92765d;
-    margin-bottom:25px;
+    font-size:52px;
+
+    font-weight:500;
+
+    color:#682536;
 }
 
 .gold-line{
+
     width:90px;
+
     height:1px;
-    background:#b69a70;
-    margin:20px auto 30px;
+
+    background:#b99a68;
+
+    margin:22px auto 30px;
 }
 
 .text{
+
     font-size:20px;
+
     line-height:1.7;
-    color:#654650;
+
+    color:#684b50;
 }
 
-/* =========================
-   DOOR INTRO
-========================= */
+
+/* =====================================================
+   ULTRA SMOOTH GATE INTRO
+===================================================== */
 
 #intro{
+
     position:fixed;
+
     inset:0;
-    z-index:100;
-    background:#fbf8f1;
-    display:flex;
-    align-items:center;
-    justify-content:center;
+
+    z-index:1000;
+
+    background:#f8f2e7;
+
     overflow:hidden;
-    transition:opacity 1.2s ease;
+
+    opacity:1;
+
+    transition:
+        opacity 1.5s ease;
+
 }
+
+
+/* -----------------------------------------------
+   STILL IMAGE
+----------------------------------------------- */
 
 #doorStill{
+
     position:absolute;
+
     inset:0;
+
     width:100%;
+
     height:100%;
+
     object-fit:cover;
+
+    z-index:1;
+
+    opacity:1;
+
+    transition:
+        opacity 1.2s ease;
+
+    /*
+       IMPORTANT:
+       image NEVER gets display:none
+       during transition.
+    */
 }
+
+
+/* -----------------------------------------------
+   DOOR VIDEO
+----------------------------------------------- */
 
 #doorVideo{
+
     position:absolute;
+
     inset:0;
+
     width:100%;
+
     height:100%;
+
     object-fit:cover;
-    display:none;
+
+    z-index:2;
+
+    opacity:0;
+
+    display:block;
+
+    /*
+       Video is already there underneath
+       but invisible.
+    */
+
+    transition:
+        opacity 1.15s ease;
+
+    pointer-events:none;
+
+    background:#f8f2e7;
 }
 
+
+/* -----------------------------------------------
+   TAP TEXT
+----------------------------------------------- */
+
 #tapText{
+
     position:absolute;
-    bottom:12%;
+
     left:50%;
+
+    bottom:11%;
+
     transform:translateX(-50%);
+
     z-index:5;
-    color:#fffaf0;
+
+    color:#fff8eb;
+
     font-family:'Great Vibes',cursive;
+
     font-size:34px;
-    text-shadow:0 2px 12px rgba(0,0,0,.35);
-    cursor:pointer;
+
     white-space:nowrap;
-    animation:pulse 2s infinite;
+
+    cursor:pointer;
+
+    text-shadow:
+        0 2px 12px rgba(0,0,0,.5);
+
+    opacity:1;
+
+    transition:
+        opacity .7s ease,
+        transform .7s ease;
+
+    animation:pulse 2s ease-in-out infinite;
 }
 
 @keyframes pulse{
-    0%,100%{opacity:.75}
-    50%{opacity:1}
+
+    0%,100%{
+        opacity:.75;
+    }
+
+    50%{
+        opacity:1;
+    }
 }
 
-/* =========================
+
+/* =====================================================
    MUSIC
-========================= */
+===================================================== */
 
 #musicToggle{
+
     position:fixed;
+
     right:16px;
+
     bottom:18px;
-    z-index:90;
-    border:1px solid rgba(150,110,75,.5);
-    background:rgba(251,248,241,.9);
-    color:#682332;
+
+    z-index:900;
+
+    padding:9px 15px;
+
+    border:1px solid #ad8d62;
+
     border-radius:30px;
-    padding:9px 14px;
+
+    background:rgba(248,242,231,.94);
+
+    color:#682536;
+
     font-family:'Montserrat',sans-serif;
+
     font-size:10px;
+
     letter-spacing:1px;
 }
 
-/* =========================
-   VIDEO SECTIONS
-========================= */
 
-.video-wrap{
+/* =====================================================
+   VIDEO FRAME
+===================================================== */
+
+.video-frame{
+
+    position:relative;
+
     width:100%;
+
     max-width:850px;
-    margin:25px auto;
+
+    margin:35px auto;
+
+    padding:9px;
+
+    border:1px solid #b89a68;
+
+    background:rgba(248,242,231,.2);
 }
 
-.video-wrap video{
+.video-frame::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:5px;
+
+    border:1px solid rgba(184,154,104,.55);
+
+    pointer-events:none;
+
+    z-index:3;
+}
+
+.video-frame::after{
+
+    content:"✿";
+
+    position:absolute;
+
+    right:3px;
+
+    bottom:-16px;
+
+    width:34px;
+
+    height:34px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:27px;
+
+    color:#9b7651;
+
+    background:#f8f2e7;
+
+    z-index:5;
+}
+
+.video-frame .corner-flower{
+
+    position:absolute;
+
+    left:3px;
+
+    bottom:-16px;
+
+    width:34px;
+
+    height:34px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:27px;
+
+    color:#9b7651;
+
+    background:#f8f2e7;
+
+    z-index:5;
+}
+
+.video-frame video{
+
     width:100%;
+
     height:auto;
-    max-height:80vh;
-    object-fit:contain;
+
     display:block;
-    margin:auto;
+
+    object-fit:contain;
 }
 
-/* =========================
+
+/* =====================================================
    COUNTDOWN
-========================= */
+===================================================== */
+
+.countdown-frame{
+
+    position:relative;
+
+    width:100%;
+
+    max-width:850px;
+
+    margin:35px auto;
+
+    padding:9px;
+
+    border:1px solid #b89a68;
+
+    background:#f8f2e7;
+}
+
+.countdown-frame::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:5px;
+
+    border:1px solid rgba(184,154,104,.55);
+
+    z-index:5;
+
+    pointer-events:none;
+}
+
+.countdown-frame .corner{
+
+    position:absolute;
+
+    z-index:10;
+
+    width:38px;
+
+    height:38px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    color:#9b7651;
+
+    background:#f8f2e7;
+
+    font-size:28px;
+}
+
+.corner.tl{
+    top:-14px;
+    left:-5px;
+}
+
+.corner.tr{
+    top:-14px;
+    right:-5px;
+}
+
+.corner.bl{
+    bottom:-14px;
+    left:-5px;
+}
+
+.corner.br{
+    bottom:-14px;
+    right:-5px;
+}
 
 .countdown-video{
+
     position:relative;
+
     width:100%;
-    max-width:850px;
-    margin:auto;
-}
 
-.countdown-video video{
-    width:100%;
-    height:auto;
-    display:block;
-    object-fit:contain;
-}
-
-.tickcounter{
-    position:absolute;
-    left:50%;
-    top:50%;
-    transform:translate(-50%,-50%);
-    width:88%;
-    max-width:700px;
-}
-
-/* =========================
-   EVENT SECTIONS
-========================= */
-
-.event-date{
-    font-family:'Great Vibes',cursive;
-    color:#9a7650;
-    font-size:36px;
-    margin:8px 0;
-}
-
-.event-name{
-    font-size:58px;
-    color:#651f2c;
-    font-weight:500;
-}
-
-.venue{
-    font-family:'Montserrat',sans-serif;
-    font-size:12px;
-    letter-spacing:2px;
-    text-transform:uppercase;
-    color:#816b5b;
-    margin:15px auto 25px;
-    line-height:1.8;
-}
-
-.map{
-    width:100%;
-    max-width:700px;
-    height:300px;
-    margin:30px auto 20px;
-    border-radius:4px;
     overflow:hidden;
 }
 
-.map-button{
-    display:inline-block;
-    padding:11px 22px;
-    border:1px solid #9c7b58;
-    color:#651f2c;
-    text-decoration:none;
-    font-family:'Montserrat',sans-serif;
-    font-size:10px;
-    letter-spacing:2px;
-    text-transform:uppercase;
+.countdown-video video{
+
+    width:100%;
+
+    height:auto;
+
+    display:block;
+
+    object-fit:contain;
 }
 
-/* =========================
-   DRESS CODE
-========================= */
+.tickcounter-container{
 
-.dress-image{
-    width:100%;
-    max-width:850px;
+    position:absolute;
+
+    left:50%;
+
+    top:50%;
+
+    transform:translate(-50%,-50%);
+
+    width:82%;
+
+    z-index:20;
+}
+
+.tickcounter{
+
     display:block;
+
+    width:100%;
+
+    position:relative;
+
+    padding-bottom:25%;
+
+    background:transparent !important;
+
+    border:0 !important;
+}
+
+
+/* =====================================================
+   EVENTS
+===================================================== */
+
+.event-name{
+
+    font-size:58px;
+
+    font-weight:500;
+
+    color:#682536;
+}
+
+.event-date{
+
+    font-family:'Great Vibes',cursive;
+
+    font-size:34px;
+
+    color:#9a7651;
+
+    margin-top:4px;
+}
+
+.venue{
+
+    font-family:'Montserrat',sans-serif;
+
+    font-size:11px;
+
+    line-height:1.9;
+
+    letter-spacing:1.5px;
+
+    text-transform:uppercase;
+
+    color:#806a5d;
+
     margin:25px auto;
 }
 
-/* =========================
+
+/* =====================================================
+   MAP
+===================================================== */
+
+.map{
+
+    width:100%;
+
+    max-width:700px;
+
+    height:290px;
+
+    margin:30px auto 20px;
+
+    border:1px solid #b89a68;
+}
+
+.map-button{
+
+    display:inline-block;
+
+    padding:11px 22px;
+
+    border:1px solid #9d7c57;
+
+    color:#682536;
+
+    text-decoration:none;
+
+    font-family:'Montserrat',sans-serif;
+
+    font-size:9px;
+
+    letter-spacing:2px;
+
+    text-transform:uppercase;
+}
+
+
+/* =====================================================
+   DRESS CODE
+===================================================== */
+
+.dress-frame{
+
+    position:relative;
+
+    max-width:850px;
+
+    margin:auto;
+
+    padding:9px;
+
+    border:1px solid #b89a68;
+}
+
+.dress-frame img{
+
+    width:100%;
+
+    display:block;
+}
+
+
+/* =====================================================
    RSVP
-========================= */
+===================================================== */
 
 .rsvp-box{
+
+    position:relative;
+
     width:100%;
+
     max-width:700px;
+
     margin:auto;
+
+    border:1px solid #b89a68;
+
+    padding:8px;
+}
+
+.rsvp-inner{
+
     position:relative;
 }
 
 .rsvp-bg{
+
     width:100%;
+
     display:block;
 }
 
 .rsvp-form{
+
     position:absolute;
+
     inset:0;
+
     display:flex;
+
     flex-direction:column;
+
     align-items:center;
+
     justify-content:center;
-    padding:15%;
-    gap:14px;
+
+    padding:12%;
+
+    gap:12px;
+}
+
+.rsvp-title{
+
+    font-family:'Great Vibes',cursive;
+
+    color:white;
+
+    font-size:48px;
+}
+
+.rsvp-label{
+
+    color:white;
+
+    font-family:'Montserrat',sans-serif;
+
+    font-size:9px;
+
+    letter-spacing:2px;
 }
 
 .rsvp-form input,
 .rsvp-form select{
+
     width:90%;
-    max-width:390px;
-    padding:12px;
-    border:none;
+
+    max-width:380px;
+
+    padding:10px;
+
+    border:0;
+
     border-bottom:1px solid rgba(255,255,255,.7);
+
     background:transparent;
-    color:white;
-    font-family:'Cormorant Garamond',serif;
-    font-size:18px;
+
     outline:none;
+
+    color:white;
+
+    font-family:'Cormorant Garamond',serif;
+
+    font-size:17px;
 }
 
 .rsvp-form input::placeholder{
+
     color:white;
+
     opacity:.9;
 }
 
 .rsvp-form select{
+
     color:white;
 }
 
 .rsvp-form option{
-    color:#4d2430;
-}
 
-.rsvp-title{
-    font-family:'Great Vibes',cursive;
-    color:white;
-    font-size:45px;
-}
-
-.rsvp-label{
-    color:white;
-    font-family:'Montserrat',sans-serif;
-    font-size:10px;
-    letter-spacing:2px;
+    color:#682536;
 }
 
 .attendance{
-    display:flex;
-    gap:18px;
-    color:white;
-    font-family:'Montserrat',sans-serif;
-    font-size:11px;
-}
 
-.attendance label{
-    cursor:pointer;
+    display:flex;
+
+    gap:18px;
+
+    color:white;
+
+    font-family:'Montserrat',sans-serif;
+
+    font-size:10px;
 }
 
 .rsvp-button{
-    margin-top:10px;
-    padding:12px 28px;
+
+    padding:11px 26px;
+
     border:1px solid rgba(255,255,255,.8);
+
     background:transparent;
+
     color:white;
+
     font-family:'Montserrat',sans-serif;
-    font-size:10px;
+
+    font-size:9px;
+
     letter-spacing:2px;
+
     cursor:pointer;
 }
 
 #rsvpMessage{
+
     color:white;
+
     font-family:'Great Vibes',cursive;
+
     font-size:24px;
+
     text-align:center;
 }
 
-/* =========================
+
+/* =====================================================
    FOOTER
-========================= */
+===================================================== */
 
 footer{
-    position:relative;
-    z-index:2;
+
     text-align:center;
-    padding:60px 20px;
-    color:#9a7650;
+
+    padding:70px 20px;
+
+    color:#8f704f;
 }
 
 footer .script{
-    font-size:42px;
+
+    font-family:'Great Vibes',cursive;
+
+    font-size:44px;
 }
 
-/* =========================
+
+/* =====================================================
    MOBILE
-========================= */
+===================================================== */
 
 @media(max-width:600px){
 
     section{
+
         min-height:auto;
-        padding:85px 18px;
+
+        padding:85px 15px;
     }
 
     .heading{
         font-size:42px;
     }
 
-    .text{
-        font-size:18px;
-    }
-
     .event-name{
-        font-size:46px;
+        font-size:47px;
     }
 
     .event-date{
         font-size:30px;
     }
 
+    .text{
+        font-size:18px;
+    }
+
     .flower{
-        width:145px;
-        opacity:.28;
+        width:180px;
+    }
+
+    .flower.left{
+        left:-85px;
+    }
+
+    .flower.right{
+        right:-85px;
     }
 
     #tapText{
+
         font-size:29px;
+
         bottom:10%;
     }
 
+    .video-frame{
+        padding:7px;
+    }
+
     .map{
-        height:260px;
+        height:250px;
     }
 
     .rsvp-form{
-        padding:10%;
-        gap:7px;
+        padding:8%;
+
+        gap:6px;
     }
 
     .rsvp-title{
-        font-size:32px;
+        font-size:34px;
     }
 
     .rsvp-form input,
     .rsvp-form select{
-        font-size:15px;
-        padding:7px;
+
+        font-size:14px;
+
+        padding:6px;
     }
 
     .attendance{
-        font-size:9px;
-        gap:8px;
+
+        font-size:8px;
+
+        gap:7px;
+    }
+
+    .rsvp-button{
+        padding:8px 18px;
     }
 
 }
@@ -485,79 +978,109 @@ footer .script{
 </style>
 </head>
 
+
 <body>
 
-<!-- =========================
+
+<!-- =====================================================
      FLOWERS
-========================= -->
+===================================================== -->
 
 <div id="flowers">
 
-    <img class="flower left f1"
-    src="https://files.catbox.moe/kgdqjb.png">
+<img
+class="flower left f1"
+src="https://files.catbox.moe/kgdqjb.png">
 
-    <img class="flower right f1"
-    src="https://files.catbox.moe/kgdqjb.png">
+<img
+class="flower right f1"
+src="https://files.catbox.moe/kgdqjb.png">
 
-    <img class="flower left f2"
-    src="https://files.catbox.moe/kgdqjb.png">
+<img
+class="flower left f2"
+src="https://files.catbox.moe/kgdqjb.png">
 
-    <img class="flower right f2"
-    src="https://files.catbox.moe/kgdqjb.png">
+<img
+class="flower right f2"
+src="https://files.catbox.moe/kgdqjb.png">
 
-    <img class="flower left f3"
-    src="https://files.catbox.moe/kgdqjb.png">
+<img
+class="flower left f3"
+src="https://files.catbox.moe/kgdqjb.png">
 
-    <img class="flower right f3"
-    src="https://files.catbox.moe/kgdqjb.png">
+<img
+class="flower right f3"
+src="https://files.catbox.moe/kgdqjb.png">
 
 </div>
 
 
-<!-- =========================
-     INTRO DOOR
-========================= -->
+<!-- =====================================================
+     INTRO
+===================================================== -->
 
 <div id="intro">
 
-    <img
-    id="doorStill"
-    src="https://files.catbox.moe/8ojdw9.png">
 
-    <video
-    id="doorVideo"
-    playsinline
-    preload="auto">
-        <source src="darwaza.mp4" type="video/mp4">
-    </video>
+<img
+id="doorStill"
+src="https://files.catbox.moe/8ojdw9.png">
 
-    <div id="tapText">
-        Tap to Open Invitation
-    </div>
+
+<video
+id="doorVideo"
+playsinline
+preload="auto"
+muted>
+
+<source
+src="darwaza.mp4"
+type="video/mp4">
+
+</video>
+
+
+<div id="tapText">
+Tap to Open Invitation
+</div>
+
 
 </div>
 
 
-<!-- =========================
+<!-- =====================================================
      MUSIC
-========================= -->
+===================================================== -->
 
-<audio id="music" loop preload="auto">
-    <source src="dekha tenu.mp3" type="audio/mpeg">
+<audio
+id="music"
+loop
+preload="auto">
+
+<source
+src="dekha tenu.mp3"
+type="audio/mpeg">
+
 </audio>
 
+
 <button id="musicToggle">
-    🔊 Sound: On
+🔊 Sound: On
 </button>
 
 
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
 <main>
 
-<!-- =========================
-     PARENTS
-========================= -->
 
-<section id="parents">
+<!-- =====================================================
+     PARENTS
+===================================================== -->
+
+<section>
 
 <div class="content">
 
@@ -571,7 +1094,13 @@ Timeless Grace
 
 <div class="gold-line"></div>
 
-<div class="video-wrap">
+
+<div class="video-frame">
+
+<span class="corner-flower">
+✿
+</span>
+
 <video
 src="parents.mp4"
 playsinline
@@ -579,12 +1108,16 @@ autoplay
 loop
 muted>
 </video>
+
 </div>
 
+
 <p class="text">
+
 With hearts full of joy and gratitude,
-we invite you to celebrate the beautiful
-beginning of our forever.
+we invite you to celebrate
+the beautiful beginning of our forever.
+
 </p>
 
 </div>
@@ -592,11 +1125,11 @@ beginning of our forever.
 </section>
 
 
-<!-- =========================
+<!-- =====================================================
      COUNTDOWN
-========================= -->
+===================================================== -->
 
-<section id="countdown">
+<section>
 
 <div class="content">
 
@@ -610,7 +1143,21 @@ Until Forever
 
 <div class="gold-line"></div>
 
+
+<div class="countdown-frame">
+
+
+<div class="corner tl">✿</div>
+
+<div class="corner tr">✿</div>
+
+<div class="corner bl">✿</div>
+
+<div class="corner br">✿</div>
+
+
 <div class="countdown-video">
+
 
 <video
 src="countdown.mp4"
@@ -620,11 +1167,22 @@ loop
 muted>
 </video>
 
-<div class="tickcounter">
-<div
-data-tickcounter-id="11468420"
-style="width:100%;position:relative;padding-bottom:25%;">
+
+<div class="tickcounter-container">
+
+<a
+class="tickcounter"
+data-type="countdown"
+data-id="11468420"
+href="https://www.tickcounter.com">
+
+Countdown
+
+</a>
+
 </div>
+
+
 </div>
 
 </div>
@@ -634,9 +1192,9 @@ style="width:100%;position:relative;padding-bottom:25%;">
 </section>
 
 
-<!-- =========================
+<!-- =====================================================
      DHOLKI
-========================= -->
+===================================================== -->
 
 <section>
 
@@ -656,7 +1214,12 @@ Friday • 7:00 PM
 
 <div class="gold-line"></div>
 
-<div class="video-wrap">
+
+<div class="video-frame">
+
+<span class="corner-flower">
+✿
+</span>
 
 <video
 src="dholki.mp4"
@@ -668,20 +1231,30 @@ muted>
 
 </div>
 
+
 <div class="venue">
+
 Royal Palace<br>
 Bedian Road, Plot #10<br>
 Adjoin Askari 11, Near DHA Phase 5<br>
 Ring Road, Lahore
+
 </div>
 
-<div id="mapDholki" class="map"></div>
+
+<div
+id="mapDholki"
+class="map">
+</div>
+
 
 <a
 class="map-button"
 target="_blank"
 href="https://www.google.com/maps/search/?api=1&query=Royal+Palace+Bedian+Road+Lahore">
+
 Open in Google Maps
+
 </a>
 
 </div>
@@ -689,9 +1262,9 @@ Open in Google Maps
 </section>
 
 
-<!-- =========================
+<!-- =====================================================
      MEHNDI
-========================= -->
+===================================================== -->
 
 <section>
 
@@ -711,7 +1284,12 @@ Saturday • 7:00 PM
 
 <div class="gold-line"></div>
 
-<div class="video-wrap">
+
+<div class="video-frame">
+
+<span class="corner-flower">
+✿
+</span>
 
 <video
 src="mehndi.mp4"
@@ -723,18 +1301,28 @@ muted>
 
 </div>
 
+
 <div class="venue">
+
 Le Aura Grand Events & Hotel<br>
 Lahore, Pakistan
+
 </div>
 
-<div id="mapMehndi" class="map"></div>
+
+<div
+id="mapMehndi"
+class="map">
+</div>
+
 
 <a
 class="map-button"
 target="_blank"
 href="https://www.google.com/maps/search/?api=1&query=Le+Aura+Grand+Events+Hotel+Lahore">
+
 Open in Google Maps
+
 </a>
 
 </div>
@@ -742,9 +1330,9 @@ Open in Google Maps
 </section>
 
 
-<!-- =========================
+<!-- =====================================================
      SHADI
-========================= -->
+===================================================== -->
 
 <section>
 
@@ -764,7 +1352,12 @@ Sunday • 8:00 PM
 
 <div class="gold-line"></div>
 
-<div class="video-wrap">
+
+<div class="video-frame">
+
+<span class="corner-flower">
+✿
+</span>
 
 <video
 src="shadi.mp4"
@@ -776,19 +1369,29 @@ muted>
 
 </div>
 
+
 <div class="venue">
+
 Shershah Palace, Marquee & Farmhouse<br>
 Adda Plot, Raiwind Road<br>
 Eden Park, Lahore
+
 </div>
 
-<div id="mapShadi" class="map"></div>
+
+<div
+id="mapShadi"
+class="map">
+</div>
+
 
 <a
 class="map-button"
 target="_blank"
 href="https://www.google.com/maps/search/?api=1&query=Shershah+Palace+Marquee+Farmhouse+Lahore">
+
 Open in Google Maps
+
 </a>
 
 </div>
@@ -796,9 +1399,9 @@ Open in Google Maps
 </section>
 
 
-<!-- =========================
+<!-- =====================================================
      WALIMA
-========================= -->
+===================================================== -->
 
 <section>
 
@@ -818,7 +1421,12 @@ Monday • 8:00 PM
 
 <div class="gold-line"></div>
 
-<div class="video-wrap">
+
+<div class="video-frame">
+
+<span class="corner-flower">
+✿
+</span>
 
 <video
 src="Walima.mp4"
@@ -830,18 +1438,28 @@ muted>
 
 </div>
 
+
 <div class="venue">
+
 Grand Vista<br>
 Lahore, Pakistan
+
 </div>
 
-<div id="mapWalima" class="map"></div>
+
+<div
+id="mapWalima"
+class="map">
+</div>
+
 
 <a
 class="map-button"
 target="_blank"
 href="https://www.google.com/maps/search/?api=1&query=Grand+Vista+Lahore">
+
 Open in Google Maps
+
 </a>
 
 </div>
@@ -849,9 +1467,9 @@ Open in Google Maps
 </section>
 
 
-<!-- =========================
+<!-- =====================================================
      DRESS CODE
-========================= -->
+===================================================== -->
 
 <section>
 
@@ -867,18 +1485,22 @@ Dress Code
 
 <div class="gold-line"></div>
 
+
+<div class="dress-frame">
+
 <img
-class="dress-image"
 src="https://files.catbox.moe/vxcqqa.png">
+
+</div>
 
 </div>
 
 </section>
 
 
-<!-- =========================
+<!-- =====================================================
      RSVP
-========================= -->
+===================================================== -->
 
 <section>
 
@@ -888,19 +1510,25 @@ src="https://files.catbox.moe/vxcqqa.png">
 We would love to celebrate with you
 </div>
 
+
 <div class="rsvp-box">
+
+<div class="rsvp-inner">
 
 <img
 class="rsvp-bg"
 src="https://files.catbox.moe/hsk39c.png">
 
+
 <form
 class="rsvp-form"
 id="rsvpForm">
 
+
 <div class="rsvp-title">
 RSVP
 </div>
+
 
 <input
 type="text"
@@ -908,32 +1536,44 @@ id="guestName"
 placeholder="Your Name"
 required>
 
+
 <div class="rsvp-label">
 WILL YOU BE JOINING US?
 </div>
 
+
 <div class="attendance">
 
 <label>
+
 <input
 type="radio"
 name="attendance"
 value="Joyfully Accept"
 required>
+
 Joyfully Accept
+
 </label>
 
+
 <label>
+
 <input
 type="radio"
 name="attendance"
 value="Regretfully Reject">
+
 Regretfully Reject
+
 </label>
 
 </div>
 
-<select id="guestCount" required>
+
+<select
+id="guestCount"
+required>
 
 <option value="">
 Number of Guests
@@ -948,13 +1588,18 @@ Number of Guests
 
 </select>
 
+
 <button
 class="rsvp-button"
 type="submit">
+
 Confirm RSVP
+
 </button>
 
+
 <div id="rsvpMessage"></div>
+
 
 </form>
 
@@ -962,14 +1607,17 @@ Confirm RSVP
 
 </div>
 
+</div>
+
 </section>
+
 
 </main>
 
 
-<!-- =========================
+<!-- =====================================================
      FOOTER
-========================= -->
+===================================================== -->
 
 <footer>
 
@@ -978,117 +1626,256 @@ Timeless Grace
 </div>
 
 <p>
+
 Together with our families,<br>
 we look forward to celebrating with you.
+
 </p>
 
 </footer>
 
 
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<!-- =====================================================
+     SCRIPTS
+===================================================== -->
 
-<script async
-src="https://cdn.tickcounter.com/loader.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+</script>
+
+
+<!-- TICKCOUNTER -->
+
+<script>
+
+(function(d,s,id){
+
+    var js;
+
+    var pjs=d.getElementsByTagName(s)[0];
+
+    if(d.getElementById(id)) return;
+
+    js=d.createElement(s);
+
+    js.id=id;
+
+    js.src=
+    "https://www.tickcounter.com/static/js/loader.js";
+
+    pjs.parentNode.insertBefore(js,pjs);
+
+})(document,"script","tickcounter-sdk");
+
+</script>
 
 
 <script>
 
-/* =========================
-   DOOR OPENING
-========================= */
+/* =====================================================
+   DOOR — SMOOTH TRANSITION
+===================================================== */
 
-const intro = document.getElementById("intro");
-const doorStill = document.getElementById("doorStill");
-const doorVideo = document.getElementById("doorVideo");
-const tapText = document.getElementById("tapText");
-const music = document.getElementById("music");
-const musicToggle = document.getElementById("musicToggle");
+const intro =
+document.getElementById("intro");
 
-let musicPlaying = false;
+const doorStill =
+document.getElementById("doorStill");
+
+const doorVideo =
+document.getElementById("doorVideo");
+
+const tapText =
+document.getElementById("tapText");
+
+const music =
+document.getElementById("music");
+
+const musicToggle =
+document.getElementById("musicToggle");
 
 
-tapText.addEventListener("click", function(){
+/*
+   Preload video.
+*/
 
-    doorStill.style.display = "none";
-    tapText.style.display = "none";
+doorVideo.load();
 
-    doorVideo.style.display = "block";
 
-    music.volume = 0.65;
+/*
+   TAP
+*/
 
-    music.play().then(()=>{
-        musicPlaying = true;
-        musicToggle.innerHTML = "🔊 Sound: On";
-    }).catch(()=>{});
+tapText.addEventListener("click",function(){
 
-    doorVideo.currentTime = 0;
+    /*
+       Prevent double tap
+    */
 
-    doorVideo.play();
+    tapText.style.pointerEvents="none";
+
+
+    /*
+       Start music IMMEDIATELY
+       from same user interaction.
+    */
+
+    music.currentTime=0;
+
+    music.volume=.7;
+
+    music.play()
+    .then(()=>{
+
+        musicToggle.innerHTML="🔊 Sound: On";
+
+    })
+    .catch(()=>{});
+
+
+    /*
+       Make sure door video
+       has absolutely NO sound.
+    */
+
+    doorVideo.muted=true;
+
+    doorVideo.volume=0;
+
+
+    /*
+       Prepare video from beginning.
+    */
+
+    doorVideo.currentTime=0;
+
+
+    /*
+       Fade Tap text away.
+    */
+
+    tapText.style.opacity="0";
+
+    tapText.style.transform=
+    "translateX(-50%) translateY(8px)";
+
+
+    /*
+       FIRST:
+       Start video underneath.
+    */
+
+    doorVideo.play()
+    .then(()=>{
+
+        /*
+           Video is now actually playing.
+
+           Only NOW fade the picture away.
+           This prevents the blank/jump effect.
+        */
+
+        requestAnimationFrame(()=>{
+
+            doorVideo.style.opacity="1";
+
+            doorStill.style.opacity="0";
+
+        });
+
+    })
+    .catch(()=>{
+
+        /*
+           Fallback
+        */
+
+        doorVideo.style.opacity="1";
+
+        doorStill.style.opacity="0";
+
+    });
 
 });
 
 
-doorVideo.addEventListener("ended", function(){
+/*
+   Remove intro only after
+   door animation completely finishes.
+*/
 
-    intro.style.opacity = "0";
+doorVideo.addEventListener("ended",function(){
+
+    intro.style.opacity="0";
 
     setTimeout(function(){
-        intro.style.display = "none";
-    },1200);
+
+        intro.style.display="none";
+
+    },1500);
 
 });
 
 
-/* =========================
+/* =====================================================
    MUSIC BUTTON
-========================= */
+===================================================== */
 
-musicToggle.addEventListener("click", function(){
+musicToggle.addEventListener("click",function(){
 
     if(music.paused){
 
         music.play();
 
-        musicPlaying = true;
-
-        musicToggle.innerHTML = "🔊 Sound: On";
+        musicToggle.innerHTML=
+        "🔊 Sound: On";
 
     }else{
 
         music.pause();
 
-        musicPlaying = false;
-
-        musicToggle.innerHTML = "🔇 Sound: Off";
+        musicToggle.innerHTML=
+        "🔇 Sound: Off";
 
     }
 
 });
 
 
-/* =========================
+/* =====================================================
    MAPS
-========================= */
+===================================================== */
 
-function createMap(id, lat, lng){
+function createMap(id,lat,lng){
 
-    const map = L.map(id,{
+    const map=
+    L.map(id,{
         scrollWheelZoom:false
-    }).setView([lat,lng],15);
+    })
+    .setView([lat,lng],15);
+
 
     L.tileLayer(
         "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
         {
             attribution:"© OpenStreetMap"
         }
-    ).addTo(map);
+    )
+    .addTo(map);
 
-    L.marker([lat,lng]).addTo(map);
+
+    L.marker([lat,lng])
+    .addTo(map);
 
 }
 
 
-document.addEventListener("DOMContentLoaded",function(){
+/* =====================================================
+   MAP INITIALIZATION
+===================================================== */
+
+document.addEventListener(
+"DOMContentLoaded",
+function(){
 
     createMap(
         "mapDholki",
@@ -1096,17 +1883,20 @@ document.addEventListener("DOMContentLoaded",function(){
         74.4105
     );
 
+
     createMap(
         "mapMehndi",
         31.5204,
         74.3587
     );
 
+
     createMap(
         "mapShadi",
         31.4075,
         74.2320
     );
+
 
     createMap(
         "mapWalima",
@@ -1117,56 +1907,85 @@ document.addEventListener("DOMContentLoaded",function(){
 });
 
 
-/* =========================
+/* =====================================================
    RSVP
-========================= */
+===================================================== */
 
-const rsvpForm =
+const rsvpForm=
 document.getElementById("rsvpForm");
 
-const rsvpMessage =
+const rsvpMessage=
 document.getElementById("rsvpMessage");
 
 
-const SCRIPT_URL =
+const SCRIPT_URL=
 "https://script.google.com/macros/s/AKfycbwhcI7eEUuhAeb9LDD_iOQV1yOXX-iSxou8kYnM_B9J6Z9Fxjma_F5E0-zGMMi_fKo/exec";
 
 
-rsvpForm.addEventListener("submit",function(e){
+rsvpForm.addEventListener(
+"submit",
+function(e){
 
     e.preventDefault();
 
-    const name =
-    document.getElementById("guestName").value;
 
-    const attendance =
+    const name=
+    document.getElementById(
+        "guestName"
+    ).value;
+
+
+    const attendance=
     document.querySelector(
         'input[name="attendance"]:checked'
     ).value;
 
-    const guests =
-    document.getElementById("guestCount").value;
+
+    const guests=
+    document.getElementById(
+        "guestCount"
+    ).value;
 
 
-    const data = new URLSearchParams();
+    const data=
+    new URLSearchParams();
 
-    data.append("name",name);
-    data.append("attendance",attendance);
-    data.append("guests",guests);
+
+    data.append(
+        "name",
+        name
+    );
+
+
+    data.append(
+        "attendance",
+        attendance
+    );
+
+
+    data.append(
+        "guests",
+        guests
+    );
+
+
     data.append(
         "timestamp",
         new Date().toISOString()
     );
 
 
-    fetch(SCRIPT_URL,{
-        method:"POST",
-        mode:"no-cors",
-        body:data
-    })
+    fetch(
+        SCRIPT_URL,
+        {
+            method:"POST",
+            mode:"no-cors",
+            body:data
+        }
+    )
     .then(()=>{
 
-        rsvpMessage.innerHTML =
+        rsvpMessage.innerHTML=
         "Thank you for your response ♡";
 
         rsvpForm.reset();
@@ -1174,7 +1993,7 @@ rsvpForm.addEventListener("submit",function(e){
     })
     .catch(()=>{
 
-        rsvpMessage.innerHTML =
+        rsvpMessage.innerHTML=
         "Thank you for your response ♡";
 
     });
