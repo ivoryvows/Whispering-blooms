@@ -4,12 +4,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-
+<meta name="theme-color" content="#f8e8eb">
 <title>Timeless Grace</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
@@ -18,9 +17,7 @@
     -webkit-tap-highlight-color:transparent;
 }
 
-html{
-    scroll-behavior:smooth;
-}
+html{scroll-behavior:smooth}
 
 body{
     margin:0;
@@ -30,41 +27,79 @@ body{
     background:#f8f2e8;
 }
 
-/* BACKGROUND */
+/* FLOWING GRADIENT BACKGROUND LAYERS */
 
 #background{
     position:fixed;
     inset:0;
     z-index:-20;
-    transition:background 1.5s ease;
+    overflow:hidden;
+    background:#f8f2e8;
+    isolation:isolate;
 }
 
-#background.original{
-    background:
-    radial-gradient(circle at 15% 15%,rgba(255,255,255,.75),transparent 38%),
-    radial-gradient(circle at 85% 75%,rgba(235,220,198,.45),transparent 42%),
-    #f8f2e8;
+.bg-layer{
+    position:absolute;
+    inset:-18%;
+    opacity:0;
+    pointer-events:none;
+    transition:opacity:2s ease;
+    animation:gradientFlow 18s ease-in-out infinite alternate;
+    will-change:transform,opacity;
 }
 
-#background.pink{
+.bg-original{
     background:
-    radial-gradient(circle at 15% 15%,rgba(255,255,255,.6),transparent 38%),
-    radial-gradient(circle at 85% 80%,rgba(243,190,204,.48),transparent 43%),
-    #f5dfe4;
+        radial-gradient(ellipse at 18% 18%,rgba(255,255,255,.95),transparent 42%),
+        radial-gradient(ellipse at 82% 75%,rgba(220,190,157,.42),transparent 48%),
+        linear-gradient(135deg,#fffaf2 0%,#f8f0e6 48%,#eee0d4 100%);
 }
 
-#background.green{
+.bg-pink{
     background:
-    radial-gradient(circle at 15% 15%,rgba(255,255,255,.65),transparent 38%),
-    radial-gradient(circle at 85% 80%,rgba(181,210,187,.5),transparent 43%),
-    #e1ede2;
+        radial-gradient(ellipse at 18% 22%,rgba(255,255,255,.92),transparent 43%),
+        radial-gradient(ellipse at 82% 75%,rgba(238,163,185,.42),transparent 48%),
+        radial-gradient(ellipse at 50% 100%,rgba(255,224,222,.7),transparent 50%),
+        linear-gradient(135deg,#fff1f3 0%,#f8e1e7 38%,#f2d9e1 70%,#f9eae7 100%);
 }
 
-#background.gold{
+.bg-yellow{
     background:
-    radial-gradient(circle at 15% 15%,rgba(255,255,255,.65),transparent 38%),
-    radial-gradient(circle at 85% 80%,rgba(222,194,133,.48),transparent 43%),
-    #f0e5c7;
+        radial-gradient(ellipse at 15% 20%,rgba(255,255,255,.95),transparent 43%),
+        radial-gradient(ellipse at 85% 78%,rgba(246,208,117,.48),transparent 48%),
+        radial-gradient(ellipse at 45% 100%,rgba(255,239,195,.78),transparent 50%),
+        linear-gradient(135deg,#fffbed 0%,#fff4d6 38%,#f8e9bd 72%,#fff5e1 100%);
+}
+
+.bg-beige{
+    background:
+        radial-gradient(ellipse at 16% 18%,rgba(255,255,255,.85),transparent 43%),
+        radial-gradient(ellipse at 86% 78%,rgba(112,42,54,.24),transparent 48%),
+        radial-gradient(ellipse at 45% 100%,rgba(190,139,128,.22),transparent 52%),
+        linear-gradient(135deg,#f9eee3 0%,#ead8c9 36%,#e6d0c7 66%,#f3e6da 100%);
+}
+
+.bg-walima{
+    background:
+        radial-gradient(ellipse at 15% 20%,rgba(255,255,255,.9),transparent 43%),
+        radial-gradient(ellipse at 86% 78%,rgba(235,174,194,.43),transparent 48%),
+        linear-gradient(135deg,#fff3f3 0%,#f7e0e7 42%,#f2dce1 70%,#fff0e9 100%);
+}
+
+/* Active layer cross-fades without hard colour changes */
+
+#background.original .bg-original,
+#background.pink .bg-pink,
+#background.green .bg-yellow,
+#background.gold .bg-beige,
+#background.walima .bg-walima{
+    opacity:1;
+}
+
+@keyframes gradientFlow{
+    0%{transform:translate3d(-1.5%,0,0) scale(1)}
+    50%{transform:translate3d(1%,1.2%,0) scale(1.045)}
+    100%{transform:translate3d(0,-1%,0) scale(1.02)}
 }
 
 /* GLITTER */
@@ -88,14 +123,8 @@ body{
 }
 
 @keyframes twinkle{
-    0%,100%{
-        opacity:.15;
-        transform:scale(.6);
-    }
-    50%{
-        opacity:.85;
-        transform:scale(1.35);
-    }
+    0%,100%{opacity:.15;transform:scale(.6)}
+    50%{opacity:.85;transform:scale(1.35)}
 }
 
 /* SOUND */
@@ -134,8 +163,7 @@ body{
     pointer-events:none;
 }
 
-#doorStill,
-#doorVideo{
+#doorStill,#doorVideo{
     position:absolute;
     inset:0;
     width:100%;
@@ -165,13 +193,7 @@ body{
     inset:0;
     z-index:3;
     pointer-events:none;
-    background:
-    linear-gradient(
-        to bottom,
-        rgba(40,10,10,.08),
-        transparent 35%,
-        rgba(40,10,10,.08)
-    );
+    background:linear-gradient(to bottom,rgba(40,10,10,.08),transparent 35%,rgba(40,10,10,.08));
 }
 
 #tapArea{
@@ -190,21 +212,13 @@ body{
     color:#fffaf0;
     font-family:"Great Vibes",cursive;
     font-size:clamp(30px,8vw,52px);
-    text-shadow:
-    0 2px 5px rgba(50,20,10,.55),
-    0 0 12px rgba(255,225,165,.35);
+    text-shadow:0 2px 5px rgba(50,20,10,.55),0 0 12px rgba(255,225,165,.35);
     animation:tapGlow 2.5s ease-in-out infinite;
 }
 
 @keyframes tapGlow{
-    0%,100%{
-        opacity:.75;
-        transform:translateY(0);
-    }
-    50%{
-        opacity:1;
-        transform:translateY(-3px);
-    }
+    0%,100%{opacity:.75;transform:translateY(0)}
+    50%{opacity:1;transform:translateY(-3px)}
 }
 
 /* MAIN */
@@ -214,8 +228,6 @@ body{
     z-index:2;
     width:100%;
 }
-
-/* SECTIONS */
 
 .section{
     width:100%;
@@ -230,14 +242,16 @@ body{
 #parents{
     padding-top:18px;
     padding-bottom:14px;
+    background:transparent;
 }
 
 #countdown{
     padding-top:12px;
     padding-bottom:16px;
+    background:transparent;
 }
 
-/* ROUNDED VIDEO FRAMES */
+/* VIDEO FRAMES */
 
 .video-wrap{
     position:relative;
@@ -292,7 +306,7 @@ body{
     transform:rotate(168deg);
 }
 
-/* ROUNDED COUNTDOWN FRAME */
+/* COUNTDOWN */
 
 .countdown-frame{
     position:relative;
@@ -304,7 +318,7 @@ body{
     box-shadow:0 7px 25px rgba(75,40,25,.1);
 }
 
-.countdown-frame > img{
+.countdown-frame>img{
     display:block;
     width:100%;
     height:auto;
@@ -334,20 +348,14 @@ body{
 .event-section{
     padding-top:10px;
     padding-bottom:18px;
-    transition:background .8s ease;
+    background:transparent;
+    transition:background 1s ease;
 }
 
-#mehndi{
-    background:rgba(224,237,225,.20);
-}
-
-#shadi{
-    background:rgba(240,229,199,.20);
-}
-
-#walima{
-    background:rgba(246,220,227,.20);
-}
+#mehndi{background:rgba(255,239,190,.08)}
+#shadi{background:rgba(115,48,59,.055)}
+#walima{background:rgba(246,220,227,.07)}
+#dresscode{background:transparent}
 
 .event-title{
     margin:2px 0 8px;
@@ -381,7 +389,7 @@ body{
     letter-spacing:.3px;
 }
 
-/* SMALL GOOGLE MAPS BUTTON */
+/* MAP BUTTON */
 
 .map-button{
     display:inline-flex;
@@ -416,7 +424,7 @@ body{
     flex-shrink:0;
 }
 
-/* ROUNDED DRESS CODE FRAME */
+/* DRESS CODE */
 
 #dresscode{
     padding-top:16px;
@@ -437,152 +445,72 @@ body{
 /* MOBILE */
 
 @media(max-width:600px){
-
-    .corner-flower{
-        width:58px;
-        height:58px;
-    }
-
-    .corner-flower.top-left{
-        left:-17px;
-        top:-15px;
-    }
-
-    .corner-flower.bottom-right{
-        right:-17px;
-        bottom:-17px;
-    }
-
-    .event-section{
-        padding-top:8px;
-        padding-bottom:15px;
-    }
-
-    .event-title{
-        font-size:49px;
-        margin-bottom:6px;
-    }
-
-    .video-wrap{
-        width:94vw;
-        padding:6px;
-        border-radius:16px;
-    }
-
-    .video-wrap::before{
-        border-radius:12px;
-    }
-
-    .video-wrap video{
-        border-radius:10px;
-    }
-
-    .countdown-frame{
-        width:96vw;
-        border-radius:15px;
-    }
-
-    .countdown-frame > img{
-        border-radius:14px;
-    }
-
-    .event-details .venue{
-        font-size:18px;
-    }
-
-    .event-details .address{
-        font-size:8px;
-    }
-
-    .map-button{
-        min-height:37px;
-        padding:9px 18px;
-        font-size:9px;
-    }
-
-    .dress-image{
-        border-radius:15px;
-    }
+    .corner-flower{width:58px;height:58px}
+    .corner-flower.top-left{left:-17px;top:-15px}
+    .corner-flower.bottom-right{right:-17px;bottom:-17px}
+    .event-section{padding-top:8px;padding-bottom:15px}
+    .event-title{font-size:49px;margin-bottom:6px}
+    .video-wrap{width:94vw;padding:6px;border-radius:16px}
+    .video-wrap::before{border-radius:12px}
+    .video-wrap video{border-radius:10px}
+    .countdown-frame{width:96vw;border-radius:15px}
+    .countdown-frame>img{border-radius:14px}
+    .event-details .venue{font-size:18px}
+    .event-details .address{font-size:8px}
+    .map-button{min-height:37px;padding:9px 18px;font-size:9px}
+    .dress-image{border-radius:15px}
 }
 
 @media(prefers-reduced-motion:reduce){
-    html{
-        scroll-behavior:auto;
-    }
-
-    .sparkle,
-    #tapText{
-        animation:none;
-    }
+    html{scroll-behavior:auto}
+    .sparkle,#tapText{animation:none}
+    .bg-layer{animation:none}
+    .bg-layer{transition:opacity:.4s ease}
 }
 </style>
 </head>
 
 <body>
 
-<div id="background" class="original"></div>
+<div id="background" class="original" aria-hidden="true">
+    <div class="bg-layer bg-original"></div>
+    <div class="bg-layer bg-pink"></div>
+    <div class="bg-layer bg-yellow"></div>
+    <div class="bg-layer bg-beige"></div>
+    <div class="bg-layer bg-walima"></div>
+</div>
+
 <div id="glitter"></div>
 
-<!-- MUSIC -->
-
 <audio id="music" src="./dekha%20tenu.mp3" preload="auto" loop></audio>
-
 <button id="soundButton" type="button">🔇 Sound: Off</button>
 
 <!-- DOOR OPENING GATE -->
 
 <div id="gate">
+    <img id="doorStill" src="./door.JPEG" alt="Wedding Invitation">
 
-    <img
-        id="doorStill"
-        src="./door.JPEG"
-        alt="Wedding Invitation"
-    >
-
-    <video
-        id="doorVideo"
-        src="./darwaza.mp4"
-        muted
-        playsinline
-        webkit-playsinline
-        preload="auto">
-    </video>
+    <video id="doorVideo" src="./darwaza.mp4"
+        muted playsinline webkit-playsinline preload="auto"></video>
 
     <div id="tapArea">
         <div id="tapText">Tap to Open Invitation</div>
     </div>
-
 </div>
-
-<!-- MAIN INVITATION -->
 
 <main id="main">
 
-    <!-- PARENTS VIDEO -->
+    <!-- PARENTS VIDEO: LIGHT PINK -->
 
-    <section id="parents" class="section">
+    <section id="parents" class="section" data-bg="pink">
         <div class="video-wrap">
-            <img
-                class="corner-flower top-left"
-                src="https://files.catbox.moe/kgdqjb.png"
-                alt=""
-            >
+            <img class="corner-flower top-left"
+                src="https://files.catbox.moe/kgdqjb.png" alt="">
+            <img class="corner-flower bottom-right"
+                src="https://files.catbox.moe/kgdqjb.png" alt="">
 
-            <img
-                class="corner-flower bottom-right"
-                src="https://files.catbox.moe/kgdqjb.png"
-                alt=""
-            >
-
-            <video
-                src="./parents.mp4"
-                autoplay
-                muted
-                loop
-                playsinline
-                webkit-playsinline
-                preload="metadata">
-            </video>
+            <video src="./parents.mp4" autoplay muted loop playsinline
+                webkit-playsinline preload="metadata"></video>
         </div>
     </section>
 
@@ -590,72 +518,43 @@ body{
 
     <section id="countdown" class="section">
         <div class="countdown-frame">
-
-            <img
-                src="https://files.catbox.moe/eokc8y.jpeg"
-                alt="Counting Days"
-            >
+            <img src="https://files.catbox.moe/eokc8y.jpeg" alt="Counting Days">
 
             <div class="countdown-box">
-
                 <script>
                 (function(d,s,id){
                     var js,pjs=d.getElementsByTagName(s)[0];
-
                     if(d.getElementById(id)) return;
-
                     js=d.createElement(s);
                     js.id=id;
                     js.src="https://www.tickcounter.com/static/js/loader.js";
-
                     pjs.parentNode.insertBefore(js,pjs);
                 }(document,"script","tickcounter-sdk"));
                 </script>
 
-                <a
-                    data-type="countdown"
-                    data-id="11468420"
+                <a data-type="countdown" data-id="11468420"
                     class="tickcounter"
                     style="display:block;left:0;width:100%;height:0;position:relative;padding-bottom:25%;margin:0 auto;"
-                    title="My countdown"
-                    href="https://www.tickcounter.com/">
+                    title="My countdown" href="https://www.tickcounter.com/">
                     My countdown
                 </a>
-
             </div>
         </div>
     </section>
 
-    <!-- MEHNDI -->
+    <!-- MEHNDI: LIGHT YELLOW -->
 
     <section id="mehndi" class="section event-section" data-bg="green">
-
         <h2 class="event-title">Mehndi</h2>
 
         <div class="video-wrap">
+            <img class="corner-flower top-left"
+                src="https://files.catbox.moe/kgdqjb.png" alt="">
+            <img class="corner-flower bottom-right"
+                src="https://files.catbox.moe/kgdqjb.png" alt="">
 
-            <img
-                class="corner-flower top-left"
-                src="https://files.catbox.moe/kgdqjb.png"
-                alt=""
-            >
-
-            <img
-                class="corner-flower bottom-right"
-                src="https://files.catbox.moe/kgdqjb.png"
-                alt=""
-            >
-
-            <video
-                src="./mehndi.mp4"
-                autoplay
-                muted
-                loop
-                playsinline
-                webkit-playsinline
-                preload="metadata">
-            </video>
-
+            <video src="./mehndi.mp4" autoplay muted loop playsinline
+                webkit-playsinline preload="metadata"></video>
         </div>
 
         <div class="event-details">
@@ -663,56 +562,33 @@ body{
             <div class="address">Lahore, Pakistan</div>
         </div>
 
-        <a
-            class="map-button"
+        <a class="map-button"
             href="https://www.google.com/maps?q=31.5204,74.3587"
-            target="_blank"
-            rel="noopener noreferrer"
+            target="_blank" rel="noopener noreferrer"
             aria-label="View Mehndi location on Google Maps">
-
             <svg class="map-icon" viewBox="0 0 24 24" fill="none"
-                 stroke="currentColor" stroke-width="1.7"
-                 stroke-linecap="round" stroke-linejoin="round"
-                 aria-hidden="true">
+                stroke="currentColor" stroke-width="1.7"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/>
                 <circle cx="12" cy="10" r="2.5"/>
             </svg>
-
             View on Google Maps
         </a>
-
     </section>
 
-    <!-- SHADI -->
+    <!-- SHADI: BEIGE WITH MAROON -->
 
     <section id="shadi" class="section event-section" data-bg="gold">
-
         <h2 class="event-title">Shadi</h2>
 
         <div class="video-wrap">
+            <img class="corner-flower top-left"
+                src="https://files.catbox.moe/kgdqjb.png" alt="">
+            <img class="corner-flower bottom-right"
+                src="https://files.catbox.moe/kgdqjb.png" alt="">
 
-            <img
-                class="corner-flower top-left"
-                src="https://files.catbox.moe/kgdqjb.png"
-                alt=""
-            >
-
-            <img
-                class="corner-flower bottom-right"
-                src="https://files.catbox.moe/kgdqjb.png"
-                alt=""
-            >
-
-            <video
-                src="./shadi.mp4"
-                autoplay
-                muted
-                loop
-                playsinline
-                webkit-playsinline
-                preload="metadata">
-            </video>
-
+            <video src="./shadi.mp4" autoplay muted loop playsinline
+                webkit-playsinline preload="metadata"></video>
         </div>
 
         <div class="event-details">
@@ -720,56 +596,33 @@ body{
             <div class="address">Adda Plot, Raiwind Road, Eden Park, Lahore</div>
         </div>
 
-        <a
-            class="map-button"
+        <a class="map-button"
             href="https://www.google.com/maps?q=31.4075,74.2320"
-            target="_blank"
-            rel="noopener noreferrer"
+            target="_blank" rel="noopener noreferrer"
             aria-label="View Shadi location on Google Maps">
-
             <svg class="map-icon" viewBox="0 0 24 24" fill="none"
-                 stroke="currentColor" stroke-width="1.7"
-                 stroke-linecap="round" stroke-linejoin="round"
-                 aria-hidden="true">
+                stroke="currentColor" stroke-width="1.7"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/>
                 <circle cx="12" cy="10" r="2.5"/>
             </svg>
-
             View on Google Maps
         </a>
-
     </section>
 
-    <!-- WALIMA -->
+    <!-- WALIMA: SOFT PINK -->
 
-    <section id="walima" class="section event-section" data-bg="pink">
-
+    <section id="walima" class="section event-section" data-bg="walima">
         <h2 class="event-title">Walima</h2>
 
         <div class="video-wrap">
+            <img class="corner-flower top-left"
+                src="https://files.catbox.moe/kgdqjb.png" alt="">
+            <img class="corner-flower bottom-right"
+                src="https://files.catbox.moe/kgdqjb.png" alt="">
 
-            <img
-                class="corner-flower top-left"
-                src="https://files.catbox.moe/kgdqjb.png"
-                alt=""
-            >
-
-            <img
-                class="corner-flower bottom-right"
-                src="https://files.catbox.moe/kgdqjb.png"
-                alt=""
-            >
-
-            <video
-                src="./Walima.mp4"
-                autoplay
-                muted
-                loop
-                playsinline
-                webkit-playsinline
-                preload="metadata">
-            </video>
-
+            <video src="./Walima.mp4" autoplay muted loop playsinline
+                webkit-playsinline preload="metadata"></video>
         </div>
 
         <div class="event-details">
@@ -777,121 +630,90 @@ body{
             <div class="address">Lahore, Pakistan</div>
         </div>
 
-        <a
-            class="map-button"
+        <a class="map-button"
             href="https://www.google.com/maps?q=31.5204,74.3587"
-            target="_blank"
-            rel="noopener noreferrer"
+            target="_blank" rel="noopener noreferrer"
             aria-label="View Walima location on Google Maps">
-
             <svg class="map-icon" viewBox="0 0 24 24" fill="none"
-                 stroke="currentColor" stroke-width="1.7"
-                 stroke-linecap="round" stroke-linejoin="round"
-                 aria-hidden="true">
+                stroke="currentColor" stroke-width="1.7"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/>
                 <circle cx="12" cy="10" r="2.5"/>
             </svg>
-
             View on Google Maps
         </a>
-
     </section>
 
     <!-- DRESS CODE -->
 
-    <section id="dresscode" class="section event-section" data-bg="pink">
-
-        <img
-            class="dress-image"
-            src="https://files.catbox.moe/vxcqqa.png"
-            alt="Dress Code"
-        >
-
+    <section id="dresscode" class="section event-section" data-bg="walima">
+        <img class="dress-image"
+            src="https://files.catbox.moe/vxcqqa.png" alt="Dress Code">
     </section>
 
 </main>
 
 <script>
-
 /* GLITTER */
 
-const glitter=document.getElementById("glitter");
+const glitter = document.getElementById("glitter");
 
 for(let i=0;i<38;i++){
-
-    const sparkle=document.createElement("span");
-
-    sparkle.className="sparkle";
-    sparkle.style.left=Math.random()*100+"%";
-    sparkle.style.top=Math.random()*100+"%";
-    sparkle.style.animationDelay=Math.random()*4+"s";
-    sparkle.style.animationDuration=3+Math.random()*4+"s";
-
+    const sparkle = document.createElement("span");
+    sparkle.className = "sparkle";
+    sparkle.style.left = Math.random()*100 + "%";
+    sparkle.style.top = Math.random()*100 + "%";
+    sparkle.style.animationDelay = Math.random()*4 + "s";
+    sparkle.style.animationDuration = 3 + Math.random()*4 + "s";
     glitter.appendChild(sparkle);
 }
 
 /* DOOR GATE */
 
-const gate=document.getElementById("gate");
-const doorStill=document.getElementById("doorStill");
-const doorVideo=document.getElementById("doorVideo");
-const tapArea=document.getElementById("tapArea");
-const music=document.getElementById("music");
-const soundButton=document.getElementById("soundButton");
+const gate = document.getElementById("gate");
+const doorStill = document.getElementById("doorStill");
+const doorVideo = document.getElementById("doorVideo");
+const tapArea = document.getElementById("tapArea");
+const music = document.getElementById("music");
+const soundButton = document.getElementById("soundButton");
+const background = document.getElementById("background");
 
-let gateOpened=false;
+let gateOpened = false;
 
 doorVideo.load();
 
 function openGate(){
-
     if(gateOpened) return;
+    gateOpened = true;
 
-    gateOpened=true;
-
-    /* Start background music after the tap */
-
-    music.volume=1;
-
+    music.volume = 1;
     music.play()
-    .then(()=>{
-        soundButton.textContent="🔊 Sound: On";
-    })
-    .catch(()=>{
-        soundButton.textContent="🔇 Sound: Off";
-    });
+        .then(()=>soundButton.textContent = "🔊 Sound: On")
+        .catch(()=>soundButton.textContent = "🔇 Sound: Off");
 
-    /* Play door-opening video silently */
+    doorVideo.muted = true;
+    doorVideo.volume = 0;
 
-    doorVideo.muted=true;
-    doorVideo.volume=0;
+    try{doorVideo.currentTime = 0;}catch(e){}
 
-    try{
-        doorVideo.currentTime=0;
-    }catch(e){}
-
-    const playPromise=doorVideo.play();
+    const playPromise = doorVideo.play();
 
     if(playPromise){
         playPromise.catch(()=>{
-            gateOpened=false;
+            gateOpened = false;
         });
     }
 
-    /* Crossfade the still image into the video */
-
     setTimeout(()=>{
-        doorVideo.style.opacity="1";
-        doorStill.style.opacity="0";
-        tapArea.style.opacity="0";
+        doorVideo.style.opacity = "1";
+        doorStill.style.opacity = "0";
+        tapArea.style.opacity = "0";
     },140);
 
     setTimeout(()=>{
-        tapArea.style.display="none";
+        tapArea.style.display = "none";
     },750);
 }
-
-/* TAP TO OPEN */
 
 doorStill.addEventListener("click",openGate);
 tapArea.addEventListener("click",openGate);
@@ -909,89 +731,69 @@ tapArea.addEventListener("touchend",function(e){
 /* SHOW INVITATION AFTER DOOR VIDEO ENDS */
 
 doorVideo.addEventListener("ended",function(){
-
     gate.classList.add("hidden");
 
     setTimeout(()=>{
-        gate.style.display="none";
+        gate.style.display = "none";
     },1300);
 });
 
 /* SOUND BUTTON */
 
 soundButton.addEventListener("click",function(e){
-
     e.stopPropagation();
 
     if(music.paused){
-
         music.play()
-        .then(()=>{
-            soundButton.textContent="🔊 Sound: On";
-        })
-        .catch(()=>{
-            soundButton.textContent="🔇 Sound: Off";
-        });
-
+            .then(()=>soundButton.textContent = "🔊 Sound: On")
+            .catch(()=>soundButton.textContent = "🔇 Sound: Off");
     }else{
-
         music.pause();
-        soundButton.textContent="🔇 Sound: Off";
-
+        soundButton.textContent = "🔇 Sound: Off";
     }
 });
 
-/* BACKGROUND COLOR ON EVENT SCROLL */
+/* SMOOTH BACKGROUND TRANSITIONS */
 
-const background=document.getElementById("background");
+const sections = document.querySelectorAll("#parents, .event-section");
 
-const sections=document.querySelectorAll(".event-section");
+function setBackground(name){
+    background.className = name;
+}
 
-const observer=new IntersectionObserver(function(entries){
-
+const observer = new IntersectionObserver(function(entries){
     entries.forEach(entry=>{
-
         if(!entry.isIntersecting) return;
 
-        const bg=entry.target.dataset.bg;
+        const bg = entry.target.dataset.bg;
 
-        if(bg==="pink") background.className="pink";
-        if(bg==="green") background.className="green";
-        if(bg==="gold") background.className="gold";
-
+        if(bg === "pink") setBackground("pink");
+        if(bg === "green") setBackground("green");
+        if(bg === "gold") setBackground("gold");
+        if(bg === "walima") setBackground("walima");
     });
-
-},{threshold:.35});
+},{threshold:0.35});
 
 sections.forEach(section=>observer.observe(section));
 
-/* RESTORE ORIGINAL BACKGROUND AT COUNTDOWN */
+/* COUNTDOWN BACKGROUND */
 
-const countdown=document.getElementById("countdown");
+const countdown = document.getElementById("countdown");
 
-const originalObserver=new IntersectionObserver(function(entries){
-
+const originalObserver = new IntersectionObserver(function(entries){
     entries.forEach(entry=>{
-
-        if(entry.isIntersecting){
-            background.className="original";
-        }
-
+        if(entry.isIntersecting) setBackground("original");
     });
-
-},{threshold:.35});
+},{threshold:0.35});
 
 originalObserver.observe(countdown);
 
 /* MOBILE VIDEO SUPPORT */
 
 document.querySelectorAll("video").forEach(video=>{
-
     video.setAttribute("playsinline","");
     video.setAttribute("webkit-playsinline","");
-
 });
-
 </script>
 
 </body>
