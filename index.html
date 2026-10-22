@@ -26,7 +26,7 @@ body {
     overflow-x: hidden;
     font-family: "Cormorant Garamond", serif;
     color: #633737;
-    background: #f4e9dc;
+    background: transparent;
 }
 
 /* CONTINUOUS GRADIENT BACKGROUND */
@@ -409,25 +409,100 @@ body {
     flex-shrink: 0;
 }
 
-/* DRESS CODE */
+/* DRESS CODE + CELEBRATION FRAMES */
 
 #dresscode {
-    padding-top: 16px;
-    padding-bottom: 20px;
+    padding: 22px 14px 36px;
+    gap: 22px;
 }
 
-.dress-image {
-    width: min(94vw,600px);
-    height: auto;
-    display: block;
-    padding: 6px;
+.dresscode-frame {
+    position: relative;
+    width: min(94vw, 600px);
+    padding: 30px 22px;
+    text-align: center;
+    overflow: hidden;
     border: 1px solid #b99752;
-    border-radius: 18px;
-    background: rgba(255,250,240,.2);
-    box-shadow: 0 7px 25px rgba(75,40,25,.12);
+    border-radius: 5px;
+    background:
+        radial-gradient(ellipse at top, rgba(255,255,255,.9), transparent 65%),
+        linear-gradient(145deg, rgba(255,249,239,.88), rgba(238,222,207,.82));
+    box-shadow: 0 8px 26px rgba(75,40,25,.10);
 }
 
-/* MOBILE */
+.dresscode-frame::before {
+    content: "";
+    position: absolute;
+    inset: 6px;
+    border: 1px solid rgba(185,151,82,.55);
+    pointer-events: none;
+}
+
+.frame-ornament {
+    color: #b99752;
+    font-size: 23px;
+    line-height: 1;
+    margin-bottom: 10px;
+}
+
+.frame-eyebrow {
+    font-family: "Montserrat", sans-serif;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #987747;
+    margin: 0 0 10px;
+}
+
+.frame-title {
+    font-family: "Great Vibes", cursive;
+    font-weight: 400;
+    font-size: clamp(42px, 10vw, 58px);
+    line-height: 1.1;
+    color: #743838;
+    margin: 0 0 12px;
+}
+
+.frame-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 15px auto;
+    color: #b99752;
+}
+
+.frame-divider::before,
+.frame-divider::after {
+    content: "";
+    display: block;
+    width: 48px;
+    height: 1px;
+    background: linear-gradient(to right, transparent, #b99752);
+}
+
+.frame-divider::after {
+    background: linear-gradient(to left, transparent, #b99752);
+}
+
+.frame-message {
+    max-width: 410px;
+    margin: 0 auto;
+    font-family: "Cormorant Garamond", serif;
+    font-size: 20px;
+    line-height: 1.5;
+    color: #704747;
+}
+
+.frame-note {
+    margin: 14px 0 0;
+    font-family: "Montserrat", sans-serif;
+    font-size: 9px;
+    line-height: 1.8;
+    letter-spacing: 1.1px;
+    text-transform: uppercase;
+    color: #8b7160;
+}
 
 @media(max-width:600px) {
     .corner-flower { width: 58px; height: 58px; }
@@ -443,7 +518,24 @@ body {
     .event-details .venue { font-size: 18px; }
     .event-details .address { font-size: 8px; }
     .map-button { min-height: 37px; padding: 9px 18px; font-size: 9px; }
-    .dress-image { border-radius: 15px; }
+
+    #dresscode {
+        padding: 18px 12px 28px;
+        gap: 18px;
+    }
+
+    .dresscode-frame {
+        width: 94vw;
+        padding: 26px 18px;
+    }
+
+    .frame-title {
+        font-size: 46px;
+    }
+
+    .frame-message {
+        font-size: 18px;
+    }
 }
 
 @media(prefers-reduced-motion:reduce) {
@@ -628,11 +720,41 @@ body {
         </a>
     </section>
 
-    <!-- DRESS CODE -->
+    <!-- DRESS CODE + CELEBRATION MESSAGE -->
 
     <section id="dresscode" class="section event-section">
-        <img class="dress-image"
-            src="https://files.catbox.moe/vxcqqa.png" alt="Dress Code">
+
+        <!-- FIRST FRAME: DRESS CODE -->
+
+        <div class="dresscode-frame">
+            <div class="frame-ornament">✧</div>
+            <p class="frame-eyebrow">The Celebration</p>
+            <h2 class="frame-title">Dress Code</h2>
+            <div class="frame-divider">❦</div>
+            <p class="frame-message">
+                Elegant &amp; Chic
+            </p>
+            <p class="frame-note">
+                Dress with grace · Celebrate in style
+            </p>
+        </div>
+
+        <!-- SECOND FRAME: WELCOME MESSAGE -->
+
+        <div class="dresscode-frame">
+            <div class="frame-ornament">♡</div>
+            <p class="frame-eyebrow">With Love &amp; Joy</p>
+            <h2 class="frame-title">We Can’t Wait</h2>
+            <div class="frame-divider">❦</div>
+            <p class="frame-message">
+                We can’t wait to celebrate these beautiful moments with you.
+                Your presence will make our celebration even more special.
+            </p>
+            <p class="frame-note">
+                With love · See you there
+            </p>
+        </div>
+
     </section>
 
 </main>
